@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101e2b">
+<title>Yalta 1945: The Roosevelt Game</title>
+<style>
+:root{color-scheme:dark;--navy:#101e2b;--panel:#192b3a;--paper:#f4edda;--ink:#202a31;--muted:#bdc9cc;--gold:#ddba72;--red:#a13235;--line:#43505a}*{box-sizing:border-box}body{margin:0;background:var(--navy);color:var(--paper);font:20px/1.5 Georgia,'Times New Roman',serif}button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:3px;padding:.65rem 1rem;background:var(--panel);color:var(--paper);text-align:left;transition:background .2s,transform .2s}button:hover:not(:disabled){background:#304655;border-color:var(--gold)}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:4px}h1,h2,h3,p{margin:0 0 1rem}h1{font-size:clamp(2.5rem,5vw,5rem);line-height:1.03;font-weight:normal}h2{font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;font-weight:normal}h3{font-size:1.15em}small,.eyebrow,.meta,.toolbar,.board,.track-label,.pips{font-family:'Courier New',Courier,monospace}.eyebrow{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.shell{max-width:1600px;margin:auto;padding:24px 36px}.masthead{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:20px;font:14px 'Courier New',monospace;letter-spacing:.13em}.masthead span:last-child{color:var(--gold)}.hud{border:1px solid var(--line);padding:18px;background:#142432;margin-bottom:24px}.hud-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:25px}.hud h3{font-size:16px;font-family:'Courier New',monospace;margin-bottom:10px}.pips{display:flex;gap:6px}.pip{height:27px;flex:1;background:var(--gold);border:1px solid var(--gold);color:var(--ink);text-align:center;font-size:15px}.pip.spent{background:transparent;color:#83919a;border-color:#64727d}.scale{position:relative;display:flex;justify-content:space-between;margin:8px 0 4px}.scale:before{content:'';height:2px;background:var(--line);position:absolute;left:12px;right:12px;top:14px}.scale span{position:relative;z-index:1;border:1px solid #75848a;background:var(--navy);width:29px;height:29px;border-radius:50%;font:16px/27px 'Courier New',monospace;text-align:center}.scale .marker{position:absolute;z-index:2;background:var(--gold);color:var(--ink);left:calc(var(--score) * (100% - 29px) / 4);transition:left .4s}.track-label{font-size:14px;color:var(--muted)}.target{font-size:16px;margin:8px 0 0}.board{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;font-size:15px;border-top:1px solid var(--line);padding-top:14px}.board span{margin-right:8px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;font-size:14px;align-items:center}.toolbar button{padding:7px 12px}.toolbar label{display:flex;gap:7px;align-items:center;margin-left:auto}.workspace{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}.workspace.facilitating{grid-template-columns:minmax(0,1fr) 320px}.content{min-width:0}.hero{padding:clamp(24px,5vw,64px);border:1px solid #637078;background:linear-gradient(120deg,#1b3040,#132532);position:relative}.hero h1{max-width:800px}.hero p{max-width:760px;color:#d5d9d5}.hero .eyebrow{margin-bottom:25px}.primary{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:bold}.primary:hover:not(:disabled){background:#f0d59d;color:var(--ink)}.paper{background:var(--paper);color:var(--ink);padding:clamp(22px,4vw,44px);border-top:5px solid #c4ad7c;box-shadow:0 8px 25px #0002}.paper .eyebrow{color:#775827}.paper button{border-color:#53616b}.paper .primary{border-color:#b59455}.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}.issue{padding:24px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between}.issue strong{font-size:32px;font-weight:normal}.issue small{color:var(--muted);font-size:14px}.options{display:grid;gap:12px;margin:24px 0}.option{display:flex;align-items:baseline;gap:15px;width:100%;padding:18px 20px}.key{font:16px 'Courier New',monospace;color:var(--gold);flex:0 0 20px}.envelope{width:100%;background:var(--paper);color:var(--ink);min-height:290px;text-align:center;position:relative;border:1px solid #c4ad7c;padding:35px;overflow:hidden}.envelope:hover:not(:disabled){background:#fff8e7;color:var(--ink)}.envelope:before{content:'';position:absolute;inset:0;background:linear-gradient(25deg,transparent 49.5%,#c3bba5 50%,transparent 50.5%),linear-gradient(-25deg,transparent 49.5%,#c3bba5 50%,transparent 50.5%);opacity:.4;pointer-events:none}.envelope strong{display:block;position:relative;font:20px 'Courier New',monospace;letter-spacing:.15em}.seal{display:block;position:relative;margin:22px auto;width:78px;height:78px;background:var(--red);color:#ffe8cc;border-radius:50%;border:5px double #ce7871;font:bold 26px/68px Georgia;box-shadow:2px 4px 0 #762325}.telegram{font-family:'Courier New',Courier,monospace;animation:open .6s ease-out;transform-origin:top}.telegram p{line-height:1.6}.effects{font:16px/1.6 'Courier New',monospace;border-top:1px solid #b8ad96;border-bottom:1px solid #b8ad96;padding:12px 0;margin:22px 0}.reaction{border-left:3px solid #aa8548;padding:8px 0 8px 20px;margin:18px 0}.reaction p{margin:8px 0}.reaction small{display:block;font-size:13px;color:#545148}.dice-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin:22px 0}.die{font:bold 42px/80px 'Courier New',monospace;width:80px;height:80px;text-align:center;border:2px solid currentColor;border-radius:12px;background:#fff9ed}.rolling{animation:roll 1s ease-in-out}.physical{display:flex;gap:8px;flex-wrap:wrap}.physical button{min-width:48px;text-align:center}.result{font-weight:bold}.facilitator{border:1px solid #9e864f;padding:22px;background:#273339;font-size:17px;align-self:start}.facilitator h3{color:var(--gold)}.facilitator p{white-space:pre-line}.log{margin-top:24px;border-top:1px solid var(--line);padding-top:15px}.log summary{cursor:pointer;font:15px 'Courier New',monospace}.log ol{font-size:16px;max-height:240px;overflow:auto}.log li{padding:5px 0}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.stats{display:flex;gap:30px;flex-wrap:wrap;border-bottom:1px solid #b8ad96;padding-bottom:16px;margin-bottom:24px}.stats strong{font-size:32px;display:block}.history-row{margin-top:20px;padding-top:20px;border-top:1px solid #b8ad96;display:grid;grid-template-columns:110px 1fr 1fr;gap:20px}.history-row small{font-size:14px}.history-row p{font-size:20px}.group-result{grid-column:2/-1;font:16px 'Courier New',monospace;color:#71521e}.print-summary{display:none}.footer{font:12px 'Courier New',monospace;color:#adbac0;margin-top:24px;letter-spacing:.08em}.rules li{margin-bottom:12px}#screen:focus{outline:none}button, p,li,h1,h2,h3{overflow-wrap:anywhere}@keyframes open{from{transform:perspective(1000px) rotateX(-80deg);opacity:.2}to{transform:rotateX(0);opacity:1}}@keyframes roll{0%,100%{transform:rotate(0)}25%{transform:rotate(18deg) scale(.9)}75%{transform:rotate(-18deg) scale(1.1)}}@media(min-width:1600px){.shell{padding-top:32px}.hud{padding:22px}}@media(max-width:900px){.workspace.facilitating{grid-template-columns:minmax(0,1fr)}.hud-grid{gap:15px}.shell{padding:16px}.history-row{grid-template-columns:1fr}.group-result{grid-column:auto}}@media(max-width:600px){body{font-size:18px}.hud-grid{grid-template-columns:1fr 1fr}.days{grid-column:1/-1}.cards{grid-template-columns:1fr}.masthead{font-size:11px}.toolbar label{margin-left:0}.paper{padding:22px 18px}.issue{min-height:130px}.hud{padding:12px}.target{font-size:14px}.option{padding:15px 12px}.track-label{font-size:12px}.shell{padding:12px}.hero{padding:25px}.footer{line-height:1.6}}@media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}}@media print{body{background:white;color:black;font-size:12pt}.shell{padding:0;max-width:none}.hud,.masthead,.footer,.facilitator,.log,button,.eyebrow{display:none!important}.workspace.facilitating{display:block}.paper{padding:0;border:0;box-shadow:none;background:white;color:black}.print-summary{display:block}.print-summary li{break-inside:avoid}h2{font-size:22pt}h3{font-size:16pt}.history-row{break-inside:avoid}a{color:black}}
+#hud{position:sticky;top:0;z-index:10;background:var(--navy);padding-top:6px}.hud{margin-bottom:18px}.track-legend{font:13px/1.5 'Courier New',monospace;color:var(--muted);text-align:right;margin-top:7px}.hud-grid{grid-template-columns:1fr 1.2fr 1.2fr}.board{margin-top:8px;padding-top:8px}.toolbar{margin-top:10px}.hint-table{border-collapse:collapse;width:100%;font-size:15px}.hint-table th,.hint-table td{border-top:1px solid var(--line);text-align:left;vertical-align:top;padding:10px 4px}.hint-table th{width:65px}.facilitator{max-height:80vh;overflow:auto}@media(max-width:600px){.hud-grid{grid-template-columns:1fr 1fr;gap:8px}.hud h3{font-size:13px;white-space:nowrap;margin-bottom:5px}.track-legend{font-size:11px;text-align:left}.board{font-size:12px;gap:3px}.board span{margin-right:4px}.toolbar{font-size:12px;gap:5px}.toolbar button{padding:5px 7px}.target{font-size:12px;margin-top:4px}.scale{margin:4px 0}.hud{margin-bottom:14px}.track-label{font-size:12px}.pips .pip{height:23px;font-size:13px}.masthead{margin-bottom:10px}}@media print{#hud{display:none!important}}
+</style>
+</head><body><div class="shell"><header class="masthead"><span>THE YALTA CONFERENCE</span><span>4–11 FEBRUARY 1945</span></header><div id="hud"></div><div id="workspace" class="workspace"><main id="screen" class="content" tabindex="-1"></main><aside id="facilitator" hidden></aside></div><details class="log" id="log"><summary>Decision log · <span id="log-count">0</span> entries</summary><ol id="log-list"></ol></details><footer class="footer">UTC2107 · NUS TEMBUSU COLLEGE &nbsp; / &nbsp; 1–3 CHOOSE · ENTER / SPACE CONTINUE · F FACILITATOR · U UNDO</footer></div>
+<script>
+const GAME_DATA = {
+  "title": "Yalta 1945: The Roosevelt Game",
+  "subtitle": "4 February 1945, Livadia Palace, Crimea. You are Franklin D. Roosevelt.",
+  "briefing": "You are Franklin Roosevelt. You are ill, and you have eight days. Four issues are on the table: the war against Japan, Poland, the United Nations and Germany. You cannot give everything equal attention. Which do you take first, and why?",
+  "issues": {
+    "Japan": [
+      "J1",
+      "J2"
+    ],
+    "Poland": [
+      "P1",
+      "P2"
+    ],
+    "UN": [
+      "U1",
+      "U2"
+    ],
+    "Germany": [
+      "G1",
+      "G2"
+    ]
+  },
+  "decisions": {
+    "J1": {
+      "title": "Who do you turn to?",
+      "question": "Japan's Kwantung Army sits in Manchuria. If you invade Japan's home islands, that army can be used against you. Who do you turn to?",
+      "options": [
+        "J1a",
+        "J1b",
+        "J1c"
+      ]
+    },
+    "J2": {
+      "title": "What do you offer Stalin?",
+      "question": "Stalin will fight Japan, but he wants something in return. What do you offer?",
+      "options": [
+        "J2a",
+        "J2b",
+        "J2c"
+      ]
+    },
+    "P1": {
+      "title": "Which government do you build on?",
+      "question": "Two governments claim Poland: the government-in-exile in London, which the US recognises, and the Soviet-backed provisional government in Lublin, which Stalin has recognised anyway. The Red Army now holds Poland. What do you build on?",
+      "options": [
+        "P1a",
+        "P1b",
+        "P1c"
+      ]
+    },
+    "P2": {
+      "title": "How do you make sure the elections are free?",
+      "question": "The new government is to hold elections. How do you make sure they are free?",
+      "options": [
+        "P2a",
+        "P2b",
+        "P2c"
+      ]
+    },
+    "U1": {
+      "title": "How strong should the veto be?",
+      "question": "The Security Council will have five permanent members. The League of Nations failed partly because great powers stayed out or walked out. How much power should each permanent member have to block decisions?",
+      "options": [
+        "U1a",
+        "U1b",
+        "U1c"
+      ]
+    },
+    "U2": {
+      "title": "How many Assembly seats for the USSR?",
+      "question": "Stalin asks for each of the 16 Soviet republics to have its own seat and vote in the General Assembly. How do you answer?",
+      "options": [
+        "U2a",
+        "U2b",
+        "U2c"
+      ]
+    },
+    "G1": {
+      "title": "What role does France get?",
+      "question": "Germany will be occupied by the victors. Churchill wants France to share the burden. What role does France get?",
+      "options": [
+        "G1a",
+        "G1b",
+        "G1c"
+      ]
+    },
+    "G2": {
+      "title": "Decide the hard questions now, or later?",
+      "question": "Two questions remain. Should Germany be permanently broken up into separate states? And how much should it pay in reparations?",
+      "options": [
+        "G2a",
+        "G2b",
+        "G2c"
+      ]
+    }
+  },
+  "cards": {
+    "J1a": {
+      "option": "Ask Stalin to enter the war against Japan",
+      "text": "Roosevelt's top military aim at Yalta is a Soviet promise to fight Japan. The Red Army could tie down the Kwantung Army in Manchuria while the US closes in on Japan's home islands. Stalin listens, and names his price.",
+      "main": true,
+      "cost": 1,
+      "roll": false,
+      "changes": {}
+    },
+    "J1b": {
+      "option": "Ask Churchill for more British forces in the Far East",
+      "text": "Churchill is sympathetic but cannot help. After more than five years of war, Britain has no army that can reach Manchuria. Roosevelt never counted on Britain for this.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {}
+    },
+    "J1c": {
+      "option": "Ask no one: rely on the atomic bomb and a US invasion",
+      "text": "The bomb has never been tested, and completion is projected for July–August 1945. Without the Soviets, an invasion of Japan is projected to cost up to a million American casualties. Roosevelt cannot bet the war on it.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {}
+    },
+    "J2a": {
+      "option": "Territory and rights in the Far East: southern Sakhalin, the Kuril Islands, privileges in Manchuria",
+      "text": "Stalin agrees to enter the war against Japan about three months after Germany surrenders. In return he gets southern Sakhalin, the Kuril Islands and privileges in Manchuria. China is not at the table, and the deal is kept secret.",
+      "main": true,
+      "cost": 1,
+      "roll": true,
+      "changes": {
+        "Stalin": 1
+      }
+    },
+    "J2b": {
+      "option": "Postwar economic aid for Soviet reconstruction",
+      "text": "Aid is your strongest lever but the least usable. Lend-Lease is legally tied to the war effort, and postwar credits need Congress. You can hint at aid, but you cannot promise it, and Stalin knows it.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {}
+    },
+    "J2c": {
+      "option": "Nothing extra: appeal to the alliance",
+      "text": "Stalin wants Far Eastern gains as the price of fighting Japan, a country the USSR still has a neutrality pact with. Appeals to friendship move nothing.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -1
+      }
+    },
+    "P1a": {
+      "option": "Reorganise the Soviet-backed government by adding democratic leaders from Poland and abroad",
+      "text": "The Soviet-backed government becomes the base, to be reorganised on a broader democratic basis with leaders from Poland and abroad. Poland's eastern border roughly follows the Curzon Line; Poland is to be compensated with German land in the west, details later.",
+      "main": true,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": 1,
+        "Churchill": -1
+      }
+    },
+    "P1b": {
+      "option": "Insist on the London government-in-exile",
+      "text": "Stalin has already recognised the Lublin government, and the Red Army holds Poland. American forces are hundreds of kilometres west and have not crossed the Rhine. Insisting on London means no agreement at all.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -1
+      }
+    },
+    "P1c": {
+      "option": "Scrap both and form a new government from scratch",
+      "text": "Stalin wants the Soviet-backed government kept as the starting point, with others added to it rather than replacing it. A clean slate costs him control and gives him nothing.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -1
+      }
+    },
+    "P2a": {
+      "option": "Accept a pledge of free elections as soon as possible, with Allied ambassadors only reporting back",
+      "text": "Poland is promised free and unfettered elections as soon as possible. There are no outside observers; Allied ambassadors will only report back to their governments. Britain wanted stronger terms. Roosevelt accepts less to close the deal.",
+      "main": true,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": 1,
+        "Churchill": -1
+      }
+    },
+    "P2b": {
+      "option": "Demand international observers to supervise the elections",
+      "text": "Stalin rejects outside supervision as an insult to Polish sovereignty and Soviet security. Churchill backs you, but Stalin will not move and the talks stall.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -1,
+        "Churchill": 1
+      }
+    },
+    "P2c": {
+      "option": "Threaten Stalin: free elections or no further cooperation",
+      "text": "A threat needs force behind it. The Red Army is in Poland, and you still need Stalin for Japan and the UN. Stalin calls your bluff.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -2
+      }
+    },
+    "U1a": {
+      "option": "A veto on major decisions, but a member involved in a dispute must abstain when the Council deals with settling it peacefully",
+      "text": "Stalin accepts the American voting formula: permanent members can veto major decisions, but a party to a dispute abstains when the Council handles its peaceful settlement. A founding conference is set for San Francisco on 25 April 1945.",
+      "main": true,
+      "cost": 1,
+      "roll": true,
+      "changes": {}
+    },
+    "U1b": {
+      "option": "No veto: majority vote decides everything",
+      "text": "Stalin will not join a body that could outvote the USSR, and Roosevelt wanted a US veto too: the Senate must ratify the charter by a two-thirds vote. A UN without the great powers repeats the League's fatal flaw.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -1
+      }
+    },
+    "U1c": {
+      "option": "An unlimited veto over everything, including blocking the Council from even discussing a dispute",
+      "text": "If any great power could stop the Council from even discussing a dispute, the UN could never call out aggression by one of its founders. Churchill insists that smaller nations must at least be heard.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Churchill": -1
+      }
+    },
+    "U2a": {
+      "option": "Support two extra seats, for Ukraine and Belarus: three Soviet votes in total",
+      "text": "Roosevelt and Churchill agree to support seats for Ukraine and Belarus, giving the USSR three votes in the General Assembly. Stalin drops his demand for sixteen.",
+      "main": true,
+      "cost": 1,
+      "roll": true,
+      "changes": {
+        "Stalin": 1
+      }
+    },
+    "U2b": {
+      "option": "Accept all 16 seats",
+      "text": "Sixteen votes for one government breaks the principle of one state, one vote, and looks like a giveaway at home. Churchill refuses.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Churchill": -1
+      }
+    },
+    "U2c": {
+      "option": "Refuse any extra seats: one state, one vote",
+      "text": "The seats question has been unresolved since the Dumbarton Oaks talks in 1944. A flat refusal risks the USSR walking away from the UN altogether.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -1
+      }
+    },
+    "G1a": {
+      "option": "A French zone carved from the American and British zones, plus a seat on the Allied Control Council",
+      "text": "France gets an occupation zone carved from the American and British zones, plus a seat on the Allied Control Council. Stalin grumbles, but gives up nothing.",
+      "main": true,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Churchill": 1,
+        "Stalin": -1
+      }
+    },
+    "G1b": {
+      "option": "Three powers only: France gets nothing",
+      "text": "Roosevelt expects American troops to leave Europe within about two years. Without France, Britain would face the Red Army alone in Germany. Churchill will not accept it.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Churchill": -1
+      }
+    },
+    "G1c": {
+      "option": "A French zone taken partly from the Soviet zone",
+      "text": "Stalin will not give up ground his armies are fighting for.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Stalin": -1
+      }
+    },
+    "G2a": {
+      "option": "Agree in principle and pass the details on: break-up to a committee, reparations to a commission in Moscow, with $20 billion only as a basis for discussion",
+      "text": "Break-up is agreed in principle and sent to a committee. Reparations go to a commission in Moscow, with $20 billion, half to the USSR, only as a basis for discussion; Britain refuses to commit to any figure. It costs you nothing today, but these questions will be settled without you.",
+      "main": true,
+      "cost": 0,
+      "roll": false,
+      "changes": {}
+    },
+    "G2b": {
+      "option": "Split Germany permanently into separate states, decided now",
+      "text": "Occupation zones are a way to control Germany, not a decision to create separate states. Drawing permanent borders inside Germany now would take days you do not have.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {}
+    },
+    "G2c": {
+      "option": "Fix reparations now at $20 billion, half to the USSR",
+      "text": "After the First World War, heavy reparations helped wreck Germany's economy and fed resentment. Churchill fears Britain will end up feeding a starving Germany, and refuses to fix a number.",
+      "main": false,
+      "cost": 1,
+      "roll": false,
+      "changes": {
+        "Churchill": -1
+      }
+    },
+    "X1": {
+      "title": "Stalin stalls",
+      "text": "Molotov raises new conditions, and a day is lost in haggling. Then Stalin agrees."
+    },
+    "X2": {
+      "title": "UN locked",
+      "text": "Relations are too strained to plan a world organisation. Spend days on banquet toasts until Stalin and Churchill are both at 2 or higher, or choose another issue."
+    },
+    "X3": {
+      "title": "Roosevelt leaves Yalta",
+      "text": "Exhausted and ill, Roosevelt must go home. Every unresolved issue stays open, and the next conference will be held without him."
+    }
+  },
+  "reactions": {
+    "J1b": [
+      {
+        "who": "Churchill",
+        "text": "My dear Franklin, Britain has been at war for over five years. We will do our part in the Pacific, but I have no army to march into Manchuria."
+      }
+    ],
+    "J2a": [
+      {
+        "who": "Stalin",
+        "text": "My people have lost millions in the west. If they are to fight in the east, they must see what Russia gains."
+      }
+    ],
+    "J2b": [
+      {
+        "who": "Stalin",
+        "text": "Promises of loans. Can your Congress keep them?"
+      }
+    ],
+    "P1a": [
+      {
+        "who": "Stalin",
+        "text": "Twice in thirty years Germany has invaded Russia through Poland. For you Poland is a question of honour. For us it is a question of security."
+      },
+      {
+        "who": "Churchill",
+        "text": "Britain went to war for Poland. I cannot tell Parliament we have handed it to a government chosen in Moscow."
+      }
+    ],
+    "P2a": [
+      {
+        "who": "Churchill",
+        "text": "Without observers, these elections will be whatever Moscow says they are."
+      }
+    ],
+    "U1a": [
+      {
+        "who": "Stalin",
+        "text": "The peace will be kept by the powers who won this war, or it will not be kept at all."
+      }
+    ],
+    "G1a": [
+      {
+        "who": "Stalin",
+        "text": "France opened its gates to Germany in 1940. Now it wants a seat with those who did the fighting?"
+      }
+    ],
+    "G1b": [
+      {
+        "who": "Churchill",
+        "text": "When your boys go home, Franklin, I will not stand alone in Europe beside the Red Army."
+      }
+    ],
+    "G2c": [
+      {
+        "who": "Churchill",
+        "text": "If Germany is bled white, someone must feed her. I fear it will be Britain."
+      }
+    ]
+  },
+  "facilitator": {},
+  "history": [
+    {
+      "issue": "Japan",
+      "deal": "Soviet promise to fight Japan about three months after Germany's surrender, paid for with Far Eastern territory and rights",
+      "after": "The USSR declared war on 8 August 1945, exactly three months after Germany's surrender and two days after Hiroshima. Japan announced its surrender on 15 August."
+    },
+    {
+      "issue": "Poland",
+      "deal": "A reorganised Soviet-backed government and a pledge of free elections, with no outside supervision",
+      "after": "A communist-dominated Provisional Government of National Unity formed in June 1945. The January 1947 elections were rigged."
+    },
+    {
+      "issue": "UN",
+      "deal": "Great-power veto with limits, three Soviet Assembly seats, and a founding conference in San Francisco",
+      "after": "The UN was founded in 1945. The veto it adopted is still in place today."
+    },
+    {
+      "issue": "Germany",
+      "deal": "A French zone and Control Council seat; break-up and reparations sent to committees",
+      "after": "Four occupation zones. The committees never settled the questions; Germany split into two states in 1949."
+    }
+  ],
+  "debrief": {},
+  "historyIntro": "Roosevelt got every main-line deal, but the ones that depended on Stalin's good faith or on later meetings mostly went against him.",
+  "historyClosing": "Roosevelt died on 12 April 1945, two months after Yalta. Every question he deferred was settled without him. When the agreements were made public, many Americans called them a sellout. Others argue he got the best deal his position allowed.",
+  "rules": [
+    "You have eight days. Each decision costs one day, except deferring Germany’s hard questions. Dead ends also cost a day.",
+    "Both relationships start at 3: Wary. At 1: Hostile, either leader blocks opening the UN.",
+    "Roll a six-sided die when asked. Stalin agrees on 7 minus his relationship score or higher. A failed roll costs one extra day, then he agrees.",
+    "Between decisions, spend a day on a banquet toast to raise either relationship by one.",
+    "Finish both decisions on an issue before choosing another. At zero days, you cannot begin a new decision."
+  ],
+  "complete": "You completed every issue before leaving Yalta.",
+  "labels": {
+    "drama": "Dramatised line, not a historical quote.",
+    "track": [
+      "Hostile",
+      "Cool",
+      "Wary",
+      "Warm",
+      "Close"
+    ]
+  }
+};
+const clone = value => JSON.parse(JSON.stringify(value));
+const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let state, history = [], timer = null, facilitator = false, physical = false;
+function fresh(previous) {
+ const orders={};
+ for(const [id,d] of Object.entries(GAME_DATA.decisions)) {
+  const a=[...d.options]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} orders[id]=a;
+ }
+ if(previous && JSON.stringify(orders)===JSON.stringify(previous)) orders.J1.push(orders.J1.shift());
+ return {screen:'title',days:8,Stalin:3,Churchill:3,done:[],opened:[],issue:null,decision:null,card:null,roll:null,log:[],orders,rows:0,toastReturn:null};
+}
+function save(){try{localStorage.setItem('yalta-1945-v1',JSON.stringify({state,history,physical}));}catch{}}
+function valid(s){return s && ['title','briefing','select','decision','sealed','card','roll','stall','locked','exhausted','ending','history','debrief','toast','restart'].includes(s.screen) && Number.isInteger(s.days) && s.days>=0 && s.days<=8 && ['Stalin','Churchill'].every(k=>s[k]>=1&&s[k]<=5) && Array.isArray(s.log) && Array.isArray(s.done) && Array.isArray(s.opened) && Object.keys(GAME_DATA.decisions).every(k=>Array.isArray(s.orders?.[k]) && [...s.orders[k]].sort().join()===GAME_DATA.decisions[k].options.join());}
+function boot(){state=fresh();try{const saved=JSON.parse(localStorage.getItem('yalta-1945-v1'));if(valid(saved?.state)&&Array.isArray(saved.history)&&saved.history.every(valid)){state=saved.state;history=saved.history;physical=!!saved.physical;}}catch{}render();}
+function change(fn){clearTimeout(timer);timer=null;history.push(clone(state));fn();save();render();}
+function undo(){if(!history.length)return;clearTimeout(timer);timer=null;state=history.pop();save();render();}
+function log(text){state.log.push(text);}
+function exhausted(){state.screen='exhausted';log('X3 — '+GAME_DATA.cards.X3.title);}
+function pay(cost){if(state.days<cost){exhausted();return false;}state.days-=cost;return true;}
+function applyCard(){const c=GAME_DATA.cards[state.card];for(const [who,n] of Object.entries(c.changes))state[who]=Math.max(1,Math.min(5,state[who]+n));if(c.main)state.done.push(state.decision);state.screen='card';log(state.card+' — '+(c.main?'Decision completed.':'Talks stalled; return to this decision.')+' Days left: '+state.days+'. Stalin: '+state.Stalin+'; Churchill: '+state.Churchill+'.');}
+function openCard(){change(()=>{const c=GAME_DATA.cards[state.card];log('Opened telegram '+state.card+'.');if(!pay(c.cost))return;if(c.roll){state.roll={target:7-state.Stalin,value:null,success:null};state.screen='roll';}else applyCard();});}
+function resolveRoll(value){if(state.screen!=='roll'||state.roll.value!==null)return;change(()=>{state.roll.value=value;state.roll.success=value>=state.roll.target;log('Roll: '+value+'; target '+state.roll.target+'+. '+(state.roll.success?'Success.':'Failed — X1: Stalin stalls; one extra day due.'));if(!state.roll.success){if(pay(1))state.screen='stall';}else applyCard();});}
+function nextDecision(){if(state.done.length===8){state.screen='ending';return;}if(state.days===0){exhausted();return;}if(state.card && GAME_DATA.cards[state.card].main===false){state.screen='decision';state.card=null;state.roll=null;return;}const remaining=GAME_DATA.issues[state.issue]?.find(id=>!state.done.includes(id));if(remaining){state.decision=remaining;state.screen='decision';}else{state.decision=null;state.issue=null;state.screen='select';}state.card=null;state.roll=null;}
+function selectIssue(issue){if(state.screen!=='select'||GAME_DATA.issues[issue].every(id=>state.done.includes(id)))return;change(()=>{if(issue==='UN'&&(state.Stalin===1||state.Churchill===1)){state.screen='locked';log('X2 — UN locked. No days spent.');return;}if(state.days===0){exhausted();return;}state.issue=issue;if(!state.opened.includes(issue))state.opened.push(issue);state.decision=GAME_DATA.issues[issue][0];state.screen='decision';log('Opened issue: '+issue+'.');});}
+function choose(cid){if(state.screen!=='decision'||!state.orders[state.decision].includes(cid))return;change(()=>{state.card=cid;state.roll=null;state.screen='sealed';log('Choice: '+GAME_DATA.cards[cid].option);});}
+function advance(){switch(state.screen){case'title':change(()=>state.screen='briefing');break;case'briefing':change(()=>state.screen='select');break;case'sealed':openCard();break;case'stall':change(applyCard);break;case'card':change(nextDecision);break;case'locked':change(()=>state.screen='select');break;case'exhausted':change(()=>state.screen='ending');break;case'ending':change(()=>{state.screen='history';state.rows=0;});break;case'history':change(()=>{if(state.rows<4)state.rows++;else state.screen='debrief';});break;}}
+function startRoll(){if(timer||state.screen!=='roll')return;const el=document.getElementById('die');el.classList.add('rolling');document.getElementById('roll-button').disabled=true;el.textContent='…';timer=setTimeout(()=>{timer=null;resolveRoll(1+Math.floor(Math.random()*6));},matchMedia('(prefers-reduced-motion: reduce)').matches?0:1000);}
+function toast(who){if(state.screen!=='toast'||state.days<1||state[who]>=5)return;change(()=>{state.days--;state[who]++;log('Banquet toast to '+who+': −1 day, '+who+' +1.');state.screen=state.toastReturn;if(state.days===0)exhausted();});}
+function act(action,value){if(action==='next')advance();else if(action==='issue')selectIssue(value);else if(action==='choose')choose(value);else if(action==='undo')undo();else if(action==='facilitator'){facilitator=!facilitator;render();}else if(action==='roll')startRoll();else if(action==='physical')resolveRoll(Number(value));else if(action==='toast'){if(['decision','select'].includes(state.screen)&&state.days>0)change(()=>{state.toastReturn=state.screen;state.screen='toast';});}else if(action==='toast-person')toast(value);else if(action==='cancel-toast')change(()=>state.screen=state.toastReturn);else if(action==='restart'){change(()=>{state.restartReturn=state.screen;state.screen='restart';});}else if(action==='cancel-restart')change(()=>state.screen=state.restartReturn);else if(action==='confirm-restart'){change(()=>{state=fresh(state.orders);});}else if(action==='print')window.print();}
+const button=(text,action,value='',cls='')=>`<button class="${cls}" data-action="${action}" data-value="${esc(value)}">${text}</button>`;
+const next=(text='Continue →')=>button(text,'next','','primary');
+function paper(label,title,body,extra=''){return `<section class="paper ${extra}"><div class="eyebrow">${label}</div><h2>${esc(title)}</h2>${body}</section>`;}
+function track(who){return `<div><h3>${who} · ${state[who]} / 5</h3><div class="scale" aria-label="${who}: ${state[who]}, ${GAME_DATA.labels.track[state[who]-1]}">${[1,2,3,4,5].map(n=>`<span aria-hidden="true">${n}</span>`).join('')}<span class="marker" style="--score:${state[who]-1}" aria-hidden="true">${state[who]}</span></div><div class="track-label">${GAME_DATA.labels.track[state[who]-1]}</div>${who==='Stalin'?`<p class="target">Stalin agrees on a roll of <strong>${7-state.Stalin}${state.Stalin===1?' only':'+'}</strong></p>`:''}</div>`;}
+function renderHUD(){document.getElementById('hud').innerHTML=`<section class="hud" aria-label="Conference status"><div class="hud-grid"><div class="days"><h3>Days remaining · ${state.days} / 8</h3><div class="pips">${Array.from({length:8},(_,i)=>`<span class="pip ${i<8-state.days?'spent':''}" title="Day ${i+1}: ${i<8-state.days?'spent':'remaining'}" aria-label="Day ${i+1}: ${i<8-state.days?'spent':'remaining'}">${i+1}</span>`).join('')}</div></div>${track('Stalin')}${track('Churchill')}</div><div class="track-legend">1 Hostile · 2 Cool · 3 Wary · 4 Warm · 5 Close</div><div class="board" aria-label="Issue board">${Object.entries(GAME_DATA.issues).map(([issue,ids])=>`<span>${esc(issue)} ${issue==='UN'&&(state.Stalin===1||state.Churchill===1)?'🔒 ':''}${ids.map((id,i)=>`<span role="checkbox" aria-checked="${state.done.includes(id)}" aria-label="${issue} decision ${i+1}">${state.done.includes(id)?'☑':'☐'}</span>`).join('')}</span>`).join('')}</div><div class="toolbar"><button data-action="toast" ${!['select','decision'].includes(state.screen)||state.days===0||(state.Stalin===5&&state.Churchill===5)?'disabled':''}>Banquet toast</button><button data-action="undo" ${history.length?'':'disabled'}>Undo</button><button data-action="facilitator" aria-pressed="${facilitator}">Facilitator mode ${facilitator?'on':'off'}</button>${button('Restart','restart')}<label><input type="checkbox" id="physical-toggle" ${physical?'checked':''} ${timer?'disabled':''}> Use physical die</label></div></section>`;}
+function summary(){return `<div class="stats"><div><strong>${state.done.length} / 8</strong>decisions completed</div><div><strong>${state.days}</strong>days left</div><div><strong>${state.Stalin} / 5</strong>Stalin</div><div><strong>${state.Churchill} / 5</strong>Churchill</div></div><h3>Completed decisions</h3>${state.done.length?'<ul>'+state.done.map(id=>'<li>'+esc(id+' · '+GAME_DATA.decisions[id].title)+'</li>').join('')+'</ul>':'<p>None completed.</p>'}<h3>Unresolved issues</h3><ul>${Object.entries(GAME_DATA.issues).filter(([,ids])=>ids.some(id=>!state.done.includes(id))).map(([issue,ids])=>`<li>${issue} · ${ids.filter(id=>!state.done.includes(id)).join(', ')} unresolved</li>`).join('')||'<li>None.</li>'}</ul>`;}
+function renderScreen(){const c=GAME_DATA.cards[state.card];switch(state.screen){case'title':return `<section class="hero"><div class="eyebrow">A negotiation game · One president. Eight days.</div><h1>Yalta 1945:<br>The Roosevelt Game</h1><p style="margin-top:28px">${esc(GAME_DATA.subtitle)}</p><div class="actions">${next('Begin →')}</div><p class="meta" style="font-size:14px;margin-top:28px">4–5 players · One shared Roosevelt · About 30 minutes</p></section>`;case'briefing':return paper('The presidential briefing','Eight days. Four issues.',`<p>${esc(GAME_DATA.briefing)}</p><h3>The rules</h3><ul class="rules">${GAME_DATA.rules.map(t=>'<li>'+esc(t)+'</li>').join('')}</ul>${next('Take your seat →')}`);case'select':return `<div class="eyebrow">The conference table</div><h2>Which issue comes first?</h2><p>Choose an issue, then work through both of its decisions.</p><div class="cards">${Object.entries(GAME_DATA.issues).map(([issue,ids],i)=>{const complete=ids.every(id=>state.done.includes(id)),locked=issue==='UN'&&(state.Stalin===1||state.Churchill===1);return `<button class="issue" data-action="issue" data-value="${issue}" ${complete?'disabled':''}><small>0${i+1} / ${complete?'COMPLETE':locked?'🔒 LOCKED':'ON THE TABLE'}</small><strong>${issue}</strong><small>${ids.filter(id=>state.done.includes(id)).length} of 2 decisions completed</small></button>`;}).join('')}</div>`;case'decision':return `<div class="eyebrow">${state.issue} · Decision ${state.decision.slice(1)} of 2</div><h2>${esc(GAME_DATA.decisions[state.decision].title)}</h2><p>${esc(GAME_DATA.decisions[state.decision].question)}</p><div class="options">${state.orders[state.decision].map((id,i)=>button(`<span class="key">${i+1}</span><span>${esc(GAME_DATA.cards[id].option)}</span>`,'choose',id,'option')).join('')}</div>`;case'sealed':return `<div class="eyebrow">A reply has arrived</div><h2>From the conference table</h2><p>${esc(c.option)}</p><button class="envelope" data-action="next"><strong>CONFIDENTIAL · PRESIDENT'S COPY</strong><span class="seal" aria-hidden="true">FDR</span><strong>Open telegram →</strong></button>`;case'roll':return paper('Negotiation in progress','Will Stalin agree?',`<p>The decision costs ${c.cost} day. That cost has been paid.</p><p>Target before track changes: <strong>${state.roll.target}+</strong>. A failed roll costs one extra day.</p><div class="dice-row"><div class="die" id="die" aria-live="polite">?</div><div>${physical?'<p>Enter the physical die result:</p><div class="physical">'+[1,2,3,4,5,6].map(n=>button(n,'physical',n)).join('')+'</div>':'<button class="primary" id="roll-button" data-action="roll">Roll die →</button>'}</div></div>`);case'card':return paper('Telegram '+state.card,c.main?'An agreement is reached.':'The talks have stalled.',`<div class="telegram"><p>${esc(c.text)}</p></div>${state.roll?`<p class="result">Die: ${state.roll.value} · Target: ${state.roll.target}+ · ${state.roll.success?'Success':'Failed — X1 cost one extra day; Stalin then agreed'}</p>`:''}<div class="effects">${c.cost===0?'0 days spent':'−1 day'}${Object.entries(c.changes).map(([w,n])=>' · '+w+' '+(n>0?'+':'−')+Math.abs(n)).join('')}${!Object.keys(c.changes).length?' · No track changes':''}<br>${c.main?'Decision complete.':'Return to the same decision. Track damage remains.'}</div>${(GAME_DATA.reactions[state.card]||[]).map(r=>`<blockquote class="reaction"><strong>${r.who}</strong><p>“${esc(r.text)}”</p><small>${GAME_DATA.labels.drama}</small></blockquote>`).join('')}${next()}`);case'stall':return paper('Telegram X1',GAME_DATA.cards.X1.title,`<p>${esc(GAME_DATA.cards.X1.text)}</p><p class="result">Die: ${state.roll.value} · Target: ${state.roll.target}+ · Failed</p><div class="effects">−1 extra day paid. The agreement’s track changes apply next.</div>${next('Apply the agreement →')}`);case'locked':return paper('Telegram X2',GAME_DATA.cards.X2.title,`<p>${esc(GAME_DATA.cards.X2.text)}</p><div class="effects">No days spent. No track changes.</div>${next('Return to the table →')}`);case'exhausted':return paper('Telegram X3',GAME_DATA.cards.X3.title,`<p>${esc(GAME_DATA.cards.X3.text)}</p>${state.roll?.value?`<p>Die: ${state.roll.value} · Target: ${state.roll.target}+ · ${state.roll.success?'Success':'Failed — the extra day cannot be paid.'}</p>`:''}${next('View your outcome →')}`);case'toast':return paper('Between decisions','Raise a banquet toast',`<p>Spend one day to raise one relationship by one.</p><div class="actions">${['Stalin','Churchill'].map(w=>`<button data-action="toast-person" data-value="${w}" ${state[w]===5?'disabled':''}>${w} · ${state[w]} → ${Math.min(5,state[w]+1)}</button>`).join('')}${button('Cancel','cancel-toast')}</div>`);case'restart':return paper('A fresh conference','Start again?',`<p>A new game resets days, tracks and the decision log, and shuffles the options. Undo can restore this game.</p><div class="actions">${button('Start new game','confirm-restart','','primary')}${button('Keep playing','cancel-restart')}</div>`);case'ending':return paper('Your conference record','Leaving Yalta',`<p>${state.done.length===8?esc(GAME_DATA.complete):'Your conference has ended.'}</p>${summary()}${next('What happened in history →')}`);case'history':return paper('The historical record','Agreements and aftermath',`<p>${esc(GAME_DATA.historyIntro)}</p>${GAME_DATA.history.slice(0,state.rows).map(row=>`<article class="history-row"><h3>${row.issue}</h3><div><small>WHAT ROOSEVELT GOT AT YALTA</small><p>${esc(row.deal)}</p></div><div><small>WHAT HAPPENED NEXT</small><p>${esc(row.after)}</p></div><div class="group-result">Your group: ${GAME_DATA.issues[row.issue].every(id=>state.done.includes(id))?'main line reached':state.opened.includes(row.issue)?'not reached':'never opened'}</div></article>`).join('')}${state.rows===4?'<p style="margin-top:28px">'+esc(GAME_DATA.historyClosing)+'</p>':''}<div class="actions">${next(state.rows<4?'Reveal '+GAME_DATA.history[state.rows].issue+' →':'Begin the debrief →')}</div>`);case'debrief':return paper('Around the table','What did your choices cost?',`${Object.entries(GAME_DATA.debrief).map(([heading,questions])=>`<h3>${esc(heading)}</h3><ul>${questions.map(q=>'<li>'+esc(q)+'</li>').join('')}</ul>`).join('')}<div class="actions">${button('Print group summary','print','','primary')}${button('Play again','restart')}</div><section class="print-summary"><h2>Your group’s conference record</h2>${summary()}<h3>Choices, cards and rolls</h3><ol>${state.log.map(t=>'<li>'+esc(t)+'</li>').join('')}</ol></section>`);}}
+function renderFacilitator(){const panel=document.getElementById('facilitator');panel.hidden=!facilitator;panel.className='facilitator';document.getElementById('workspace').classList.toggle('facilitating',facilitator);if(!facilitator){panel.innerHTML='';return;}const key=state.decision||'Issue select';let entries=[];if(GAME_DATA.facilitator[key])entries.push(GAME_DATA.facilitator[key].split(' Also show this hint table:')[0]);if(state.card&&GAME_DATA.cards[state.card]?.main===false&&state.screen==='card')entries.push(GAME_DATA.facilitator['After any dead end']);if(state.roll?.success===false)entries.push(GAME_DATA.facilitator['After a failed roll']);if(state.days<=2)entries.push(GAME_DATA.facilitator['When 2 or fewer days remain']);panel.innerHTML='<h3>Facilitator notes</h3>'+entries.map(t=>'<p>'+esc(t)+'</p>').join('');if(key==='Issue select'){const hints=GAME_DATA.facilitator[key].split('Also show this hint table: ')[1];panel.innerHTML+='<table class="hint-table"><caption>Opening issue hints</caption><tbody>'+hints.split('; ').map(t=>{const [issue,detail]=t.split(' — ');return '<tr><th scope="row">'+esc(issue)+'</th><td>'+esc(detail)+'</td></tr>';}).join('')+'</tbody></table>';}}
+function render(){renderHUD();document.getElementById('screen').innerHTML=renderScreen();renderFacilitator();document.getElementById('log-count').textContent=state.log.length;document.getElementById('log-list').innerHTML=state.log.map(t=>'<li>'+esc(t)+'</li>').join('');document.getElementById('screen').focus({preventScroll:true});window.scrollTo(0,0);}
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(b&&!b.disabled)act(b.dataset.action,b.dataset.value);});
+document.addEventListener('change',e=>{if(e.target.id==='physical-toggle'){clearTimeout(timer);timer=null;physical=e.target.checked;save();render();}});
+document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.repeat)return;const tag=e.target.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(tag))return;const key=e.key.toLowerCase();if(key==='f'){e.preventDefault();act('facilitator');}else if(key==='u'){e.preventDefault();undo();}else if(['1','2','3'].includes(key)&&state.screen==='decision'){e.preventDefault();choose(state.orders[state.decision][Number(key)-1]);}else if((key==='enter'||key===' ')&&!['BUTTON','SUMMARY'].includes(tag)){e.preventDefault();advance();}});
+boot();
+</script></body></html>

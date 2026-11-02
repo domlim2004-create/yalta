@@ -1,0 +1,62 @@
+[
+  {
+    "name": "1. All eight main-line costs and completion",
+    "status": "PASS"
+  },
+  {
+    "name": "2. All 16 dead ends: cost, changes, same decision and option order",
+    "status": "PASS"
+  },
+  {
+    "name": "3. Rolls 3/4 at Stalin 3; changes only after roll, failure shows X1",
+    "status": "PASS"
+  },
+  {
+    "name": "4. Tracks clamp to 1–5",
+    "status": "PASS"
+  },
+  {
+    "name": "5. Either hostile track locks UN without cost; toast unlocks",
+    "status": "PASS"
+  },
+  {
+    "name": "6. Unpayable extra cost / zero-day next decision show X3 and unresolved ending",
+    "status": "PASS"
+  },
+  {
+    "name": "7. Fresh games shuffle; order remains fixed during play",
+    "status": "PASS"
+  },
+  {
+    "name": "8. Undo exactly restores rolls, effects, tokens, tracks and log",
+    "status": "PASS"
+  },
+  {
+    "name": "9. Facilitator hidden by default; only toggle reveals it",
+    "status": "PASS"
+  },
+  {
+    "name": "10. No horizontal overflow at 375 / 1280 / 1920 across every screen",
+    "status": "PASS"
+  },
+  {
+    "name": "10b. Keyboard-only complete playthrough, history and debrief",
+    "status": "PASS"
+  },
+  {
+    "name": "Requested adverse playthrough: dead end, failed roll, Stalin 1, UN lock, exhaustion",
+    "status": "PASS"
+  },
+  {
+    "name": "Animated die, Undo during animation, reduced motion and refresh",
+    "status": "PASS"
+  },
+  {
+    "name": "Blocked localStorage still permits gameplay",
+    "status": "PASS"
+  },
+  {
+    "name": "No runtime errors or network requests",
+    "status": "PASS"
+  }
+]
