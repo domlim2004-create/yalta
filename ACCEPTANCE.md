@@ -33,3 +33,7 @@ Tested on 2 November 2026 in headless Chromium using the real page and browser c
 - Desktop and phone screenshots visually inspected.
 
 The harness uses isolated state fixtures for rule boundaries and real UI interactions from the title screen for both full playthroughs. It does not represent an in-person seminar or direct Safari/Edge testing.
+
+## Content follow-up
+
+During walkthrough preparation, the facilitator and debrief data were found empty. The original report overstated that content verification. Restored all 12 facilitator entries and 10 debrief questions verbatim from the supplied prompt. Added browser assertions for the four-row opening hint table, all eight decision prompts and all ten rendered debrief questions. The complete suite passed after this correction.
