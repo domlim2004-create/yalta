@@ -8,6 +8,12 @@ The intended experience is a discussion about difficult choices. Before selectin
 
 The game is designed for 4–5 students sharing one Roosevelt, with a facilitator operating the game on a laptop or projector. Allow about 30 minutes of play, followed by discussion.
 
+## The showcase interface
+
+Open the presidential briefing, then choose among four issue dossiers. During negotiations, the status panel shows days, relationships and decision progress. Proposals lead to sealed telegrams; roll screens show Stalin’s current relationship and the target together. The ending separates completed issues, partly negotiated issues and issues never opened.
+
+The layout prioritises a shared laptop. Facilitator notes are optional and visible to anyone looking at the screen. Long briefings and the historical record can be scrolled. All visuals and text are included in the single offline file.
+
 ## What players are working towards
 
 The practical objective is to complete both decisions on all four issues before Roosevelt leaves Yalta. Players must balance three pressures:

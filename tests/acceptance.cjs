@@ -8,13 +8,13 @@ const fs=require('node:fs');
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const url='http://127.0.0.1:'+server.address().port;
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
- const page=await browser.newPage({viewport:{width:1280,height:720}});
+ const page=await browser.newPage({viewport:{width:1280,height:720},reducedMotion:'reduce'});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const requests=[];page.on('request',r=>{if(/^https?:/.test(r.url())&&!r.url().startsWith(url))requests.push(r.url());});
  await page.goto(url);
  const results=[];
  async function test(name,fn){try{await fn();results.push({name,status:'PASS'});console.log('PASS '+name);}catch(e){results.push({name,status:'FAIL',error:e.message});console.error('FAIL '+name+' '+e.stack);}}
- async function fixture(data={}){await page.evaluate(data=>{clearTimeout(timer);timer=null;history=[];state=fresh();Object.assign(state,{screen:'decision',issue:'Japan',decision:'J1'},data);physical=true;facilitator=false;render();},data);}
+ async function fixture(data={}){await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(data=>{cancelMotion();clearTimeout(timer);timer=null;history=[];state=fresh();Object.assign(state,{screen:'decision',issue:'Japan',decision:'J1'},data);physical=true;facilitator=false;render();},data);}
  async function get(){return page.evaluate(()=>clone(state));}
  async function choice(cid,roll=6){await page.locator(`[data-action="choose"][data-value="${cid}"]`).click();await page.locator('.envelope').click();if((await get()).screen==='roll')await page.locator(`[data-action="physical"][data-value="${roll}"]`).click();if((await get()).screen==='stall')await page.locator('#screen [data-action="next"]').click();}
  await test('1. All eight main-line costs and completion',async()=>{for(const id of ['J1','J2','P1','P2','U1','U2','G1','G2']){await fixture({decision:id,issue:{J:'Japan',P:'Poland',U:'UN',G:'Germany'}[id[0]]});await choice(id+'a');const s=await get();assert.equal(s.days,id==='G2'?8:7);assert.deepEqual(s.done,[id]);}});
@@ -29,9 +29,112 @@ const fs=require('node:fs');
  await test('10. No horizontal overflow at 375 / 1280 / 1920 across every screen',async()=>{for(const width of [375,1280,1920]){await page.setViewportSize({width,height:width===375?812:1080});for(const screen of ['title','briefing','select','decision','sealed','roll','card','stall','locked','exhausted','ending','history','debrief','toast','restart']){await fixture({screen,card:'P1a',decision:'P1',issue:'Poland',roll:{target:4,value:3,success:false},rows:4});for(const fac of [false,true]){await page.evaluate(f=>{facilitator=f;render();},fac);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${width} ${screen} facilitator=${fac}`);}}}await page.setViewportSize({width:1280,height:720});assert.equal(await page.evaluate(()=>getComputedStyle(document.body).fontSize),'20px');});
  await test('10b. Keyboard-only complete playthrough, history and debrief',async()=>{await fixture({screen:'title',issue:null,decision:null});await page.keyboard.press('Enter');await page.keyboard.press('Space');for(const issue of ['Japan','UN','Germany','Poland']){await page.locator(`[data-action="issue"][data-value="${issue}"]`).focus();await page.keyboard.press('Enter');for(let d=0;d<2;d++){const key=await page.evaluate(()=>String(state.orders[state.decision].indexOf(state.decision+'a')+1));await page.keyboard.press(key);await page.keyboard.press('Enter');if((await get()).screen==='roll'){await page.locator('[data-action="physical"][data-value="6"]').focus();await page.keyboard.press('Enter');}await page.keyboard.press('Space');}}assert.equal((await get()).done.length,8);assert.equal((await get()).screen,'ending');assert.match(await page.locator('#screen').innerText(),/You completed every issue before leaving Yalta/);await page.keyboard.press('Enter');for(let i=1;i<=4;i++){await page.keyboard.press('Enter');assert.equal(await page.locator('.history-row').count(),i);}await page.keyboard.press('Enter');assert.equal((await get()).screen,'debrief');await page.emulateMedia({media:'print'});assert.equal(await page.locator('.print-summary').isVisible(),true);assert.match(await page.locator('.print-summary').innerText(),/Choices, cards and rolls/);await page.emulateMedia({media:'screen'});});
  await test('Requested adverse playthrough: dead end, failed roll, Stalin 1, UN lock, exhaustion',async()=>{await fixture({screen:'title',issue:null,decision:null});await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.locator('[data-action="issue"][data-value="Japan"]').click();await choice('J1b');await page.keyboard.press('Enter');assert.equal((await get()).decision,'J1');await choice('J1a');await page.keyboard.press('Enter');await choice('J2a',3);await page.keyboard.press('Enter');await page.locator('[data-action="issue"][data-value="Germany"]').click();for(let i=0;i<2;i++){await choice('G1c');await page.keyboard.press('Enter');}await choice('G1a');await page.keyboard.press('Enter');await choice('G2a');await page.keyboard.press('Enter');assert.equal((await get()).Stalin,1);await page.locator('[data-action="issue"][data-value="UN"]').click();assert.equal((await get()).screen,'locked');await page.keyboard.press('Enter');await page.locator('[data-action="toast"]').click();await page.locator('[data-action="toast-person"][data-value="Stalin"]').click();assert.equal((await get()).Stalin,2);assert.equal((await get()).screen,'exhausted');await page.keyboard.press('Enter');assert.match(await page.locator('#screen').innerText(),/Poland · P1, P2 unresolved/);assert.match(await page.locator('#screen').innerText(),/UN · U1, U2 unresolved/);});
- await test('Animated die, Undo during animation, reduced motion and refresh',async()=>{await fixture({decision:'J2'});await page.evaluate(()=>{physical=false;render();});await page.locator('[data-value="J2a"]').click();await page.locator('.envelope').click();await page.locator('[data-action="roll"]').click();await page.keyboard.press('u');await page.waitForTimeout(1100);assert.equal((await get()).screen,'sealed');await page.keyboard.press('Enter');await page.locator('[data-action="roll"]').click();await page.waitForTimeout(1100);assert.ok((await get()).roll.value>=1);const before=await get();await page.reload();assert.deepEqual(await get(),before);await page.emulateMedia({reducedMotion:'reduce'});assert.equal(await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches),true);await page.emulateMedia({reducedMotion:'no-preference'});});
- await test('Blocked localStorage still permits gameplay',async()=>{const p=await browser.newPage();await p.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked');}})});await p.goto(url);await p.keyboard.press('Enter');await p.keyboard.press('Enter');await p.locator('[data-action="issue"][data-value="Japan"]').click();await p.locator('[data-value="J1a"]').click();await p.locator('.envelope').click();assert.match(await p.locator('#screen').innerText(),/An agreement is reached/);await p.close();});
+ await test('Animated die, Undo during animation, reduced motion and refresh',async()=>{
+  await fixture({decision:'J2'});await page.evaluate(()=>{physical=false;render();});await page.locator('[data-value="J2a"]').click();await page.locator('.envelope').click();
+  // This test needs a real one-second die animation, not the reduced-motion zero-delay result.
+  await page.emulateMedia({reducedMotion:'no-preference'});await page.locator('[data-action="roll"]').click();await page.keyboard.press('u');await page.waitForTimeout(1100);assert.equal((await get()).screen,'sealed');
+  await page.keyboard.press('Enter');await page.waitForFunction(()=>motion===null);await page.locator('[data-action="roll"]').click();await page.waitForFunction(()=>state.roll?.value!==null);assert.ok((await get()).roll.value>=1);
+  const before=await get();await page.reload();assert.deepEqual(await get(),before);await page.emulateMedia({reducedMotion:'reduce'});assert.equal(await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches),true);await page.emulateMedia({reducedMotion:'no-preference'});
+ });
+ await test('Blocked localStorage still permits gameplay',async()=>{const p=await browser.newPage({reducedMotion:'reduce'});await p.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked');}})});await p.goto(url);await p.keyboard.press('Enter');await p.keyboard.press('Enter');await p.locator('[data-action="issue"][data-value="Japan"]').click();await p.locator('[data-value="J1a"]').click();await p.locator('.envelope').click();assert.match(await p.locator('#screen').innerText(),/An agreement is reached/);await p.close();});
  await test('All facilitator prompts and debrief questions are present',async()=>{await fixture({screen:'select',decision:null,issue:null});await page.keyboard.press('f');assert.equal(await page.locator('.hint-table tbody tr').count(),4);assert.match(await page.locator('#facilitator').innerText(),/Order changes leverage/);for(const id of ['J1','J2','P1','P2','U1','U2','G1','G2']){await fixture({decision:id});await page.keyboard.press('f');assert.match(await page.locator('#facilitator').innerText(),/Tease out/);}await fixture({screen:'debrief'});assert.equal(await page.locator('#screen .paper > ul > li').count(),10);assert.match(await page.locator('#screen').innerText(),/Was Yalta a sellout/);});
+ await test('Historical content and documented rule data preserved exactly',async()=>{
+  const digest=require('node:crypto').createHash('sha256').update(JSON.stringify(await page.evaluate(()=>GAME_DATA))).digest('hex');
+  assert.equal(digest,'984a0faaccaacc1f5dcfad6f4e9e010dab4a6a6d3f4263031ac1892c61545456');
+ });
+ await test('Completion at zero days and affordable last-day agreements',async()=>{
+  const done=['J1','J2','U1','U2','G1','G2','P1'];
+  await fixture({decision:'P2',issue:'Poland',days:1,done});await choice('P2a');assert.equal((await get()).days,0);await page.keyboard.press('Enter');assert.equal((await get()).screen,'ending');assert.equal((await get()).done.length,8);
+  await fixture({decision:'J2',days:2,done:['J1']});await choice('J2a',1);assert.equal((await get()).days,0);assert.ok((await get()).done.includes('J2'));await page.keyboard.press('Enter');assert.equal((await get()).screen,'exhausted');
+ });
+ await test('Every die threshold uses the pre-agreement relationship',async()=>{
+  for(let score=1;score<=5;score++)for(const value of [6-score,7-score]){await fixture({decision:'J2',Stalin:score});await choice('J2a',value);const s=await get();assert.equal(s.roll.target,7-score);assert.equal(s.roll.success,value>=7-score);assert.equal(s.days,value>=7-score?7:6);assert.equal(s.Stalin,Math.min(5,score+1));}
+ });
+ await test('Shared-laptop table and all proposals visible at 1366 × 768',async()=>{
+  await page.setViewportSize({width:1366,height:768});
+  await fixture({screen:'select',issue:null,decision:null});
+  for(const el of await page.locator('.issue').all())assert.ok((await el.boundingBox()).y+(await el.boundingBox()).height<=768,'Issue card below viewport');
+  for(const id of ['J1','J2','P1','P2','U1','U2','G1','G2']){
+   await fixture({decision:id,issue:{J:'Japan',P:'Poland',U:'UN',G:'Germany'}[id[0]]});
+   const options=page.locator('.option');assert.equal(await options.count(),3);
+   for(const el of await options.all()){const box=await el.boundingBox();assert.ok(box.y+box.height<=768,`${id}: proposal below viewport`);assert.equal(await el.getAttribute('class'),'option');}
+  }
+  await fixture({screen:'title',issue:null,decision:null});const begin=await page.locator('[data-action="next"]').boundingBox();assert.ok(begin.y+begin.height<=768);
+  await page.screenshot({path:'/tmp/yalta-title.png',fullPage:true});
+  await fixture({screen:'select',issue:null,decision:null});await page.screenshot({path:'/tmp/yalta-table.png',fullPage:true});
+  await page.setViewportSize({width:1280,height:720});
+ });
+ await test('Toast warning, cancellation and maximum relationship',async()=>{
+  await fixture({days:1,Stalin:5});await page.locator('[data-action="toast"]').click();assert.match(await page.locator('#screen').innerText(),/spend your final day/);assert.equal(await page.locator('[data-action="toast-person"][data-value="Stalin"]').isDisabled(),true);await page.locator('[data-action="cancel-toast"]').click();assert.equal((await get()).days,1);assert.equal((await get()).screen,'decision');
+ });
+ await test('UN lock is checked at entry, not during negotiations',async()=>{
+  await fixture({screen:'select',issue:null,decision:null,Stalin:2,Churchill:2});await page.locator('[data-action="issue"][data-value="UN"]').click();await choice('U1b');await page.keyboard.press('Enter');const s=await get();assert.equal(s.Stalin,1);assert.equal(s.screen,'decision');assert.equal(s.decision,'U1');
+ });
+ await test('Direct file:// complete game, saved refresh, print and no network',async()=>{
+  const p=await browser.newPage({viewport:{width:1366,height:768},reducedMotion:'reduce'});const external=[];const localErrors=[];p.on('request',r=>{if(/^https?:/.test(r.url()))external.push(r.url())});p.on('pageerror',e=>localErrors.push(e.message));
+  await p.goto(require('node:url').pathToFileURL(path.resolve(__dirname,'../index.html')).href);await p.evaluate(()=>{state=fresh();history=[];physical=true;save();render();});await p.keyboard.press('Enter');await p.keyboard.press('Enter');
+  for(const issue of ['Japan','UN','Germany','Poland']){await p.locator(`[data-action="issue"][data-value="${issue}"]`).click();for(let i=0;i<2;i++){const cid=await p.evaluate(()=>state.decision+'a');await p.locator(`[data-action="choose"][data-value="${cid}"]`).click();await p.locator('.envelope').click();if(await p.locator('[data-action="physical"]').count())await p.locator('[data-action="physical"][data-value="6"]').click();await p.locator('#screen [data-action="next"]').click();}}
+  assert.equal(await p.evaluate(()=>state.screen),'ending');const saved=await p.evaluate(()=>clone(state));await p.reload();assert.deepEqual(await p.evaluate(()=>clone(state)),saved);await p.keyboard.press('Enter');for(let i=0;i<5;i++)await p.keyboard.press('Enter');assert.equal(await p.evaluate(()=>state.screen),'debrief');
+  await p.emulateMedia({media:'print'});assert.equal(await p.locator('#hud').isVisible(),false);assert.equal(await p.locator('.print-summary').isVisible(),true);assert.match(await p.locator('.print-summary').innerText(),/8 \/ 8/);await p.pdf({path:'/tmp/yalta-group-summary.pdf',format:'A4',margin:{top:'15mm',bottom:'15mm',left:'15mm',right:'15mm'},printBackground:true});
+  assert.deepEqual(localErrors,[]);assert.deepEqual(external,[]);await p.close();
+ });
+ await test('Dossier and proposal animations commit once, clear and preserve focus',async()=>{
+  await fixture({screen:'select',issue:null,decision:null});await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.locator('[data-action="issue"][data-value="Poland"]').click();
+  assert.equal(await page.locator('.motion-layer').count(),1);assert.equal(await page.locator('.motion-ghost.issue').count(),4);assert.equal(await page.locator('.sweeping-forearm svg').count(),1);assert.equal(await page.locator('.forearm-sleeve').count(),1);assert.equal(await page.locator('.chosen-dossier').count(),1);assert.equal((await get()).decision,'P1');assert.equal((await get()).days,8);
+  await page.keyboard.press('1');assert.equal((await get()).screen,'decision');
+  await page.waitForFunction(()=>motion===null);assert.equal(await page.locator('.motion-layer').count(),0);assert.equal(await page.locator('#screen').getAttribute('aria-busy'),null);assert.equal(await page.evaluate(()=>document.activeElement.id),'screen');
+  const key=await page.evaluate(()=>String(state.orders.P1.indexOf('P1a')+1));await page.keyboard.press(key);
+  assert.equal(await page.locator('.motion-ghost.option').count(),3);assert.equal((await get()).screen,'sealed');assert.equal((await get()).days,8);
+  await page.waitForFunction(()=>motion===null);assert.equal((await get()).log.filter(t=>t.startsWith('Choice:')).length,1);
+ });
+ await test('Envelope opens, ignores repeated input and cleans up after reveal',async()=>{
+  await fixture({screen:'sealed',card:'P1a',decision:'P1',issue:'Poland'});await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.keyboard.press('Enter');assert.equal(await page.locator('.motion-ghost .envelope-flap').count(),1);assert.equal(await page.locator('.motion-ghost .envelope-letter').count(),1);assert.equal((await get()).days,7);
+  await page.keyboard.press('Enter');await page.keyboard.press('Space');assert.equal((await get()).screen,'card');assert.equal((await get()).days,7);
+  const layers=await page.evaluate(()=>{motion.animations.forEach(a=>{a.pause();a.currentTime=1100});const letter=document.querySelector('.motion-ghost .envelope-letter'),pocket=document.querySelector('.motion-ghost .envelope-pocket'),flap=document.querySelector('.motion-ghost .envelope-flap');const result={letter:Number(getComputedStyle(letter).zIndex),pocket:Number(getComputedStyle(pocket).zIndex),flap:Number(getComputedStyle(flap).zIndex),stack:getComputedStyle(letter.parentElement).transformStyle,duration:Math.max(...motion.animations.map(a=>a.effect.getComputedTiming().endTime)),extractionEnd:letter.getAnimations()[0].effect.getComputedTiming().endTime};motion.animations.forEach(a=>a.play());return result;});
+  assert.ok(layers.letter>layers.pocket&&layers.letter>layers.flap,'Extracted paper must be in front of the envelope');assert.equal(layers.stack,'flat');assert.ok(layers.duration>=layers.extractionEnd,'Transition must allow the letter extraction to finish');
+  await page.waitForFunction(()=>motion===null);assert.deepEqual((await get()).done,['P1']);assert.equal(await page.locator('.motion-layer').count(),0);
+ });
+ await test('Undo cancels dossier, proposal and envelope motion exactly',async()=>{
+  for(const setup of [{screen:'select',issue:null,decision:null},{screen:'decision'},{screen:'sealed',card:'J1a'}]){
+   await fixture(setup);const before=await get();await page.emulateMedia({reducedMotion:'no-preference'});
+   if(setup.screen==='select')await page.locator('[data-action="issue"][data-value="Japan"]').click();
+   else if(setup.screen==='decision')await page.keyboard.press('1');else await page.keyboard.press('Enter');
+   assert.equal(await page.locator('.motion-layer').count(),1);await page.keyboard.press('u');assert.deepEqual(await get(),before);assert.equal(await page.locator('.motion-layer').count(),0);
+  }
+ });
+ await test('Reduced motion skips effects and changing preference cancels effects',async()=>{
+  await fixture({screen:'select',issue:null,decision:null});await page.locator('[data-action="issue"][data-value="Japan"]').click();assert.equal(await page.locator('.motion-layer').count(),0);await page.locator('[data-value="J1a"]').click();assert.equal(await page.locator('.motion-layer').count(),0);await page.locator('.envelope').click();assert.equal(await page.locator('.motion-layer').count(),0);assert.equal((await get()).days,7);
+  await fixture({screen:'select',issue:null,decision:null});await page.emulateMedia({reducedMotion:'no-preference'});await page.locator('[data-action="issue"][data-value="Japan"]').click();await page.emulateMedia({reducedMotion:'reduce'});await page.waitForFunction(()=>motion===null);assert.equal((await get()).decision,'J1');
+ });
+ await test('Refresh mid-animation retains committed state without replaying effects',async()=>{
+  await fixture({screen:'sealed',card:'J1a'});await page.emulateMedia({reducedMotion:'no-preference'});await page.keyboard.press('Enter');const committed=await get();await page.reload();assert.deepEqual(await get(),committed);assert.equal(await page.locator('.motion-layer').count(),0);await page.emulateMedia({reducedMotion:'reduce'});
+ });
+ await test('Three-stage dossier sequence preserves selection until pickup in all four corners',async()=>{
+  await page.setViewportSize({width:1366,height:768});
+  for(const issue of ['Japan','Poland','UN','Germany']){
+   await fixture({screen:'select',issue:null,decision:null});await page.emulateMedia({reducedMotion:'no-preference'});await page.locator(`[data-action="issue"][data-value="${issue}"]`).click();
+   await page.evaluate(()=>motion.animations.forEach(a=>{a.pause();a.currentTime=0}));
+   assert.equal(await page.locator('[data-sweep-stage="1"]').count(),2);assert.equal(await page.locator('[data-sweep-stage="2"]').count(),1);assert.equal(await page.locator('.sweeping-forearm').count(),1);
+   const sample=async t=>page.evaluate(t=>{motion.animations.forEach(a=>a.currentTime=t);const read=s=>{const el=document.querySelector(s);const m=new DOMMatrix(getComputedStyle(el).transform);return {x:m.m41,y:m.m42}};return {chosen:read('.chosen-dossier'),near:read('[data-sweep-stage="2"]'),arm:read('.sweeping-forearm')};},t);
+   const fanStart=await sample(416),fanEnd=await sample(960);assert.ok(['Japan','UN'].includes(issue)?fanEnd.arm.x-fanStart.arm.x>150:fanEnd.arm.x-fanStart.arm.x< -150,'Fan must translate sideways as well as pivot');
+   const clearStart=await sample(1408),clearEnd=await sample(2016);assert.ok(['Japan','Poland'].includes(issue)?clearEnd.arm.y-clearStart.arm.y>150:clearEnd.arm.y-clearStart.arm.y< -150,'Second sweep must translate vertically as well as pivot');
+   const afterFan=await sample(1100);assert.equal(afterFan.chosen.x,0);assert.equal(afterFan.chosen.y,0);assert.equal(afterFan.near.y,0);
+   const afterClear=await sample(2200);assert.equal(afterClear.chosen.x,0);assert.equal(afterClear.chosen.y,0);assert.ok(['Japan','Poland'].includes(issue)?afterClear.near.y>768:afterClear.near.y< -768);
+   const pickup=await sample(2850);assert.ok(Math.abs(pickup.chosen.x)>20);await page.keyboard.press('u');assert.equal((await get()).screen,'select');assert.equal(await page.locator('.motion-layer').count(),0);
+  }
+  await page.setViewportSize({width:1280,height:720});await page.emulateMedia({reducedMotion:'reduce'});
+ });
+ await test('Opening and briefing animate with staggered dossiers and exact Undo',async()=>{
+  await fixture({screen:'title',issue:null,decision:null});await page.emulateMedia({reducedMotion:'no-preference'});const title=await get();await page.keyboard.press('Enter');assert.equal((await get()).screen,'briefing');assert.equal(await page.locator('.motion-page').count(),1);assert.equal(await page.locator('#screen .brief-rules li').count(),5);await page.keyboard.press('u');assert.deepEqual(await get(),title);assert.equal(await page.locator('.motion-layer').count(),0);
+  await page.keyboard.press('Enter');await page.waitForFunction(()=>motion===null);await page.keyboard.press('Enter');assert.equal((await get()).screen,'select');assert.equal(await page.locator('#screen .issue').count(),4);assert.equal(await page.locator('.motion-page').count(),1);await page.waitForFunction(()=>motion===null);assert.equal(await page.evaluate(()=>document.activeElement.id),'screen');
+ });
+ await test('Continue turns the telegram page; history reveals animate separately',async()=>{
+  await fixture({screen:'card',card:'J1a',decision:'J1',issue:'Japan',done:['J1'],opened:['Japan']});await page.emulateMedia({reducedMotion:'no-preference'});const before=await get();await page.keyboard.press('Enter');assert.equal((await get()).decision,'J2');assert.equal(await page.locator('.motion-page').count(),1);assert.equal(await page.locator('#screen .option').count(),3);await page.keyboard.press('u');assert.deepEqual(await get(),before);assert.equal(await page.locator('.motion-layer').count(),0);
+  await fixture({screen:'history',rows:0});await page.emulateMedia({reducedMotion:'no-preference'});await page.keyboard.press('Enter');assert.equal(await page.locator('.history-row').count(),1);assert.equal(await page.locator('.motion-page').count(),0);await page.waitForFunction(()=>motion===null);assert.equal((await get()).rows,1);
+  await page.setViewportSize({width:375,height:812});await fixture({screen:'card',card:'J1a',done:['J1']});await page.emulateMedia({reducedMotion:'no-preference'});await page.keyboard.press('Enter');await page.evaluate(()=>motion.animations.forEach(a=>{a.pause();a.currentTime=160}));assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.keyboard.press('u');await page.setViewportSize({width:1280,height:720});await page.emulateMedia({reducedMotion:'reduce'});
+ });
  await test('No runtime errors or network requests',async()=>{assert.deepEqual(errors,[]);assert.deepEqual(requests,[]);});
  await fixture({screen:'select',issue:null,decision:null});await page.screenshot({path:'/tmp/yalta-desktop.png',fullPage:true});await page.setViewportSize({width:375,height:812});await fixture({screen:'card',card:'P1a',issue:'Poland',decision:'P1'});await page.waitForTimeout(650);await page.screenshot({path:'/tmp/yalta-mobile.png',fullPage:true});
  fs.writeFileSync(path.resolve(__dirname,'../acceptance-results.json'),JSON.stringify(results,null,2)+'\n');await browser.close();server.close();if(results.some(x=>x.status==='FAIL'))process.exitCode=1;

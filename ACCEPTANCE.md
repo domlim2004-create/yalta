@@ -1,39 +1,48 @@
 # Acceptance report
 
-Tested on 2 November 2026 in headless Chromium using the real page and browser controls. All 10 Section 11 checks pass. Safari and Edge were not available for direct validation; no claim of direct testing in those browsers is made.
+Validated on 3 November 2026 in headless Chromium after the briefing-room presentation rebuild. **All 31 automated checks pass.** Results are recorded in `acceptance-results.json`. The original 16 checks also passed before the rebuild.
 
-| Section 11 check | Result | Evidence |
+Safari and Edge were not available for direct validation. These results do not represent an in-person showcase rehearsal.
+
+## Rules and state
+
+| Check | Result | Evidence |
 | --- | --- | --- |
-| 1. Main-line costs and completion | PASS | All eight choices exercised; seven cost one day, G2a costs zero. |
-| 2. Dead-end cost, damage and retry | PASS | All 16 dead ends exercised; each costs one day, applies its specified damage, retains the option order and returns to the same decision. |
-| 3. Stalin 3 die thresholds and effect order | PASS | J2a, U1a and U2a tested at rolls 3 and 4. Roll 3 shows X1 and spends an extra day; roll 4 succeeds. Track effects occur after the roll. |
-| 4. Track bounds | PASS | Negative changes at 1 and positive changes at 5 remain clamped. |
-| 5. UN lock and toast | PASS | Each leader independently tested at 1. X2 costs nothing; a toast to 2 permits opening the UN. |
-| 6. Exhaustion and unresolved ending | PASS | Unpayable base/extra cost and zero-day next decision show X3. Ending identifies unresolved decisions. |
-| 7. Shuffle stability | PASS | Restart changes option ordering; dead-end retries retain it. |
-| 8. Exact Undo | PASS | Full state equality checked after undoing a roll and a continuation: days, tracks, log, card and order restored. |
-| 9. Facilitator hidden by default | PASS | Hidden until F; F hides it again. |
-| 10. Layout and keyboard | PASS | All 15 screen states, notes on/off, at 375, 1280 and 1920px: no horizontal overflow. Entire successful game, history and debrief completed with keyboard. Body text is 20px at 1280px. |
+| Main-line costs and completion | PASS | All eight agreements exercised; seven cost one day, G2a costs zero. |
+| Dead ends and retry | PASS | All 16 dead ends cost one day, apply their specified changes and return to the same decision without reshuffling. |
+| Rolls and effect order | PASS | All three roll-dependent agreements checked at Stalin 3, with rolls 3 and 4. Every relationship score also checked on both sides of its threshold. Changes apply after resolution. |
+| Relationship bounds | PASS | Tracks remain between 1 and 5. |
+| UN lock and repair | PASS | Either leader at 1 blocks entry without cost; toasting to 2 permits entry. A relationship falling to 1 during UN talks does not eject the group. |
+| Exhaustion and completion boundaries | PASS | Unpayable base or extra costs end play. An affordable final-day agreement completes. Completing all eight decisions at zero days receives the completed ending. Zero days prevents starting G2. |
+| Toasts | PASS | Cancellation spends nothing; a relationship at 5 cannot be increased. Spending the final day is explained before confirmation. |
+| Shuffle and Undo | PASS | Restart changes option order; retry preserves it. Undo restores exact state after rolls and continuations and cancels pending die animation. |
+| Saving and storage denial | PASS | Refresh restores the saved state. Play continues when localStorage access throws. |
+| Content preservation | PASS | A SHA-256 comparison confirms the complete historical content and rule data match the pre-rebuild version. All facilitator prompts and debrief questions render. |
 
-## Full playthroughs
+## Complete playthroughs
 
-**Successful, keyboard only:** Japan → UN → Germany → Poland, choosing each agreement and entering successful physical rolls. All eight decisions completed; the completion line appears. Each historical row reveals separately, followed by the closing paragraph and debrief.
+- **Keyboard only:** Japan → UN → Germany → Poland, with successful physical-die entries. All eight decisions complete, followed by four separate historical reveals and the debrief.
+- **Adverse route:** J1b → J1a → failed J2a roll → G1c twice → G1a → G2a → locked UN → final-day toast. X3 appears, with Poland and the UN unresolved.
+- **Direct offline file:** A complete game opened through `file://`, followed by saved refresh, historical reveals, debrief and print-to-PDF. No external network requests or JavaScript errors occurred.
 
-**Requested adverse route:** Japan J1b (dead end) → J1a → J2a with roll 3 (X1; extra day paid) → Germany G1c twice → G1a → G2a. Stalin is now 1 and one day remains. Attempt UN: X2, no day charged. Toast Stalin to 2: the final day is spent and X3 appears. Ending lists Poland and UN unresolved.
+## Presentation and accessibility
 
-## Additional checks
+- All 15 screen states, with facilitator notes on and off, checked at 375, 1280 and 1920 pixels without horizontal overflow.
+- At 1366 × 768 with notes off, all four issue cards and all three proposals on each of the eight decision screens fit within the viewport. The opening button also fits.
+- Body text remains 20px at a 1280px viewport. Long briefings and historical comparisons can scroll.
+- Facilitator notes are hidden by default; F toggles them. An explicit note explains that everyone viewing the screen can see them.
+- Keyboard-only navigation, physical-die entry and reduced-motion support checked.
+- Laptop opening, table and decision layouts, notes, and phone layouts visually inspected.
+- Print media hides game controls and shows debrief questions, final resources, issue status, completed decisions and the complete choice/card/roll log. Generated PDF text checked; the group record begins on a new page.
 
-- Animated roll finishes with a result in 1–6; Undo during animation cancels its delayed result.
-- Refresh restores the exact saved game state.
-- Gameplay works when every localStorage access throws.
-- Print media exposes the group's outcome and decision log.
-- Reduced-motion preference is supported by animation CSS and the die timer.
-- No JavaScript errors or external HTTP requests during the suite.
-- 8 questions, 24 option cards, 3 general cards, 10 reactions, 4 history rows and 10 debrief questions checked against the supplied content data.
-- Desktop and phone screenshots visually inspected.
+## Selection and envelope animations
 
-The harness uses isolated state fixtures for rule boundaries and real UI interactions from the title screen for both full playthroughs. It does not represent an in-person seminar or direct Safari/Edge testing.
+Eight additional checks exercise motion with reduced motion disabled: dossier/proposal transitions commit once and retain keyboard focus, with a visible inline-SVG forearm and sleeve and exactly one chosen dossier during the folder sweep; envelope opening ignores repeated input, allows extraction to finish before the transition ends and lifts the extracted paper above both pocket and flap in a flat stacking context; Undo cancels every transition and restores the exact preceding state; reduced-motion preference skips or cancels effects; and refreshing mid-animation restores the committed state without replaying it. Mid-animation folder and envelope frames, the closed envelope and its phone layout were also visually inspected. The main rules suite uses reduced motion for deterministic interactions.
 
-## Content follow-up
+The three-stage motion is also checked at fixed timeline points for all four corners: two opposite-column files leave first, the remaining file is cleared vertically, and the selected dossier stays stationary until pickup. The elbow also travels sideways during the fan and vertically during the second sweep; both translations are asserted for all four corners. Undo restores the table from these intermediate poses. The fan, downward clear and pickup were visually compared with the supplied `ArmMotion.mp4`.
 
-During walkthrough preparation, the facilitator and debrief data were found empty. The original report overstated that content verification. Restored all 12 facilitator entries and 10 debrief questions verbatim from the supplied prompt. Added browser assertions for the four-row opening hint table, all eight decision prompts and all ten rendered debrief questions. The complete suite passed after this correction.
+Opening/briefing and Continue transitions are checked with motion enabled, including staggered rules and dossiers, exact Undo, a separate historical-row reveal and no horizontal overflow during a phone-sized page transition. Initial title entrance is also visually inspected.
+
+## Reproduce
+
+Run `node tests/acceptance.cjs` with Playwright and Chromium available. Set `NODE_PATH` if Playwright is installed outside this checkout, and `CHROMIUM_PATH` if needed. The harness owns its temporary local server and writes the machine-readable report here. Screenshots and the sample summary PDF are written to `/tmp`.

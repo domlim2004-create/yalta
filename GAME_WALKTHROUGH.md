@@ -16,7 +16,7 @@ Facilitator notes are hidden by default. Press **F** to show them. On a mirrored
 
 ## 2. Begin and read the briefing
 
-Click **Begin**. Read the briefing aloud:
+Click **Enter the briefing room**. Read the briefing aloud:
 
 > You are Franklin Roosevelt. You are ill, and you have eight days. Four issues are on the table: the war against Japan, Poland, the United Nations and Germany. You cannot give everything equal attention. Which do you take first, and why?
 
@@ -35,7 +35,7 @@ Read the short rules panel, then select **Take your seat**.
 
 ## 3. Choose an issue
 
-The conference table offers Japan, Poland, the UN and Germany. Ask the group to explain its first choice before clicking.
+The conference table presents four dossiers: Japan, Poland, the United Nations and Germany. Ask the group to explain its first choice before clicking.
 
 Useful prompts include:
 
@@ -134,7 +134,7 @@ After a completed decision, press **Continue**:
 - After the eighth completed decision, go to the completed-game ending.
 - If another decision is needed but no days remain, show X3 and end negotiations.
 
-The issue board has two boxes per issue. A box represents a completed decision, not an attempt. Selecting an option or spending a day on a dead end does not tick it.
+The issue board has two markers per issue. A box represents a completed decision, not an attempt. Selecting an option or spending a day on a dead end does not tick it.
 
 ## 7. Repair relationships with a banquet toast
 

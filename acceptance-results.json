@@ -60,6 +60,66 @@
     "status": "PASS"
   },
   {
+    "name": "Historical content and documented rule data preserved exactly",
+    "status": "PASS"
+  },
+  {
+    "name": "Completion at zero days and affordable last-day agreements",
+    "status": "PASS"
+  },
+  {
+    "name": "Every die threshold uses the pre-agreement relationship",
+    "status": "PASS"
+  },
+  {
+    "name": "Shared-laptop table and all proposals visible at 1366 × 768",
+    "status": "PASS"
+  },
+  {
+    "name": "Toast warning, cancellation and maximum relationship",
+    "status": "PASS"
+  },
+  {
+    "name": "UN lock is checked at entry, not during negotiations",
+    "status": "PASS"
+  },
+  {
+    "name": "Direct file:// complete game, saved refresh, print and no network",
+    "status": "PASS"
+  },
+  {
+    "name": "Dossier and proposal animations commit once, clear and preserve focus",
+    "status": "PASS"
+  },
+  {
+    "name": "Envelope opens, ignores repeated input and cleans up after reveal",
+    "status": "PASS"
+  },
+  {
+    "name": "Undo cancels dossier, proposal and envelope motion exactly",
+    "status": "PASS"
+  },
+  {
+    "name": "Reduced motion skips effects and changing preference cancels effects",
+    "status": "PASS"
+  },
+  {
+    "name": "Refresh mid-animation retains committed state without replaying effects",
+    "status": "PASS"
+  },
+  {
+    "name": "Three-stage dossier sequence preserves selection until pickup in all four corners",
+    "status": "PASS"
+  },
+  {
+    "name": "Opening and briefing animate with staggered dossiers and exact Undo",
+    "status": "PASS"
+  },
+  {
+    "name": "Continue turns the telegram page; history reveals animate separately",
+    "status": "PASS"
+  },
+  {
     "name": "No runtime errors or network requests",
     "status": "PASS"
   }
