@@ -21,7 +21,7 @@ Open the local server in your browser. Use the existing checkout; a separate Git
 
 ## What's different
 
-- An illustrated conference table, stylised leaders, coloured issue cards and speech bubbles.
+- A green-felt card table, cream playing-card dossiers, chunky controls and exaggerated original character illustrations. Churchill has a bowler and bow tie, Stalin a broad moustache and uniform, Roosevelt round glasses. Gentle blinking and idle motion respect reduced-motion preferences.
 - Selecting a proposal reveals only Send proposal. Sending opens a separate page with two restrained reactions from leaders or a fictional adviser. Stand by the proposal to commit, or Reconsider for free. Explicit reflection questions are reserved for optional facilitator notes.
 - Historical agreements and simulated counteroffers replace compulsory dead-end retries.
 - Failed rolls create choices, not an automatic lost day.
@@ -57,3 +57,9 @@ node tests/acceptance.cjs
 Set `CHROMIUM_PATH` if Chromium is not `/usr/bin/chromium`, and `NODE_PATH` if Playwright is installed outside Node's normal module lookup. The suite starts its own temporary HTTP server, checks all proposal branches and full playthroughs, then closes the server. Results are saved to `acceptance-results.json`; screenshots and a sample PDF go to `/tmp`.
 
 The original Section 11 acceptance rules are superseded where the approved redesign deliberately changes dead ends, dice penalties and completion. The new report names the behaviours tested rather than claiming the old rules still apply.
+
+## Visual direction
+
+The redesign uses an original arcade card-table aesthetic: warm paper, deep green felt, purple and gold accents, thick outlines, offset shadows and fast tactile button feedback. Artwork is inline SVG, with no copied game assets, remote fonts or downloads. The style draws on approachable party-game presentation and card-game readability without adding gambling mechanics. No sound or flashing effects are used.
+
+Reaction portraits use the same neutral pose for a speaker across proposals and relationship values; their idle motion is cosmetic. Hidden scores and future acceptance cannot be inferred from a new approval/disapproval animation. Relationships remain explicit in the HUD. Longer dialogue and records scroll vertically on smaller displays.

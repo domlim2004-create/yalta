@@ -84,6 +84,14 @@
     "status": "PASS"
   },
   {
+    "name": "Stylised portraits and issue artwork are self-contained; previews reveal no evaluative pose",
+    "status": "PASS"
+  },
+  {
+    "name": "Portrait motion respects reduced-motion preference",
+    "status": "PASS"
+  },
+  {
     "name": "Facilitator hidden by default; no runtime errors or external requests",
     "status": "PASS"
   }

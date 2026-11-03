@@ -1,6 +1,6 @@
 # Redesign acceptance report
 
-Validated on 4 November 2026 in headless Chromium. **22 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
+Validated on 4 November 2026 in headless Chromium. **24 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
 
 This report covers the approved redesign. It supersedes the original forced-dead-end, automatic extra-day and historical-main-line scoring assumptions. The original game and its earlier reports remain at `pre-party-redesign`.
 
@@ -43,3 +43,7 @@ The score is hidden from normal play, not encrypted. No public deployment of thi
 The latest interaction supersedes the inline adviser-question panel. Selecting a proposal shows only Send proposal. Sending opens a separate Read the room page with two restrained, dramatised reactions from leaders or a fictional adviser. No scores, numerical relationship effects, final acceptance or final refusal appear at this stage. Explicit reflection questions are optional facilitator notes only.
 
 The four flow tests cover all 24 reaction pairs, absence of pre-send reconsideration, no resource changes until Stand by this proposal, no double charge, reconsideration and Escape, Undo, save/refresh and withheld score information. The full suite has 22 passing checks. Desktop and mobile reaction screens were visually inspected. Whether reactions are appropriately subtle for a classroom remains a facilitation judgment, not something the automated checks establish.
+
+## Card-table visual refresh
+
+Added original exaggerated SVG portraits, cosmetic idle/head and blink animation, felt table, playing-card issue artwork, tactile controls and refreshed HUD styling. Two added tests verify all illustrations are self-contained, preview portraits are identical across relationship values, and reduced-motion preferences disable portrait animation. All 24 checks pass. Desktop title, table and reaction screenshots and a 375px reaction screen were visually inspected. All GAME_DATA content and scoring are byte-equivalent as parsed JSON to the preceding version. No gameplay or historical-content changes were made.
