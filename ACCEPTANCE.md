@@ -1,6 +1,6 @@
 # Redesign acceptance report
 
-Validated on 4 November 2026 in headless Chromium. **19 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
+Validated on 4 November 2026 in headless Chromium. **22 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
 
 This report covers the approved redesign. It supersedes the original forced-dead-end, automatic extra-day and historical-main-line scoring assumptions. The original game and its earlier reports remain at `pre-party-redesign`.
 
@@ -37,3 +37,7 @@ Inspected desktop conference-table and mobile reflection screenshots. The interf
 Browser tests combine isolated boundary fixtures with full UI playthroughs. They verify implementation, not classroom engagement or the objective merit of the scoring rubric. The eight-day budget is an initial balance: the historical route leaves one spare day; bargaining consumes time unless the responding leader is warm. Classroom testing should assess pacing and whether the score explanations support useful discussion.
 
 The score is hidden from normal play, not encrypted. No public deployment of this branch was performed.
+
+## Inline adviser follow-up
+
+The reflection interaction now expands under its selected proposal instead of replacing the decision screen. The fictional adviser has a portrait and speech bubble; all three options remain available. Added checks for placement, exactly one expanded conversation, two prompts, fictional-character labelling, switching without commitment, toggle/Escape dismissal with focus restoration, numeric shortcuts and saved reflection restoration. The complete 22-check suite passes. Desktop and mobile adviser screenshots were visually inspected.

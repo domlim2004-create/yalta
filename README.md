@@ -22,7 +22,7 @@ Open the local server in your browser. Use the existing checkout; a separate Git
 ## What's different
 
 - An illustrated conference table, stylised leaders, coloured issue cards and speech bubbles.
-- Two tailored discussion questions before each of 24 proposals. Reconsidering is free.
+- A fictional adviser expands beneath each selected proposal, asking two tailored questions in a speech bubble. All three options stay visible. Switching, closing and reconsidering are free.
 - Historical agreements and simulated counteroffers replace compulsory dead-end retries.
 - Failed rolls create choices, not an automatic lost day.
 - Visible relationships affect rolls, access to the UN and the cost of further bargaining.
@@ -32,7 +32,7 @@ Open the local server in your browser. Use the existing checkout; a separate Git
 
 ## Controls and saves
 
-**1–3** select a proposal. **Tab** moves focus and **Enter/Space** activates buttons. **Enter/Space** on the page advances Continue screens; sending a proposal requires activating **Send proposal** explicitly. **F** toggles visible facilitator notes. **U** undoes the last game action, including rolls and settlements. Use **Physical die** to enter a real result.
+**1–3** select a proposal. **Tab** moves focus and **Enter/Space** activates buttons. **Enter/Space** on the page advances Continue screens; sending a proposal requires activating **Send proposal** explicitly. **Escape** closes an adviser conversation and returns focus to its option. **1–3** can also switch the open adviser conversation. **F** toggles visible facilitator notes. **U** undoes the last game action, including rolls and settlements. Use **Physical die** to enter a real result.
 
 The redesign uses `yalta-party-v2` localStorage. It leaves the original `yalta-1945-v1` save untouched and starts a separate game. Save failures never block play. Restart is confirmed and reversible with Undo. No sound is used. Reduced-motion preferences suppress transitions and shorten the die animation.
 

@@ -2,7 +2,7 @@
 
 ## Proposal and deliberation
 
-A proposal is one of the three options for a decision. Selecting it opens two reflection questions. No days are spent until **Send proposal**. **Reconsider** returns to the same options for free.
+A proposal is one of the three options for a decision. Selecting it expands a fictional adviser’s speech bubble immediately below the option, with two reflection questions. The other options remain visible. No days are spent until **Send proposal**. **Reconsider**, Escape or clicking the selected option closes the bubble for free. Selecting another option switches the conversation; it does not send either proposal.
 
 ## Historical agreement
 

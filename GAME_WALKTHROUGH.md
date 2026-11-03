@@ -18,7 +18,7 @@ Complete decision 1 then decision 2 before returning to the table, or deliberate
 
 Each decision shows three shuffled proposals. Their order remains fixed within a game.
 
-Selecting one opens **Talk it through** with the proposal and two tailored questions. Discuss aloud. **Reconsider** is free; **Send proposal** commits the displayed day cost. Most proposals cost one day. Referring Germany's hard questions costs zero, but starting that decision still requires time remaining.
+Selecting one unfolds a conversation directly below it. **Your adviser**, a fictional guide, asks two tailored questions in a speech bubble. The issue question and all three proposals stay on the same screen. Discuss aloud. Click another option or press 1–3 to hear its questions; click the open option or press Escape to close the conversation. **Reconsider** is free; **Send proposal** commits the displayed day cost. Most proposals cost one day. Referring Germany's hard questions costs zero, but starting that decision still requires time remaining.
 
 ## 4. Receive a response
 
@@ -93,6 +93,6 @@ After the closing paragraph, continue to the debrief. The original ten questions
 
 ## 12. Controls
 
-1–3 selects proposals. Tab moves focus; Enter/Space activates buttons. Enter/Space on a Continue screen advances. Sending is an explicit button action. F toggles facilitator notes; U reverses the last game action. Undo restores hidden scores, relationships, days, orders and logs together and cancels pending roll animation. Restart is confirmed and reversible.
+1–3 selects proposals. Tab moves focus; Enter/Space activates buttons. Enter/Space on a Continue screen advances. Sending is an explicit button action. Escape closes the adviser bubble and returns focus to the option. F toggles facilitator notes; U reverses the last game action. Undo restores hidden scores, relationships, days, orders and logs together and cancels pending roll animation. Restart is confirmed and reversible.
 
 The redesigned save key is separate from the original. Browser storage failure does not prevent play, but progress may be lost on refresh. The original eight-day version and its documentation remain recoverable through the backup tag.

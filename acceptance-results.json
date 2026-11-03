@@ -4,6 +4,18 @@
     "status": "PASS"
   },
   {
+    "name": "Adviser unfolds below the selected proposal while all choices remain visible",
+    "status": "PASS"
+  },
+  {
+    "name": "Selecting another proposal switches the adviser; toggle and Escape close it for free",
+    "status": "PASS"
+  },
+  {
+    "name": "Numeric shortcuts switch reflection without sending; saved reflection resumes inline",
+    "status": "PASS"
+  },
+  {
     "name": "Every historical agreement costs correctly and scores once",
     "status": "PASS"
   },
