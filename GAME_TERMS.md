@@ -2,7 +2,9 @@
 
 ## Proposal and deliberation
 
-A proposal is one of the three options for a decision. Selecting it expands a fictional adviser’s speech bubble immediately below the option, with two reflection questions. The other options remain visible. No days are spent until **Send proposal**. **Reconsider**, Escape or clicking the selected option closes the bubble for free. Selecting another option switches the conversation; it does not send either proposal.
+A proposal is one of the three options for a decision. Selecting it expands a short Send proposal control beneath it. Sending opens a separate page with two mild, dramatised first reactions. These are neither acceptance nor refusal and reveal no scores or numerical relationship effects.
+
+After hearing the room, choose **Stand by this proposal** to commit the displayed day cost and proceed to its actual response, or **Reconsider** to return for free. Escape also reconsiders. No time, tracks, outcomes or scores change merely from sending tentatively. The adviser is fictional; all preview reactions are explicitly dramatised.
 
 ## Historical agreement
 

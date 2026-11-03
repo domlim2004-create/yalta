@@ -1,18 +1,18 @@
 [
   {
-    "name": "All 24 proposals have two tailored prompts; reconsider is free",
+    "name": "All 24 proposals send to two mild reactions before any commitment",
     "status": "PASS"
   },
   {
-    "name": "Adviser unfolds below the selected proposal while all choices remain visible",
+    "name": "Reactions withhold scores, effects and acceptance; facilitator questions are optional",
     "status": "PASS"
   },
   {
-    "name": "Selecting another proposal switches the adviser; toggle and Escape close it for free",
+    "name": "Only standing by the proposal charges time and resolves it once",
     "status": "PASS"
   },
   {
-    "name": "Numeric shortcuts switch reflection without sending; saved reflection resumes inline",
+    "name": "Reconsider, Escape, Undo and refresh preserve the tentative reaction state",
     "status": "PASS"
   },
   {

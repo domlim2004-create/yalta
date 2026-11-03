@@ -6,7 +6,7 @@ This report covers the approved redesign. It supersedes the original forced-dead
 
 | Behaviour | Result | Evidence |
 | --- | --- | --- |
-| Reflection before commitment | PASS | All 24 options have two prompts; selecting/reconsidering spends no time, changes no relationships and retains option order. |
+| Tentative proposal and reactions | PASS | All 24 options send to two mild reaction bubbles. The selection offers only Send; the next page offers Stand by or Reconsider. Neither tentative send nor reconsider changes game resources. |
 | Historical outcomes | PASS | All eight historical agreements resolve with their specified cost; G2a remains free. Each decision scores once. |
 | Alternative negotiation branches | PASS | All 16 alternative proposals resolve through acceptance, further bargaining and walkaway: 48 branch fixtures. |
 | Forward progression | PASS | Accepting a counteroffer advances to the next decision instead of forcing another guess. |
@@ -20,7 +20,7 @@ This report covers the approved redesign. It supersedes the original forced-dead
 | Undo | PASS | Exact state restoration after proposal send, roll, settlement and restart, including scored outcomes and logs. |
 | Complete keyboard game | PASS | Japan → UN → Germany → Poland; eight agreements, one day remaining, 11 points; historical rows and ten debrief questions reached. Print-to-PDF exercised. |
 | Adverse full playthrough | PASS | Alternative demand, further bargaining, Stalin at 1, blocked UN, repair toast, failed rolls, conditional settlements and exhaustion on final toast. |
-| Responsive layouts | PASS | All 16 screens at 375, 1280 and 1920 pixels, with facilitator notes on/off, have no horizontal overflow. |
+| Responsive layouts | PASS | All 17 screens at 375, 1280 and 1920 pixels, with facilitator notes on/off, have no horizontal overflow. |
 | Animated die | PASS | Actual timed roll resolves and Undo cancels a pending callback; reduced-motion rendering used throughout other fixtures. |
 | Persistence and compatibility | PASS | Save/refresh round-trip; original-version save preserved in its separate key. |
 | Unavailable storage | PASS | Gameplay with throwing storage accessor; corrupt save fallback. |
@@ -38,6 +38,8 @@ Browser tests combine isolated boundary fixtures with full UI playthroughs. They
 
 The score is hidden from normal play, not encrypted. No public deployment of this branch was performed.
 
-## Inline adviser follow-up
+## Revised reaction flow
 
-The reflection interaction now expands under its selected proposal instead of replacing the decision screen. The fictional adviser has a portrait and speech bubble; all three options remain available. Added checks for placement, exactly one expanded conversation, two prompts, fictional-character labelling, switching without commitment, toggle/Escape dismissal with focus restoration, numeric shortcuts and saved reflection restoration. The complete 22-check suite passes. Desktop and mobile adviser screenshots were visually inspected.
+The latest interaction supersedes the inline adviser-question panel. Selecting a proposal shows only Send proposal. Sending opens a separate Read the room page with two restrained, dramatised reactions from leaders or a fictional adviser. No scores, numerical relationship effects, final acceptance or final refusal appear at this stage. Explicit reflection questions are optional facilitator notes only.
+
+The four flow tests cover all 24 reaction pairs, absence of pre-send reconsideration, no resource changes until Stand by this proposal, no double charge, reconsideration and Escape, Undo, save/refresh and withheld score information. The full suite has 22 passing checks. Desktop and mobile reaction screens were visually inspected. Whether reactions are appropriately subtle for a classroom remains a facilitation judgment, not something the automated checks establish.

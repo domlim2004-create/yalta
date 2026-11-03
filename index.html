@@ -6,6 +6,9 @@
 /* The adviser expands inside the choice list instead of replacing the decision. */
 .proposal-choice{min-width:0}.proposal-choice.expanded>.option{background:#e8ddff;border-color:#69538c;box-shadow:0 3px 0 #69538c}.proposal-choice .arrow{min-width:22px;text-align:center}.adviser-panel{display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:24px 0 12px 10px;animation:adviser-arrive .2s ease-out;scroll-margin:16px}.adviser-person{align-self:start;padding-top:10px;text-align:center}.adviser-portrait{background:#e9dfc7;border:2px solid var(--ink);border-radius:24px;overflow:hidden}.adviser-portrait svg{width:100%;display:block}.adviser-role{display:block;font-size:9px;letter-spacing:.1em;font-weight:850;color:#746050;margin-top:9px}.adviser-bubble{position:relative;min-width:0;background:#fff;border:2px solid #4b405f;border-radius:6px 22px 22px 22px;padding:22px;box-shadow:0 4px 0 #e3d8eb}.adviser-bubble:before{content:'';position:absolute;top:26px;left:-10px;width:16px;height:16px;transform:rotate(45deg);background:white;border-left:2px solid #4b405f;border-bottom:2px solid #4b405f}.adviser-heading h3{font-size:20px;margin:0 0 4px}.adviser-heading>span{display:block;font-size:12px;color:#6b6175}.adviser-intro{font-size:17px;color:#6b517d;margin:18px 0 12px;font-weight:650}.adviser-questions .prompt{display:block;background:transparent;border-radius:0;padding:0;margin:0 0 14px;font-size:20px;line-height:1.5}.adviser-questions .prompt:last-child{margin-bottom:0}.adviser-instruction{font-size:14px;color:#655d6f;margin-top:18px;margin-bottom:10px}.adviser-disclaimer{font-size:11px;color:#71687a;margin:0}.adviser-send{border-top:1px solid #e0d7e7;padding-top:16px;margin-top:18px}.send-cost{display:block;font-size:13px;color:#5e5369}.adviser-send .actions{margin-top:12px;gap:10px}.adviser-send button{font-size:16px;padding:10px 16px}.proposal-choice{scroll-margin-top:16px}@keyframes adviser-arrive{from{opacity:.4;transform:translateY(-5px)}to{opacity:1;transform:none}}@media(max-width:600px){.adviser-panel{grid-template-columns:1fr;padding:15px 0 5px;gap:0}.adviser-person{display:flex;align-items:center;gap:10px;padding:0 0 12px 8px;text-align:left}.adviser-portrait{width:54px;flex:0 0 54px;border-radius:15px}.adviser-role{font-size:10px;margin:0}.adviser-bubble{padding:18px 16px;border-radius:16px}.adviser-bubble:before{top:-10px;left:27px;transform:rotate(135deg)}.adviser-questions .prompt{font-size:18px}.adviser-intro{font-size:16px}.adviser-send .actions{display:grid;grid-template-columns:1fr}.adviser-send button{text-align:center}.option .key{min-width:28px;height:28px;font-size:14px}.option{gap:10px}.option .arrow{min-width:16px}.adviser-role{max-width:130px}}
 
+
+.proposal-send{padding:20px 20px 10px;border-left:3px solid #b7a1d8;margin:14px 0 6px 16px;animation:adviser-arrive .2s ease-out}.proposal-send p{font-size:16px;margin-bottom:8px}.proposal-send .actions{margin-top:14px}.first-reactions{display:grid;gap:24px;margin:30px 0}.first-reaction{display:grid;grid-template-columns:96px minmax(0,1fr);gap:20px;align-items:center}.reaction-person{text-align:center}.reaction-person .adviser-portrait{max-width:80px;margin:0 auto 8px;background:#ece3d0}.reaction-person b{font-size:13px;display:block}.reaction-speech{position:relative;border:2px solid #5a496f;border-radius:20px;background:#fff;padding:24px;box-shadow:0 4px 0 #e0d5e8}.reaction-speech:before{content:'';position:absolute;top:30px;left:-10px;width:16px;height:16px;background:#fff;border-left:2px solid #5a496f;border-bottom:2px solid #5a496f;transform:rotate(45deg)}.reaction-speech p{font-size:21px;margin:0 0 12px;line-height:1.55}.reaction-speech small{font-size:11px;color:#71677b}.reaction-invite{font-size:17px;color:#675477;font-weight:600}@media(max-width:600px){.first-reaction{grid-template-columns:1fr;gap:12px}.reaction-person{display:flex;align-items:center;gap:12px;text-align:left;padding-left:8px}.reaction-person .adviser-portrait{width:54px;margin:0}.reaction-person b{font-size:16px}.reaction-speech{padding:18px}.reaction-speech:before{top:-10px;left:28px;transform:rotate(135deg)}.reaction-speech p{font-size:18px}.proposal-send{margin-left:6px;padding:15px 12px}.proposal-send button{width:100%;font-size:17px}.first-reactions{gap:24px}}
+
 </style></head><body><div class="app"><header class="mast"><div class="brand">YALTA<span> / 1945</span></div><span class="edition">AT THE TABLE · REDESIGN</span></header><div id="hud"></div><div class="layout" id="layout"><main id="screen" tabindex="-1"></main><aside id="notes" class="notes" hidden></aside></div><details class="log" id="log"><summary>Conference log · <span id="log-count">0</span> entries</summary><ol id="log-list"></ol></details><footer class="footer"><span>UTC2107 · NUS TEMBUSU COLLEGE · 4–5 PLAYERS</span><span>1–3 CHOOSE · ENTER CONTINUE · F NOTES · U UNDO</span></footer></div><script>
 const GAME_DATA = {
   "title": "Yalta 1945: The Roosevelt Game",
@@ -116,6 +119,16 @@ const GAME_DATA = {
       "questions": [
         "What can Soviet forces do that your other partners cannot?",
         "What might Stalin ask for once you depend on his help?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "We should be clear about what each of us is being asked to undertake."
+        },
+        {
+          "who": "Churchill",
+          "text": "There is still the question of how our plans fit together."
+        }
       ]
     },
     "J1b": {
@@ -130,6 +143,16 @@ const GAME_DATA = {
       "questions": [
         "What military help can Britain actually deliver here?",
         "If British help is limited, where will you turn next?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "There are several theatres competing for our attention."
+        },
+        {
+          "who": "Stalin",
+          "text": "It may help to be precise about the assistance you have in mind."
+        }
       ]
     },
     "J1c": {
@@ -144,6 +167,16 @@ const GAME_DATA = {
       "questions": [
         "What do you know about whether the bomb will be ready?",
         "Who bears the risk if your plan does not work?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "There is a great deal resting on that assessment."
+        },
+        {
+          "who": "Adviser",
+          "text": "Some parts of the plan are easier to judge than others."
+        }
       ]
     },
     "J2a": {
@@ -160,6 +193,16 @@ const GAME_DATA = {
       "questions": [
         "Whose territory and interests would this concession affect?",
         "What makes this promise deliverable, and what makes it costly?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "The details of those arrangements would matter to us."
+        },
+        {
+          "who": "Churchill",
+          "text": "There are interests beyond this room to keep in mind."
+        }
       ]
     },
     "J2b": {
@@ -174,6 +217,16 @@ const GAME_DATA = {
       "questions": [
         "Who controls the funds you would need to promise?",
         "What could you offer if Congress does not approve?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "I would be interested in what form that promise could take."
+        },
+        {
+          "who": "Adviser",
+          "text": "We may be asked who has the authority to carry it out."
+        }
       ]
     },
     "J2c": {
@@ -190,6 +243,16 @@ const GAME_DATA = {
       "questions": [
         "Why would Stalin fight Japan without a concession?",
         "What leverage remains if an appeal to the alliance fails?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "We may each have a different understanding of what the alliance requires."
+        },
+        {
+          "who": "Churchill",
+          "text": "It would be useful to know what happens after the appeal."
+        }
       ]
     },
     "P1a": {
@@ -207,6 +270,16 @@ const GAME_DATA = {
       "questions": [
         "Whose army holds Poland?",
         "Who gains a voice in this arrangement, and who might lose one?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "The starting point will shape what follows."
+        },
+        {
+          "who": "Churchill",
+          "text": "I will have questions about who is actually represented."
+        }
       ]
     },
     "P1b": {
@@ -223,6 +296,16 @@ const GAME_DATA = {
       "questions": [
         "What leverage supports the London government’s claim?",
         "What could you obtain if Stalin refuses to replace the government he recognises?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "There are people who will listen closely to how we frame this."
+        },
+        {
+          "who": "Stalin",
+          "text": "We should distinguish a claim from an arrangement that can be put into effect."
+        }
       ]
     },
     "P1c": {
@@ -239,6 +322,16 @@ const GAME_DATA = {
       "questions": [
         "What would persuade Stalin to give up the existing starting point?",
         "How would you choose a government that the parties would accept?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "We would need to discuss how such a government takes shape."
+        },
+        {
+          "who": "Adviser",
+          "text": "The process of choosing its members may matter as much as the label."
+        }
       ]
     },
     "P2a": {
@@ -256,6 +349,16 @@ const GAME_DATA = {
       "questions": [
         "What does each side understand by free elections?",
         "How would you know the promise had been kept?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "We should be careful about what the wording commits us to."
+        },
+        {
+          "who": "Churchill",
+          "text": "I will be thinking about how we learn what happens afterwards."
+        }
       ]
     },
     "P2b": {
@@ -273,6 +376,16 @@ const GAME_DATA = {
       "questions": [
         "Whose army controls access to polling places?",
         "If Stalin rejects observers, which narrower safeguard could you defend?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "The practical arrangements would deserve some attention."
+        },
+        {
+          "who": "Stalin",
+          "text": "There would be questions about the role those observers were to play."
+        }
       ]
     },
     "P2c": {
@@ -289,6 +402,16 @@ const GAME_DATA = {
       "questions": [
         "What can you credibly withhold if Stalin refuses?",
         "Which other negotiations could your threat endanger?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "That would place quite a weight on our next exchange."
+        },
+        {
+          "who": "Adviser",
+          "text": "Other discussions are still waiting for us this week."
+        }
       ]
     },
     "U1a": {
@@ -303,6 +426,16 @@ const GAME_DATA = {
       "questions": [
         "Why might the great powers refuse to join without a veto?",
         "What should happen when a permanent member is itself involved in a dispute?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "We should examine how that distinction works in practice."
+        },
+        {
+          "who": "Churchill",
+          "text": "The members will want to understand when they can be heard."
+        }
       ]
     },
     "U1b": {
@@ -319,6 +452,16 @@ const GAME_DATA = {
       "questions": [
         "Would the United States accept being outvoted on its own vital interests?",
         "What can an organisation achieve without the major powers?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "Each government will consider what joining would mean for its own decisions."
+        },
+        {
+          "who": "Adviser",
+          "text": "The same rule would apply when the United States is in the minority."
+        }
       ]
     },
     "U1c": {
@@ -335,6 +478,16 @@ const GAME_DATA = {
       "questions": [
         "What happens if a member can prevent discussion of its own conduct?",
         "What reason would smaller states have to trust this arrangement?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "The scope of that protection would need to be understood."
+        },
+        {
+          "who": "Churchill",
+          "text": "I would want to examine what remains open for discussion."
+        }
       ]
     },
     "U2a": {
@@ -351,6 +504,16 @@ const GAME_DATA = {
       "questions": [
         "Where will the UN’s strongest powers sit?",
         "What does this concession cost compared with what it could secure?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "The number is one part of the discussion."
+        },
+        {
+          "who": "Churchill",
+          "text": "We should consider how the arrangement will be explained to the other members."
+        }
       ]
     },
     "U2b": {
@@ -367,6 +530,16 @@ const GAME_DATA = {
       "questions": [
         "How would other countries view sixteen votes for one government?",
         "What would you need in return to justify this concession?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "That would certainly be noticed by the other delegations."
+        },
+        {
+          "who": "Churchill",
+          "text": "There are questions about how those votes would sit alongside everyone else’s."
+        }
       ]
     },
     "U2c": {
@@ -383,6 +556,16 @@ const GAME_DATA = {
       "questions": [
         "How important are Assembly votes compared with Security Council powers?",
         "What is your fallback if Stalin makes seats a condition of joining?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "The principle is clear enough. The negotiation may be less straightforward."
+        },
+        {
+          "who": "Stalin",
+          "text": "We have been looking at the question from rather different positions."
+        }
       ]
     },
     "G1a": {
@@ -400,6 +583,16 @@ const GAME_DATA = {
       "questions": [
         "Who will share the burden if American troops leave?",
         "Can France gain a role without requiring Stalin to give up ground?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "The division of responsibilities will matter beyond this meeting."
+        },
+        {
+          "who": "Stalin",
+          "text": "I would want to see how the proposed arrangement is drawn."
+        }
       ]
     },
     "G1b": {
@@ -416,6 +609,16 @@ const GAME_DATA = {
       "questions": [
         "What support will Britain have after American forces leave?",
         "Who benefits from excluding France, and who carries the burden?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "We should think about who remains to carry the burden later."
+        },
+        {
+          "who": "Adviser",
+          "text": "A smaller group may still have quite different expectations."
+        }
       ]
     },
     "G1c": {
@@ -432,6 +635,16 @@ const GAME_DATA = {
       "questions": [
         "What makes Soviet-held territory negotiable from Stalin’s perspective?",
         "Could you give France a role through another source of territory?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "The source of the territory is part of the question for us."
+        },
+        {
+          "who": "Churchill",
+          "text": "Perhaps we should look closely at what each party would contribute."
+        }
       ]
     },
     "G2a": {
@@ -446,6 +659,16 @@ const GAME_DATA = {
       "questions": [
         "What can you responsibly decide this week?",
         "Who gets to shape the details after you leave?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Churchill",
+          "text": "We should be clear about what we are deciding and what we are passing on."
+        },
+        {
+          "who": "Adviser",
+          "text": "There will be other people at those later discussions."
+        }
       ]
     },
     "G2b": {
@@ -460,6 +683,16 @@ const GAME_DATA = {
       "questions": [
         "Are temporary occupation zones the same as permanent national borders?",
         "What information and agreement would a permanent division require?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "The boundaries and the timetable would require attention."
+        },
+        {
+          "who": "Churchill",
+          "text": "We may have different things in mind when we speak of a lasting settlement."
+        }
       ]
     },
     "G2c": {
@@ -476,6 +709,16 @@ const GAME_DATA = {
       "questions": [
         "What concerns does Churchill have about a fixed reparations figure?",
         "How could you recognise Soviet losses without committing to an unworkable amount?"
+      ],
+      "firstReactions": [
+        {
+          "who": "Stalin",
+          "text": "A figure has meaning only alongside the arrangements for carrying it out."
+        },
+        {
+          "who": "Churchill",
+          "text": "I would want to look at the assumptions behind that amount."
+        }
       ]
     },
     "X1": {
@@ -611,7 +854,7 @@ const GAME_DATA = {
   "historyClosing": "Roosevelt died on 12 April 1945, two months after Yalta. Every question he deferred was settled without him. When the agreements were made public, many Americans called them a sellout. Others argue he got the best deal his position allowed.",
   "rules": [
     "You share one Roosevelt. Start with eight days and both relationships at 3. Discussion itself costs no time.",
-    "Choose a proposal, discuss two questions, then send or reconsider. Only sending commits time.",
+    "Choose a proposal and send it to hear initial reactions. Then stand by it or reconsider. Only standing by it commits time.",
     "Relationships remain visible. Goodwill can reduce the cost of bargaining; Stalin’s score also sets die targets.",
     "A setback offers a choice: accept modified terms, spend time negotiating, or walk away. You do not have to find a hidden correct answer.",
     "Every settled decision receives one hidden score from −1 to +2. The ending explains each score. Unattempted decisions remain unresolved and add no points."
@@ -746,14 +989,7 @@ const GAME_DATA = {
     "0": "Limited progress or gains balanced by costs.",
     "−1": "A costly position unsupported by your leverage."
   },
-  "simulationNotice": "Counteroffers, alternative outcomes and scores are teaching simulations, not historical events or historical quotations.",
-  "reflectionGuide": {
-    "name": "Your adviser",
-    "role": "Fictional guide · here to help you think",
-    "intro": "Before we send that, Mr President…",
-    "instruction": "Talk it over with your group. You can choose a different proposal or send this one when you’re ready.",
-    "disclaimer": "Dramatised prompts, not historical quotations."
-  }
+  "simulationNotice": "Counteroffers, alternative outcomes and scores are teaching simulations, not historical events or historical quotations."
 };
 const clone = v => JSON.parse(JSON.stringify(v));
 const esc = v => String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -761,8 +997,8 @@ const STORAGE_KEY='yalta-party-v2';
 const ISSUE_VIEW={Japan:{icon:'☀',color:'#ffd577',code:'01'},Poland:{icon:'⚑',color:'#f5ada4',code:'02'},UN:{icon:'✦',color:'#bdb7fc',code:'03'},Germany:{icon:'▦',color:'#9ce0cd',code:'04'}};
 let state, history=[], timer=null, facilitator=false, physical=false, storageNotice='';
 function fresh(previous){const orders={};for(const [id,d] of Object.entries(GAME_DATA.decisions)){const a=[...d.options];for(let i=2;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}orders[id]=a;}if(previous&&JSON.stringify(previous)===JSON.stringify(orders))orders.J1.push(orders.J1.shift());return {version:2,screen:'title',days:8,Stalin:3,Churchill:3,issue:null,decision:null,card:null,opened:[],closed:[],results:{},orders,log:[],roll:null,rows:0,reason:null,returnTo:null};}
-const screens=['title','briefing','select','decision','reflect','roll','counter','result','locked','toast','leave','restart','exhausted','ending','history','debrief'];
-function valid(s){return s?.version===2&&screens.includes(s.screen)&&Number.isInteger(s.days)&&s.days>=0&&s.days<=8&&['Stalin','Churchill'].every(w=>Number.isInteger(s[w])&&s[w]>=1&&s[w]<=5)&&Array.isArray(s.log)&&s.log.every(x=>typeof x==='string')&&Array.isArray(s.opened)&&Array.isArray(s.closed)&&[...s.opened,...s.closed].every(x=>GAME_DATA.issues[x])&&s.results&&!Array.isArray(s.results)&&Object.entries(s.results).every(([id,r])=>r&&GAME_DATA.decisions[id]&&Number.isInteger(r.score)&&r.score>=-1&&r.score<=2&&['agreement','walkaway'].includes(r.status))&&Object.keys(GAME_DATA.decisions).every(id=>Array.isArray(s.orders?.[id])&&[...s.orders[id]].sort().join()===GAME_DATA.decisions[id].options.join())&&(!s.card||GAME_DATA.cards[s.card])&&(!s.decision||GAME_DATA.decisions[s.decision])&&(!s.issue||GAME_DATA.issues[s.issue])&&(!['decision','reflect','roll','counter','result'].includes(s.screen)||(s.issue&&s.decision))&&(!['reflect','roll','counter'].includes(s.screen)||s.card)&&Number.isInteger(s.rows)&&s.rows>=0&&s.rows<=4&&(s.screen!=='result'||s.results[s.decision])&&(s.screen!=='roll'||(s.roll&&Number.isInteger(s.roll.target)&&s.roll.target>=2&&s.roll.target<=6&&s.roll.value===null));}
+const screens=['title','briefing','select','decision','reflect','reaction','roll','counter','result','locked','toast','leave','restart','exhausted','ending','history','debrief'];
+function valid(s){return s?.version===2&&screens.includes(s.screen)&&Number.isInteger(s.days)&&s.days>=0&&s.days<=8&&['Stalin','Churchill'].every(w=>Number.isInteger(s[w])&&s[w]>=1&&s[w]<=5)&&Array.isArray(s.log)&&s.log.every(x=>typeof x==='string')&&Array.isArray(s.opened)&&Array.isArray(s.closed)&&[...s.opened,...s.closed].every(x=>GAME_DATA.issues[x])&&s.results&&!Array.isArray(s.results)&&Object.entries(s.results).every(([id,r])=>r&&GAME_DATA.decisions[id]&&Number.isInteger(r.score)&&r.score>=-1&&r.score<=2&&['agreement','walkaway'].includes(r.status))&&Object.keys(GAME_DATA.decisions).every(id=>Array.isArray(s.orders?.[id])&&[...s.orders[id]].sort().join()===GAME_DATA.decisions[id].options.join())&&(!s.card||GAME_DATA.cards[s.card])&&(!s.decision||GAME_DATA.decisions[s.decision])&&(!s.issue||GAME_DATA.issues[s.issue])&&(!['decision','reflect','reaction','roll','counter','result'].includes(s.screen)||(s.issue&&s.decision))&&(!['reflect','reaction','roll','counter'].includes(s.screen)||s.card)&&Number.isInteger(s.rows)&&s.rows>=0&&s.rows<=4&&(s.screen!=='result'||s.results[s.decision])&&(s.screen!=='roll'||(s.roll&&Number.isInteger(s.roll.target)&&s.roll.target>=2&&s.roll.target<=6&&s.roll.value===null));}
 function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({state,history,physical}));}catch{storageNotice='Progress cannot be saved in this browser. Keep this tab open.';}}
 function boot(){state=fresh();try{const raw=localStorage.getItem(STORAGE_KEY);if(raw){const v=JSON.parse(raw);if(valid(v.state)&&Array.isArray(v.history)&&v.history.every(valid)){state=v.state;history=v.history;physical=!!v.physical;}else storageNotice='The redesign save could not be restored. A fresh conference is ready.';}else if(localStorage.getItem('yalta-1945-v1'))storageNotice='Your original game save is preserved. This redesign starts a separate conference.';}catch{storageNotice='Storage is unavailable or the save could not be read. You can still play.';}render();}
 function cancelRoll(){clearTimeout(timer);timer=null;}
@@ -780,8 +1016,9 @@ function bargainCost(){const b=GAME_DATA.branches[state.decision];return state[b
 function chooseIssue(issue){if(state.screen!=='select'||!GAME_DATA.issues[issue]||state.closed.includes(issue))return;change(()=>{if(issue==='UN'&&(state.Stalin===1||state.Churchill===1)){state.screen='locked';log('UN entry blocked. No days spent.');return;}if(!state.days){exhausted();return;}state.issue=issue;state.decision=GAME_DATA.issues[issue][0];state.card=null;state.roll=null;state.reason=null;if(!state.opened.includes(issue))state.opened.push(issue);state.screen='decision';log('Opened '+issue+'.');});}
 function focusOption(cid){const el=document.querySelector('[data-action="choose"][data-value="'+cid+'"]');if(el)el.focus({preventScroll:true});}
 function choose(cid){if(!['decision','reflect'].includes(state.screen)||!state.orders[state.decision].includes(cid))return;const closing=state.screen==='reflect'&&state.card===cid;change(()=>{state.card=closing?null:cid;state.screen=closing?'decision':'reflect';});focusOption(cid);}
-function reconsider(){if(state.screen!=='reflect')return;const cid=state.card;change(()=>{state.card=null;state.screen='decision';});focusOption(cid);}
-function send(){if(state.screen!=='reflect')return;change(()=>{const c=GAME_DATA.cards[state.card];log('Proposal sent: '+c.option);if(!pay(c.cost))return;if(c.main){if(c.roll){state.roll={target:7-state.Stalin,value:null,success:null};state.screen='roll';}else historical();}else{tracks(c.changes);log('Response to proposal: '+effectsText(c.changes));state.reason='proposal';state.screen='counter';}});}
+function reconsider(){if(state.screen!=='reaction')return;const cid=state.card;change(()=>{state.card=null;state.screen='decision';});focusOption(cid);}
+function send(){if(state.screen!=='reflect')return;change(()=>{state.screen='reaction';});}
+function commitProposal(){if(state.screen!=='reaction')return;change(()=>{const c=GAME_DATA.cards[state.card];log('Proposal sent: '+c.option);if(!pay(c.cost))return;if(c.main){if(c.roll){state.roll={target:7-state.Stalin,value:null,success:null};state.screen='roll';}else historical();}else{tracks(c.changes);log('Response to proposal: '+effectsText(c.changes));state.reason='proposal';state.screen='counter';}});}
 function resolveRoll(value){if(state.screen!=='roll'||state.roll?.value!==null||!Number.isInteger(value)||value<1||value>6)return;change(()=>{state.roll.value=value;state.roll.success=value>=state.roll.target;log('Roll '+value+' against '+state.roll.target+'+: '+(state.roll.success?'success':'complication')+'.');if(state.roll.success)historical();else{state.reason='roll';state.screen='counter';}});}
 function roll(){if(timer||state.screen!=='roll')return;document.getElementById('die').classList.add('rolling');document.getElementById('die').textContent='…';document.getElementById('roll-button').disabled=true;timer=setTimeout(()=>resolveRoll(1+Math.floor(Math.random()*6)),matchMedia('(prefers-reduced-motion: reduce)').matches?0:800);}
 function resolveCounter(kind){if(state.screen!=='counter')return;change(()=>{const b=GAME_DATA.branches[state.decision],c=GAME_DATA.cards[state.card],failed=state.reason==='roll';if(kind==='walk'){finish({status:'walkaway',title:'No agreement; issue left unresolved',text:'You decline the available terms. Any remaining decision on this issue will stay unattempted.',score:c.score<0?-1:0,why:c.score<0?'The unsupported opening position used time and goodwill without an agreement. Walking away avoids further concessions.':'You avoid a concession you cannot defend, but secure no agreement on this decision.',changes:{},historical:false});return;}if(kind==='press'){const cost=bargainCost();if(!pay(cost))return;log('Further bargaining: '+cost+' additional day(s).');finish({status:'agreement',title:'Negotiated terms',text:b.pressText,score:c.score<0?Math.min(1,b.pressScore):b.pressScore,why:c.score<0?'You recover a workable compromise after an unsupported opening demand, using further bargaining.':'You use bargaining to improve the specificity or balance of the terms. Limits on enforcement and leverage still remain.',changes:b.changes,historical:false});return;}if(kind==='accept'){finish({status:'agreement',title:failed?'Conditional agreement':b.title,text:failed?b.title+'. Support is conditional; the remaining detail is left for further discussion.':b.title+'. You accept the counteroffer as stated.',score:failed?Math.max(-1,c.score-1):b.score,why:failed?'You preserve time by accepting less certain terms after the complication. The concession, not the die result itself, reduces this assessment.':b.why,changes:b.changes,historical:false});}});}
@@ -790,7 +1027,7 @@ function leave(){if(!['select','decision'].includes(state.screen))return;change(
 function confirmLeave(){if(state.screen!=='leave')return;change(()=>{if(state.returnTo==='select'){state.screen='ending';log('The group closes its conference early.');return;}state.card=null;finish({status:'walkaway',title:'Issue deliberately left unresolved',text:'You preserve time for other priorities. Remaining decisions on this issue stay unattempted.',score:0,why:'You conserve resources without securing an agreement. This is a deliberate deferral, not a completed settlement.',changes:{},historical:false});});}
 function toast(who){if(state.screen!=='toast'||state.days<1||!['Stalin','Churchill'].includes(who)||state[who]===5)return;change(()=>{state.days--;state[who]++;log('Toast to '+who+': −1 day, relationship +1.');state.screen=state.returnTo;if(!state.days)exhausted();});}
 function next(){switch(state.screen){case'title':change(()=>state.screen='briefing');break;case'briefing':change(()=>state.screen='select');break;case'result':onward();break;case'locked':change(()=>state.screen='select');break;case'exhausted':change(()=>state.screen='ending');break;case'ending':change(()=>{state.rows=0;state.screen='history';});break;case'history':change(()=>{if(state.rows<4)state.rows++;else state.screen='debrief';});break;}}
-function act(a,v){if(a==='undo'){undo();return;}if(a==='notes'){facilitator=!facilitator;cancelRoll();render();return;}if(a==='next')next();else if(a==='issue')chooseIssue(v);else if(a==='choose')choose(v);else if(a==='send')send();else if(a==='reconsider')reconsider();else if(a==='roll')roll();else if(a==='physical')resolveRoll(Number(v));else if(a==='counter')resolveCounter(v);else if(a==='leave')leave();else if(a==='confirm-leave')confirmLeave();else if(a==='cancel'&&['leave','toast','restart'].includes(state.screen))change(()=>state.screen=state.returnTo);else if(a==='toast'&&['select','decision'].includes(state.screen)&&state.days>0)change(()=>{state.returnTo=state.screen;state.screen='toast';});else if(a==='toast-person')toast(v);else if(a==='restart'&&state.screen!=='restart')change(()=>{state.returnTo=state.screen;state.screen='restart';});else if(a==='confirm-restart'&&state.screen==='restart')change(()=>state=fresh(state.orders));else if(a==='print')window.print();}
+function act(a,v){if(a==='undo'){undo();return;}if(a==='notes'){facilitator=!facilitator;cancelRoll();render();return;}if(a==='next')next();else if(a==='issue')chooseIssue(v);else if(a==='choose')choose(v);else if(a==='send')send();else if(a==='commit')commitProposal();else if(a==='reconsider')reconsider();else if(a==='roll')roll();else if(a==='physical')resolveRoll(Number(v));else if(a==='counter')resolveCounter(v);else if(a==='leave')leave();else if(a==='confirm-leave')confirmLeave();else if(a==='cancel'&&['leave','toast','restart'].includes(state.screen))change(()=>state.screen=state.returnTo);else if(a==='toast'&&['select','decision'].includes(state.screen)&&state.days>0)change(()=>{state.returnTo=state.screen;state.screen='toast';});else if(a==='toast-person')toast(v);else if(a==='restart'&&state.screen!=='restart')change(()=>{state.returnTo=state.screen;state.screen='restart';});else if(a==='confirm-restart'&&state.screen==='restart')change(()=>state=fresh(state.orders));else if(a==='print')window.print();}
 const button=(text,action,value='',cls='')=>`<button class="${cls}" data-action="${action}" data-value="${esc(value)}">${text}</button>`;
 const nextButton=(text='Continue →')=>button(text,'next','','primary');
 function paper(label,title,body){return `<section class="paper"><div class="eyebrow">${label}</div><h2>${esc(title)}</h2>${body}</section>`;}
@@ -800,14 +1037,16 @@ function hud(){const show=!['title','briefing'].includes(state.screen);document.
 function scoreSummary(){const values=Object.values(state.results),total=values.reduce((n,r)=>n+r.score,0),agreements=values.filter(r=>r.status==='agreement').length;return `<div class="score-grid"><div class="score-box"><strong>${total>0?'+':''}${total}</strong><span>DECISION POINTS</span></div><div class="score-box"><strong>${agreements}/8</strong><span>AGREEMENTS</span></div><div class="score-box"><strong>${8-agreements}</strong><span>UNRESOLVED DECISIONS</span></div><div class="score-box"><strong>${state.days}</strong><span>DAYS LEFT</span></div></div><p class="tiny">Stalin ${state.Stalin}/5 · Churchill ${state.Churchill}/5. Scores are teaching judgments, not historical grades. Read the explanations alongside the total. Unattempted decisions add no points.</p>`;}
 function outcomes(){return Object.entries(GAME_DATA.decisions).map(([id,d])=>{const r=state.results[id];return `<article class="outcome"><h3><span>${id} · ${esc(d.title)}</span>${r?`<span class="score ${r.score<0?'negative':''}">${r.score>0?'+':''}${r.score}</span>`:''}</h3>${r?`<p><b>${r.status==='agreement'?'Agreement':'Unresolved · deliberate walkaway'}:</b> ${esc(r.title)}</p><p><b>Your proposal:</b> ${esc(r.proposal)}</p><p>${esc(r.text)}</p><p><b>Why this score:</b> ${esc(r.why)}</p>`:'<p>Unresolved · no settled decision. No points added.</p>'}</article>`;}).join('');}
 
-function adviserPanel(cid){const c=GAME_DATA.cards[cid],guide=GAME_DATA.reflectionGuide;return `<section id="reflection-${cid}" class="adviser-panel" role="region" aria-labelledby="adviser-title-${cid}"><div class="adviser-person"><div class="adviser-portrait">${avatar('Adviser')}</div><span class="adviser-role">IN YOUR CORNER</span></div><div class="adviser-bubble"><div class="adviser-heading"><h3 id="adviser-title-${cid}">${esc(guide.name)}</h3><span>${esc(guide.role)}</span></div><p class="adviser-intro">${esc(guide.intro)}</p><div class="adviser-questions">${c.questions.map(q=>`<p class="prompt">${esc(q)}</p>`).join('')}</div><p class="adviser-instruction">${esc(guide.instruction)}</p><p class="adviser-disclaimer">${esc(guide.disclaimer)}</p><div class="adviser-send"><span class="send-cost">Sending costs <b>${c.cost} ${c.cost===1?'day':'days'}</b> · nothing spent yet</span><div class="actions">${button('Send proposal →','send','','primary')}${button('Reconsider','reconsider','','quiet')}</div></div></div></section>`;}
-function decisionScreen(){const d=GAME_DATA.decisions[state.decision];return paper(state.issue+' · Decision '+state.decision.slice(1)+' of 2',d.title,`<p>${esc(d.question)}</p><p class="tiny">Choose a proposal to hear your adviser’s questions. You commit only when you send.</p><div class="options">${state.orders[state.decision].map((id,i)=>{const open=state.screen==='reflect'&&state.card===id;return `<div class="proposal-choice ${open?'expanded':''}"><button class="option" data-action="choose" data-value="${id}" aria-expanded="${open}" aria-controls="reflection-${id}"><span class="key">${i+1}</span><span>${esc(GAME_DATA.cards[id].option)}</span><span class="arrow" aria-hidden="true">${open?'−':'+'}</span></button>${open?adviserPanel(id):`<div id="reflection-${id}" hidden></div>`}</div>`;}).join('')}</div>${state.screen==='decision'?`<div class="actions">${button('Leave this issue unresolved','leave','','quiet')}</div>`:''}`);}
+function proposalPanel(cid){const c=GAME_DATA.cards[cid];return `<section id="reflection-${cid}" class="proposal-send" aria-label="Send selected proposal"><p>Send this proposal to hear the room’s first reactions. You can reconsider afterwards.</p><span class="tiny">Standing by it afterwards costs ${c.cost} ${c.cost===1?'day':'days'}. Nothing spent yet.</span><div class="actions">${button('Send proposal →','send','','primary')}</div></section>`;}
+function reactionScreen(){const c=GAME_DATA.cards[state.card];return paper('First reactions · Dramatised simulation','Read the room.',`<div class="proposal">${esc(c.option)}</div><p class="tiny">The room has heard your suggestion. These are initial impressions, not an agreement or a final refusal.</p><div class="first-reactions">${c.firstReactions.map((r,i)=>`<article class="first-reaction"><div class="reaction-person"><div class="adviser-portrait">${avatar(r.who,r.who==='Adviser'?3:state[r.who])}</div><b>${r.who==='Adviser'?'Your adviser':r.who}</b></div><div class="reaction-speech"><p>“${esc(r.text)}”</p><small>${r.who==='Adviser'?'Fictional adviser. ':''}Dramatised line, not a historical quote.</small></div></article>`).join('')}</div><p class="reaction-invite">What do you make of those responses? Discuss whether to keep your position.</p><div class="notice">No days or relationship points have changed. Standing by this proposal commits ${c.cost} ${c.cost===1?'day':'days'}.</div><div class="actions">${button('Stand by this proposal →','commit','','primary')}${button('Reconsider','reconsider','','quiet')}</div>`);}
+function decisionScreen(){const d=GAME_DATA.decisions[state.decision];return paper(state.issue+' · Decision '+state.decision.slice(1)+' of 2',d.title,`<p>${esc(d.question)}</p><p class="tiny">Choose a proposal, send it, then hear the room before you commit.</p><div class="options">${state.orders[state.decision].map((id,i)=>{const open=state.screen==='reflect'&&state.card===id;return `<div class="proposal-choice ${open?'expanded':''}"><button class="option" data-action="choose" data-value="${id}" aria-expanded="${open}" aria-controls="reflection-${id}"><span class="key">${i+1}</span><span>${esc(GAME_DATA.cards[id].option)}</span><span class="arrow" aria-hidden="true">${open?'−':'+'}</span></button>${open?proposalPanel(id):`<div id="reflection-${id}" hidden></div>`}</div>`;}).join('')}</div>${state.screen==='decision'?`<div class="actions">${button('Leave this issue unresolved','leave','','quiet')}</div>`:''}`);}
 
 function screen(){const c=GAME_DATA.cards[state.card],d=GAME_DATA.decisions[state.decision],b=GAME_DATA.branches[state.decision];switch(state.screen){
 case'title':return `<section class="hero"><div><span class="pill">A DISCUSSION GAME · ABOUT 30 MINUTES</span><h1>Big decisions.<br><em>Eight days.</em></h1><p class="lead">You’re Roosevelt. Your group calls the shots. What will you give up to get an agreement?</p><p class="tiny">${esc(GAME_DATA.subtitle)}</p><div class="actions">${nextButton('Take your seat →')}</div>${storageNotice?'<p class="notice" style="margin-top:20px;color:var(--ink)">'+esc(storageNotice)+'</p>':''}</div>${room(false)}</section>`;
 case'briefing':return paper('Before the meeting','One president. Your choices.',`<p>${esc(GAME_DATA.briefing)}</p><ul class="rules">${GAME_DATA.rules.map(t=>'<li>'+esc(t)+'</li>').join('')}</ul><h3>What the hidden scores mean</h3><p class="tiny">Each settled decision earns −1, 0, +1 or +2. The assessment considers your goals, leverage, safeguards and concessions. Relationships are separate; pleasing a leader does not automatically earn points.</p><details><summary>Read the scoring rubric</summary><ul>${Object.entries(GAME_DATA.rubric).map(([n,t])=>'<li><b>'+n+'</b> · '+t+'</li>').join('')}</ul></details><p class="notice">${GAME_DATA.simulationNotice} The historical record is shown separately after play.</p><div class="actions">${nextButton('Open the conference →')}</div>`);
 case'select':return `<div class="eyebrow">The conference table</div><h2>${state.opened.length?'What comes next?':'Where do you begin?'}</h2>${room()}<p class="table-prompt">Which issue matters most—and whose cooperation will you need?</p><div class="actions">${button('Close conference early','leave','','quiet')}</div>`;
 case'decision':case'reflect':return decisionScreen();
+case'reaction':return reactionScreen();
 case'roll':return paper('Stalin is considering your proposal','Will he agree?',`<div class="question-header"><div class="mini-avatar">${avatar('Stalin',state.Stalin)}</div><p>The proposal’s day has been paid. You need <b>${state.roll.target}+</b>, based on Stalin’s current relationship. Track changes come after the result.</p></div><p class="notice">A failed roll creates a counteroffer. You choose whether to spend time, accept modified terms or walk away.</p><div class="die-row"><div id="die" class="die" role="status" aria-live="polite">?</div>${physical?'<div class="physical">'+[1,2,3,4,5,6].map(n=>button(n,'physical',n)).join('')+'</div>':'<button id="roll-button" class="primary" data-action="roll">Roll die →</button>'}</div>`);
 case'counter':{const cost=bargainCost();return paper('Simulation · '+(state.reason==='roll'?'A complication':'A counteroffer'),'The terms have changed.',`<div class="question-header"><div class="mini-avatar">${avatar(b.who,state[b.who])}</div><div><h3>${b.who}</h3><p class="tiny">Dramatised line, not a historical quote.</p></div></div><div class="bubble"><p>${esc(b.text)}</p></div>${state.roll?`<p class="notice">Roll ${state.roll.value} · Target ${state.roll.target}+. No extra day has been charged. The original proposal’s day is already spent.</p>`:`<p class="notice">Your proposal has been heard. ${effectsText(c.changes)}. Its day is already spent.</p>`}<div class="counter-options">${button((state.reason==='roll'?'Accept conditional support':esc(b.label))+'<small>No extra day. '+(state.reason==='roll'?'Leave remaining detail open.':esc(b.title))+'. '+effectsText(b.changes)+'.</small>','counter','accept','primary')}<button data-action="counter" data-value="press" ${state.days<cost?'disabled':''}>${esc(b.press)}<small>${cost?'Spend 1 extra day.':'No extra day: '+b.who+' is warm enough to continue readily.'} ${esc(b.pressText)} ${effectsText(b.changes)}.</small></button>${button('Walk away from this issue<small>No extra day or relationship change. Remaining decisions on this issue stay unresolved.</small>','counter','walk','quiet')}</div>`);}
 case'result':{const r=state.results[state.decision];return paper(r.historical?'Historical agreement · '+state.card:'Simulation outcome · '+state.decision,r.title,`<p>${esc(r.text)}</p><div class="effect"><span>${state.days} days remaining</span><span>${effectsText(r.changes||{})}</span><span>${r.status==='agreement'?'Agreement recorded':'Issue left unresolved'}</span></div>${r.historical?(GAME_DATA.reactions[state.card]||[]).map(x=>`<div class="bubble"><b>${x.who}</b><p>${esc(x.text)}</p><small class="tiny">${GAME_DATA.labels.drama}</small></div>`).join(''):'<p class="notice" style="margin-top:20px">'+GAME_DATA.simulationNotice+'</p>'}<p class="tiny" style="margin-top:20px">Your decision is recorded. Its score and explanation will be revealed at the ending.</p><div class="actions">${nextButton()}</div>`);}
@@ -820,9 +1059,9 @@ case'ending':return paper('The full picture','What did your choices cost?',`${sc
 case'history':return paper('Historical record · not the simulated branches','What happened after Yalta?',`<p>${esc(GAME_DATA.historyIntro)}</p><p class="tiny">${state.rows} of 4 issues revealed</p>${GAME_DATA.history.slice(0,state.rows).map(r=>`<article class="history-row"><h3>${r.issue}</h3><div class="history-columns"><div><small>WHAT ROOSEVELT GOT</small><p>${esc(r.deal)}</p></div><div><small>WHAT HAPPENED NEXT</small><p>${esc(r.after)}</p></div></div><p class="notice">Your group: ${GAME_DATA.issues[r.issue].filter(id=>state.results[id]?.status==='agreement').length}/2 agreements · ${state.opened.includes(r.issue)?'issue opened':'never opened'}. Simulated agreements may differ from the historical settlement.</p></article>`).join('')}${state.rows===4?'<p style="margin-top:24px">'+esc(GAME_DATA.historyClosing)+'</p>':''}<div class="actions">${nextButton(state.rows<4?'Reveal '+GAME_DATA.history[state.rows].issue+' →':'Discuss your conference →')}</div>`);
 case'debrief':return paper('Back to your group','Defend your decisions.',`<p>Which score would you challenge? Use your goals and the situation to explain why. The rubric starts a discussion; it does not settle it.</p>${Object.entries(GAME_DATA.debrief).map(([h,qs])=>'<h3>'+esc(h)+'</h3><ul>'+qs.map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul>').join('')}<div class="actions">${button('Print group summary','print','','primary')}${button('Play again','restart','','quiet')}</div><section class="print-only"><h2>Your conference record</h2>${scoreSummary()}${outcomes()}<h3>Choice and roll log</h3><ol>${state.log.map(t=>'<li>'+esc(t)+'</li>').join('')}</ol></section>`);
 }}
-function render(){hud();document.getElementById('screen').innerHTML=screen();const notes=document.getElementById('notes');notes.hidden=!facilitator;document.getElementById('layout').classList.toggle('notes-on',facilitator);if(facilitator){const key=state.decision||'Issue select';notes.innerHTML='<h3>Facilitator notes</h3><p class="tiny">Visible to everyone looking at this screen. F hides notes.</p><p>'+esc(GAME_DATA.facilitator[key]||'Discuss your priorities and compare the group’s reasoning with its outcomes.')+'</p><p>Do not reveal point values during play. Invite a reason for each proposal and discuss who bears its costs.</p>'+(state.days<=2?'<p>What are you leaving unresolved, and who will pay for it later?</p>':'');}else notes.innerHTML='';document.getElementById('log').hidden=!state.log.length;document.getElementById('log-count').textContent=state.log.length;document.getElementById('log-list').innerHTML=state.log.map(t=>'<li>'+esc(t)+'</li>').join('');document.getElementById('screen').focus({preventScroll:true});if(state.screen==='reflect'){const selected=document.querySelector('.proposal-choice.expanded');selected.scrollIntoView({block:'nearest',behavior:'instant'});}else if(state.screen!=='decision'){window.scrollTo(0,0);}}
+function render(){hud();document.getElementById('screen').innerHTML=screen();const notes=document.getElementById('notes');notes.hidden=!facilitator;document.getElementById('layout').classList.toggle('notes-on',facilitator);if(facilitator){const key=state.decision||'Issue select';notes.innerHTML='<h3>Facilitator notes</h3><p class="tiny">Visible to everyone looking at this screen. F hides notes.</p><p>'+esc(GAME_DATA.facilitator[key]||'Discuss your priorities and compare the group’s reasoning with its outcomes.')+'</p><p>Do not reveal point values during play. Invite a reason for each proposal and discuss who bears its costs.</p>'+(state.screen==='reaction'?'<p><b>Optional discussion prompts</b></p>'+GAME_DATA.cards[state.card].questions.map(q=>'<p>'+esc(q)+'</p>').join(''):'')+(state.days<=2?'<p>What are you leaving unresolved, and who will pay for it later?</p>':'');}else notes.innerHTML='';document.getElementById('log').hidden=!state.log.length;document.getElementById('log-count').textContent=state.log.length;document.getElementById('log-list').innerHTML=state.log.map(t=>'<li>'+esc(t)+'</li>').join('');document.getElementById('screen').focus({preventScroll:true});if(state.screen==='reflect'){const selected=document.querySelector('.proposal-choice.expanded');selected.scrollIntoView({block:'nearest',behavior:'instant'});}else if(state.screen!=='decision'){window.scrollTo(0,0);}}
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(b&&!b.disabled)act(b.dataset.action,b.dataset.value);});
 document.addEventListener('change',e=>{if(e.target.id==='physical-toggle'){cancelRoll();physical=e.target.checked;save();render();}});
-document.addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;const k=e.key.toLowerCase();if(k==='escape'&&state.screen==='reflect'){e.preventDefault();reconsider();}else if(k==='u'){e.preventDefault();undo();}else if(k==='f'){e.preventDefault();act('notes');}else if(['1','2','3'].includes(k)&&['decision','reflect'].includes(state.screen)){e.preventDefault();choose(state.orders[state.decision][Number(k)-1]);}else if((k==='enter'||k===' ')&&!['BUTTON','SUMMARY'].includes(e.target.tagName)){e.preventDefault();next();}});
+document.addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;const k=e.key.toLowerCase();if(k==='escape'&&state.screen==='reaction'){e.preventDefault();reconsider();}else if(k==='u'){e.preventDefault();undo();}else if(k==='f'){e.preventDefault();act('notes');}else if(['1','2','3'].includes(k)&&['decision','reflect'].includes(state.screen)){e.preventDefault();choose(state.orders[state.decision][Number(k)-1]);}else if((k==='enter'||k===' ')&&!['BUTTON','SUMMARY'].includes(e.target.tagName)){e.preventDefault();next();}});
 boot();
 </script></body></html>
