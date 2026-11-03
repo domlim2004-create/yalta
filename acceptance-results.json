@@ -92,6 +92,14 @@
     "status": "PASS"
   },
   {
+    "name": "Room persists through choosing and sending; reaction bubbles sit with their speakers",
+    "status": "PASS"
+  },
+  {
+    "name": "Desktop HUD sits beside the room and narrow layout stacks without overlap",
+    "status": "PASS"
+  },
+  {
     "name": "Facilitator hidden by default; no runtime errors or external requests",
     "status": "PASS"
   }

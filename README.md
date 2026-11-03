@@ -4,7 +4,7 @@ A single-file, offline discussion game for 4–5 students sharing one Roosevelt.
 
 ## Preserved version
 
-The original game is preserved on `main` and the annotated tag `pre-party-redesign`, at commit `450f623838b5ddecec7c2e1d5d985914d9924afc`. This branch does not change that website or its publishing settings. Switching branches in GitHub shows the alternative files; it does not automatically create a second live website.
+The original game is preserved on `main` and the annotated tag `pre-party-redesign`, at commit `450f623838b5ddecec7c2e1d5d985914d9924afc`. The preceding party-style card-table design is also preserved at tag `pre-theatrical-table`, commit `172e38eb4ef24bf8ae208d55d3055f18b77966d8`. This branch does not change the main website or its publishing settings. Switching branches in GitHub shows the alternative files; it does not automatically create a second live website.
 
 ## Play
 
@@ -63,3 +63,11 @@ The original Section 11 acceptance rules are superseded where the approved redes
 The redesign uses an original arcade card-table aesthetic: warm paper, deep green felt, purple and gold accents, thick outlines, offset shadows and fast tactile button feedback. Artwork is inline SVG, with no copied game assets, remote fonts or downloads. The style draws on approachable party-game presentation and card-game readability without adding gambling mechanics. No sound or flashing effects are used.
 
 Reaction portraits use the same neutral pose for a speaker across proposals and relationship values; their idle motion is cosmetic. Hidden scores and future acceptance cannot be inferred from a new approval/disapproval animation. Relationships remain explicit in the HUD. Longer dialogue and records scroll vertically on smaller displays.
+
+## Theatrical room presentation
+
+The current design keeps the conference room visible during issue selection, proposals, first reactions, bargaining, rolls and settlement. Churchill and Stalin face the player across the table; a near-edge Roosevelt nameplate marks the group’s seat. The desktop HUD sits in a compact left column and stacks above the scene on narrow screens. Warm overhead and wall lighting contrasts with blue-green shadows.
+
+Proposal options are physical-looking cards. Selecting lifts the card; sending slides its text onto the table. Initial speech bubbles sit beside their speakers, with an adviser aside where needed. Acceptance stamps appear only after a settlement, and score-box motion is reserved for the ending. All movement is cosmetic, short or subtle, and disabled under reduced-motion preferences. No effects announce a hidden score during play.
+
+This is a visual change: the negotiated outcomes, prompts, mild reactions, costs, hidden scoring and save format are unchanged. The room remains 2D and entirely self-contained.

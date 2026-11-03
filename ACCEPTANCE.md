@@ -1,6 +1,6 @@
 # Redesign acceptance report
 
-Validated on 4 November 2026 in headless Chromium. **24 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
+Validated on 4 November 2026 in headless Chromium. **26 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
 
 This report covers the approved redesign. It supersedes the original forced-dead-end, automatic extra-day and historical-main-line scoring assumptions. The original game and its earlier reports remain at `pre-party-redesign`.
 
@@ -47,3 +47,9 @@ The four flow tests cover all 24 reaction pairs, absence of pre-send reconsidera
 ## Card-table visual refresh
 
 Added original exaggerated SVG portraits, cosmetic idle/head and blink animation, felt table, playing-card issue artwork, tactile controls and refreshed HUD styling. Two added tests verify all illustrations are self-contained, preview portraits are identical across relationship values, and reduced-motion preferences disable portrait animation. All 24 checks pass. Desktop title, table and reaction screenshots and a 375px reaction screen were visually inspected. All GAME_DATA content and scoring are byte-equivalent as parsed JSON to the preceding version. No gameplay or historical-content changes were made.
+
+## Theatrical conference room
+
+Preserved the preceding card-table design in the pushed `pre-theatrical-table` tag at `172e38e`. Negotiations now share a persistent room with larger leader portraits, warm lamps, cool shadows, a felt table, a desktop sidebar and Roosevelt’s place in the foreground. Sent proposals slide onto the table, settled outcomes receive a stamp, and final scores enter in sequence. Reduced-motion preferences disable these animations. Reactions remain restrained and appear beside their speakers.
+
+Two additional checks verify room continuity, speaker-attached reaction bubbles, unchanged resources on tentative send, and desktop/mobile HUD placement. **All 26 checks pass**, including both complete playthroughs, adverse paths, saving, keyboard interaction and all 17 screens at three viewport widths. Desktop table and reaction screenshots and the 375px reaction layout were visually inspected. Parsed GAME_DATA is identical to the preserved version: this update changes presentation, not decisions, scoring or historical content.
