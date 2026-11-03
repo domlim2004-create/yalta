@@ -1,37 +1,41 @@
-# Yalta 1945: Main Lines, Dead Ends and Special Cards
+# Game terms · Party-style redesign
 
-The **main line** is the option that leads to the agreement described in the historical account. Each decision has one main-line option and two dead ends.
+## Proposal and deliberation
 
-## The three outcomes
+A proposal is one of the three options for a decision. Selecting it opens two reflection questions. No days are spent until **Send proposal**. **Reconsider** returns to the same options for free.
 
-- **Main line:** Moves you to the next decision. Usually costs **1 day**. Deferring Germany’s hard questions costs **0 days**. Some agreements also require a die roll.
-- **Dead end:** Your proposal is rejected. You lose **1 day**, take any relationship changes, then try the **same decision again**. Those relationship changes remain in effect.
-- **Failed roll:** Your proposal still succeeds, but Stalin stalls first. You lose **an extra day** before the agreement takes effect—unless you cannot pay that cost, which ends the game.
+## Historical agreement
 
-## Example: What do you offer Stalin for fighting Japan?
+An outcome based on the supplied historical account. It normally costs one day; referring Germany's hard questions costs zero. Historical outcomes are not automatically the highest-scoring choices.
 
-| Choice | Type | Result |
-| --- | --- | --- |
-| Territory and rights in the Far East | Main line | Spend a day, roll for Stalin’s cooperation, then gain Stalin +1 |
-| Postwar economic aid | Dead end | Lose a day and choose again |
-| Nothing extra; appeal to the alliance | Dead end | Lose a day, Stalin −1, and choose again |
+## Counteroffer
 
-## The die rule
+A simulated response to a rejected proposal or failed roll. The original day is already spent. The response offers three routes:
 
-Stalin agrees when your roll is **7 minus his current relationship score, or higher**. At Stalin 3, you need **4 or higher**.
+- Accept modified terms without another day.
+- Negotiate the specified improvement for one more day, or no extra day if the responding leader is at least 4.
+- Walk away at no extra cost, leaving this issue closed and unresolved.
 
-Roll before applying the agreement’s relationship changes. A failed roll costs an extra day; if you can pay it, Stalin then agrees and the normal effects apply.
+Initial proposal relationship changes apply when it is sent. Settlement changes are shown on the counteroffer buttons and apply when accepted. These are separate stages; both can affect the same relationship.
 
-## Special cards
+## Roll and complication
 
-- **X1 — Stalin stalls:** A failed roll costs an extra day.
-- **X2 — UN locked:** Stalin or Churchill is at 1. Attempting to open the UN costs nothing, but you must repair the relationship with a toast or choose another issue.
-- **X3 — Roosevelt leaves Yalta:** Time has run out; unresolved issues remain open. This occurs when a cost cannot be paid or you have zero days when another decision must begin.
+The target is **7 minus Stalin's current score**: at 3, roll 4+. Historical J2, U1 and U2 agreements require rolls, before their relationship effects. A failed roll creates a counteroffer without automatically deducting a day or points. The selected settlement determines the score.
 
-## What “main line” means for the game
+## Hidden decision score
 
-**Main line does not mean the morally best choice.** It means the historical agreement the game lets you reach.
+Each settled decision earns exactly one integer: **+2** for a strong result within constraints; **+1** for a defensible compromise; **0** for limited or balanced progress; **−1** for a costly, unsupported outcome.
 
-This game has one progressing option per decision. The strategy is mainly about **issue order, relationships and managing time**, rather than creating alternative historical agreements.
+The ending explains the assessment for each decision. A decision to walk away is scored; an unattempted decision is labelled unresolved and contributes no points. There is no separate completion bonus, automatic dice penalty or relationship-to-points conversion. Read the total together with agreements and unresolved decisions. This is a discussion rubric, not an objective measure of historical or moral worth.
 
-Completing every issue means you secured all eight agreements. The historical reveal and debrief then ask whether those agreements were fair, enforceable and effective.
+## Relationships
+
+Stalin and Churchill range from 1 (Hostile) to 5 (Close). Both begin at 3. Stalin sets roll targets; either leader at 1 blocks opening the UN. A counteroffer's responding leader at 4 or 5 makes further bargaining free. A one-day banquet toast increases either relationship by one, up to 5.
+
+## Closed versus agreed
+
+An issue closes after both decisions settle, or when the group walks away. A closed issue cannot be reopened. An agreement is a negotiated outcome; a walkaway does not count as an agreement. The historical comparison reports how many agreements the group secured without treating simulated terms as historical events.
+
+## End of conference
+
+At zero days, you cannot begin a new decision. A counteroffer already in progress can still be resolved through an affordable choice, including a free concession or walkaway. The conference also ends when all issues close, or the group explicitly closes it early. Undo restores days, tracks, outcomes, hidden scores and the log together.

@@ -1,126 +1,78 @@
 [
   {
-    "name": "1. All eight main-line costs and completion",
+    "name": "All 24 proposals have two tailored prompts; reconsider is free",
     "status": "PASS"
   },
   {
-    "name": "2. All 16 dead ends: cost, changes, same decision and option order",
+    "name": "Every historical agreement costs correctly and scores once",
     "status": "PASS"
   },
   {
-    "name": "3. Rolls 3/4 at Stalin 3; changes only after roll, failure shows X1",
+    "name": "All 16 alternative proposals resolve through accept, bargain or walkaway",
     "status": "PASS"
   },
   {
-    "name": "4. Tracks clamp to 1–5",
+    "name": "Counteroffer ends forced retries and advances the issue",
     "status": "PASS"
   },
   {
-    "name": "5. Either hostile track locks UN without cost; toast unlocks",
+    "name": "Roll targets use pre-agreement Stalin; failed roll charges no automatic penalty",
     "status": "PASS"
   },
   {
-    "name": "6. Unpayable extra cost / zero-day next decision show X3 and unresolved ending",
+    "name": "Warm relationships make bargaining free; hostile relations still clamp",
     "status": "PASS"
   },
   {
-    "name": "7. Fresh games shuffle; order remains fixed during play",
+    "name": "Each leader at 1 blocks UN without cost; toast to 2 unlocks it",
     "status": "PASS"
   },
   {
-    "name": "8. Undo exactly restores rolls, effects, tokens, tracks and log",
+    "name": "Walkaway closes issue, preserves other priorities and does not fabricate completion",
     "status": "PASS"
   },
   {
-    "name": "9. Facilitator hidden by default; only toggle reveals it",
+    "name": "Deliberate deferral is confirmed, free and reversible",
     "status": "PASS"
   },
   {
-    "name": "10. No horizontal overflow at 375 / 1280 / 1920 across every screen",
+    "name": "Exhaustion and zero-day complications retain the final choice",
     "status": "PASS"
   },
   {
-    "name": "10b. Keyboard-only complete playthrough, history and debrief",
+    "name": "No scores or reasons exposed in live outcome or log; ending reveals the ledger",
     "status": "PASS"
   },
   {
-    "name": "Requested adverse playthrough: dead end, failed roll, Stalin 1, UN lock, exhaustion",
+    "name": "Undo restores exact state after send, roll, settlement and restart",
     "status": "PASS"
   },
   {
-    "name": "Animated die, Undo during animation, reduced motion and refresh",
+    "name": "Keyboard-only full game, historical reveal and printed debrief",
     "status": "PASS"
   },
   {
-    "name": "Blocked localStorage still permits gameplay",
+    "name": "Adverse playthrough: alternative, failed roll, Stalin 1, UN lock and last-day toast",
     "status": "PASS"
   },
   {
-    "name": "All facilitator prompts and debrief questions are present",
+    "name": "All screens fit 375, 1280 and 1920px with notes on/off",
     "status": "PASS"
   },
   {
-    "name": "Historical content and documented rule data preserved exactly",
+    "name": "Animated die resolves, and Undo cancels its pending callback",
     "status": "PASS"
   },
   {
-    "name": "Completion at zero days and affordable last-day agreements",
+    "name": "Save and refresh round-trip; original-version save is preserved",
     "status": "PASS"
   },
   {
-    "name": "Every die threshold uses the pre-agreement relationship",
+    "name": "Storage denial and corrupt saves do not prevent play",
     "status": "PASS"
   },
   {
-    "name": "Shared-laptop table and all proposals visible at 1366 × 768",
-    "status": "PASS"
-  },
-  {
-    "name": "Toast warning, cancellation and maximum relationship",
-    "status": "PASS"
-  },
-  {
-    "name": "UN lock is checked at entry, not during negotiations",
-    "status": "PASS"
-  },
-  {
-    "name": "Direct file:// complete game, saved refresh, print and no network",
-    "status": "PASS"
-  },
-  {
-    "name": "Dossier and proposal animations commit once, clear and preserve focus",
-    "status": "PASS"
-  },
-  {
-    "name": "Envelope opens, ignores repeated input and cleans up after reveal",
-    "status": "PASS"
-  },
-  {
-    "name": "Undo cancels dossier, proposal and envelope motion exactly",
-    "status": "PASS"
-  },
-  {
-    "name": "Reduced motion skips effects and changing preference cancels effects",
-    "status": "PASS"
-  },
-  {
-    "name": "Refresh mid-animation retains committed state without replaying effects",
-    "status": "PASS"
-  },
-  {
-    "name": "Three-stage dossier sequence preserves selection until pickup in all four corners",
-    "status": "PASS"
-  },
-  {
-    "name": "Opening and briefing animate with staggered dossiers and exact Undo",
-    "status": "PASS"
-  },
-  {
-    "name": "Continue turns the telegram page; history reveals animate separately",
-    "status": "PASS"
-  },
-  {
-    "name": "No runtime errors or network requests",
+    "name": "Facilitator hidden by default; no runtime errors or external requests",
     "status": "PASS"
   }
 ]
