@@ -22,7 +22,7 @@ Open the local server in your browser. Use the existing checkout; a separate Git
 ## What's different
 
 - A green-felt card table, cream playing-card dossiers, chunky controls and exaggerated original character illustrations. Churchill has a bowler and bow tie, Stalin a broad moustache and uniform, Roosevelt round glasses. Gentle blinking and idle motion respect reduced-motion preferences.
-- Selecting a proposal reveals only Send proposal. Sending opens a separate page with two restrained reactions from leaders or a fictional adviser. Stand by the proposal to commit, or Reconsider for free. Explicit reflection questions are reserved for optional facilitator notes.
+- Selecting a proposal opens two thinking questions and a short guide with a reference to the supplied case study. Sending opens a separate page with two restrained reactions from leaders or a fictional adviser. Stand by the proposal to commit, or Reconsider for free. Questions appear before sending; optional facilitator notes can revisit them during reactions.
 - Historical agreements and simulated counteroffers replace compulsory dead-end retries.
 - Failed rolls create choices, not an automatic lost day.
 - Visible relationships affect rolls, access to the UN and the cost of further bargaining.
@@ -71,3 +71,11 @@ The current design keeps the conference room visible during issue selection, pro
 Proposal options are physical-looking cards. Selecting lifts the card; sending slides its text onto the table. Initial speech bubbles sit beside their speakers, with an adviser aside where needed. Acceptance stamps appear only after a settlement, and score-box motion is reserved for the ending. All movement is cosmetic, short or subtle, and disabled under reduced-motion preferences. No effects announce a hidden score during play.
 
 This is a visual change: the negotiated outcomes, prompts, mild reactions, costs, hidden scoring and save format are unchanged. The room remains 2D and entirely self-contained.
+
+## Discussion support and case study
+
+Before sending, the selected proposal opens a full-width discussion panel: two numbered thinking questions, a short guide and the relevant case-study section. Reading, changing the selection and discussing are free; Send still leads to mild reactions, and only Stand by commits the proposal. The guide does not show scores or recommend an answer.
+
+The briefing separates the mission, five numbered rules, highlighted key mechanics and an optional scoring rubric. The decision page labels the situation, selection and discussion steps separately.
+
+The supplied [case study](CASE_STUDY.md) is preserved with formatting changes only. [Decision coverage and optional supplementary context](CASE_STUDY_ALIGNMENT.md) map all eight decisions to it and identify specific proposal details not explicit in the original text.

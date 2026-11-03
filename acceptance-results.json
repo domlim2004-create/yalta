@@ -100,6 +100,14 @@
     "status": "PASS"
   },
   {
+    "name": "Pre-send questions switch with the proposal, restore on Undo and survive refresh",
+    "status": "PASS"
+  },
+  {
+    "name": "Briefing numbers five rules, highlights their key points and keeps rubric optional",
+    "status": "PASS"
+  },
+  {
     "name": "Facilitator hidden by default; no runtime errors or external requests",
     "status": "PASS"
   }

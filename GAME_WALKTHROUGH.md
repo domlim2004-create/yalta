@@ -18,11 +18,11 @@ Complete decision 1 then decision 2 before returning to the table, or deliberate
 
 Each decision shows three shuffled proposals. Their order remains fixed within a game.
 
-Selecting an option expands only a short explanation and **Send proposal** beneath it. The other proposals remain available. There is no pre-send Reconsider button or adviser-question panel.
+The page separates **01 Read the situation**, **02 Choose a proposal**, and **03 Talk it through before you send**. Selecting an option opens a full-width panel below the cards with two numbered thinking questions, a short guide and a reference to the relevant case-study sections. The other proposals remain available; switching cards changes the questions. Discuss aloud, then use **Send proposal**. No written answer is required and no score is shown.
 
 Send opens a separate **Read the room** page with two restrained speech bubbles from Stalin, Churchill or a fictional adviser. All are labelled as dramatised. These first impressions are not an acceptance or final refusal, and show no score or numerical relationship effect. Interpret them as a group rather than trying to identify an obvious approval signal.
 
-Choose **Stand by this proposal** to commit its displayed day cost, or **Reconsider** to return to the decision for free. Escape also reconsiders. Merely selecting or sending tentatively changes no days, relationships, scores, results or action log. The two explicit reflection questions remain available only in optional facilitator notes on this page.
+Choose **Stand by this proposal** to commit its displayed day cost, or **Reconsider** to return to the decision for free. Escape also reconsiders. Merely selecting or sending tentatively changes no days, relationships, scores, results or action log. The pre-send questions remain available in optional facilitator notes on this page.
 
 Most confirmed proposals cost one day. Referring Germany's hard questions costs zero, but beginning that decision still requires time remaining. Only after confirmation does the game reveal the actual agreement, die request or counteroffer.
 

@@ -1,6 +1,6 @@
 # Redesign acceptance report
 
-Validated on 4 November 2026 in headless Chromium. **26 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
+Validated on 4 November 2026 in headless Chromium. **28 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
 
 This report covers the approved redesign. It supersedes the original forced-dead-end, automatic extra-day and historical-main-line scoring assumptions. The original game and its earlier reports remain at `pre-party-redesign`.
 
@@ -53,3 +53,9 @@ Added original exaggerated SVG portraits, cosmetic idle/head and blink animation
 Preserved the preceding card-table design in the pushed `pre-theatrical-table` tag at `172e38e`. Negotiations now share a persistent room with larger leader portraits, warm lamps, cool shadows, a felt table, a desktop sidebar and Roosevelt’s place in the foreground. Sent proposals slide onto the table, settled outcomes receive a stamp, and final scores enter in sequence. Reduced-motion preferences disable these animations. Reactions remain restrained and appear beside their speakers.
 
 Two additional checks verify room continuity, speaker-attached reaction bubbles, unchanged resources on tentative send, and desktop/mobile HUD placement. **All 26 checks pass**, including both complete playthroughs, adverse paths, saving, keyboard interaction and all 17 screens at three viewport widths. Desktop table and reaction screenshots and the 375px reaction layout were visually inspected. Parsed GAME_DATA is identical to the preserved version: this update changes presentation, not decisions, scoring or historical content.
+
+## Pre-send discussion and guided reading
+
+The latest flow adds a discussion panel before Send: two proposal-specific questions, decision-level guidance, and a named section reference to the supplied case study. All 24 proposals were checked for their matching questions and guide, absence of score/effect spoilers, and unchanged resources before commitment. Two added tests cover switching, Undo, collapse, keyboard selection and refresh, plus numbered briefing rules and an optional scoring rubric. **All 28 checks pass in Chromium**, including the existing full playthroughs and responsive checks. Desktop proposal/briefing and mobile discussion screenshots were visually reviewed.
+
+The previous presentation is preserved at `pre-discussion-guides` (`ea079ee`). Existing GAME_DATA fields are unchanged; only discussionGuides was added. The case study’s wording is preserved apart from Markdown formatting. CASE_STUDY_ALIGNMENT.md maps all eight decisions and separates additional option context from the supplied narrative. This checks coverage, not the accuracy of its unsupplied bibliography.
