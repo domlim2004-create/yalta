@@ -36,7 +36,7 @@ Inspected desktop conference-table and mobile reflection screenshots. The interf
 
 Browser tests combine isolated boundary fixtures with full UI playthroughs. They verify implementation, not classroom engagement or the objective merit of the scoring rubric. The eight-day budget is an initial balance: the historical route leaves one spare day; bargaining consumes time unless the responding leader is warm. Classroom testing should assess pacing and whether the score explanations support useful discussion.
 
-The score is hidden from normal play, not encrypted. No public deployment of this branch was performed.
+The score is hidden from normal play, not encrypted. The tested game was promoted to `main` on 4 November 2026. Public website deployment was not separately verified.
 
 ## Revised reaction flow
 

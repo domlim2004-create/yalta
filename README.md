@@ -1,10 +1,10 @@
 # Yalta 1945 · At the table
 
-A single-file, offline discussion game for 4–5 students sharing one Roosevelt. This is the **party-style gameplay redesign**, developed on `redesign/party-style`.
+A single-file, offline discussion game for 4–5 students sharing one Roosevelt. The **party-style gameplay redesign** is now the current game on `main`; its development history remains on `redesign/party-style`.
 
 ## Preserved version
 
-The original game is preserved on `main` and the annotated tag `pre-party-redesign`, at commit `450f623838b5ddecec7c2e1d5d985914d9924afc`. The preceding party-style card-table design is also preserved at tag `pre-theatrical-table`, commit `172e38eb4ef24bf8ae208d55d3055f18b77966d8`. This branch does not change the main website or its publishing settings. Switching branches in GitHub shows the alternative files; it does not automatically create a second live website.
+The original game is preserved at the annotated tags `pre-party-redesign` and `pre-main-redesign-2026-11-04`, at commit `450f623838b5ddecec7c2e1d5d985914d9924afc`. The preceding party-style card-table design is also preserved at tag `pre-theatrical-table`, commit `172e38eb4ef24bf8ae208d55d3055f18b77966d8`. The approved full game has been promoted to `main`. Existing website publishing settings have not been changed.
 
 The version before the approved hand-swipe integration is preserved at `pre-integrated-swipe` (`80d88cd`).
 

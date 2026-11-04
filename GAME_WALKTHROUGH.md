@@ -1,6 +1,6 @@
 # Detailed progression · Party-style redesign
 
-This guide applies to `redesign/party-style`. The earlier forced-main-line game is preserved at `pre-party-redesign`.
+This guide applies to the current game on `main`, developed on `redesign/party-style`. The earlier forced-main-line game is preserved at `pre-party-redesign`.
 
 ## 1. Start a separate conference
 
