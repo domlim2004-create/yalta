@@ -1,6 +1,6 @@
 # Redesign acceptance report
 
-Validated on 4 November 2026 in headless Chromium. **32 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
+Validated on 4 November 2026 in headless Chromium. **37 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
 
 This report covers the approved redesign. It supersedes the original forced-dead-end, automatic extra-day and historical-main-line scoring assumptions. The original game and its earlier reports remain at `pre-party-redesign`.
 
@@ -65,3 +65,19 @@ The previous presentation is preserved at `pre-discussion-guides` (`ea079ee`). E
 The approved animation is now part of the full game, preserving the existing save key and all GAME_DATA fields. Middle selections place two hands on adjacent cards; end selections use one forearm. The chosen card stays in place until the other cards clear. Issue opening is recorded exactly once after the transition and costs no game time. Escape or U cancels before opening, and reloads cannot resume a stale transition. Reduced motion, blocked UN, exhaustion and missing animation support take the immediate path.
 
 Four additional acceptance checks cover neighbouring-card contact, single-arm versus two-hand motion, repeated selection, cancellation, refresh, fallback and live phone/tablet completion. **All 32 checks pass in Chromium.** The full suite was followed by a focused rerun of the four animation checks and runtime check after correcting the cancellation test to press Escape during, rather than after awaiting, the asynchronous animation. No game code changed between these runs. The preceding full game is preserved as `pre-integrated-swipe` (`80d88cd`).
+
+## Visible 3D dice
+
+The digital die now enters from below/right, turns twice and slows to rest on the table, settles on its actual value and waits for Continue. The cream/gold die and dark green pips use the existing palette. All 37 checks pass, including six-face orientation/pip checks, the existing game routes, settled-result save/refresh, exact Undo, unsupported-animation fallback and phone overflow. The settled result cannot be rerolled. Physical entry retains its direct resolution. After adjusting result-page scrolling, a focused browser check also confirmed that the die and Continue are both visible at 1280 × 800, 1366 × 768 and 375 × 812.
+
+## Seated dialogue
+
+Counteroffers and historical agreement reactions use speech bubbles beside the seated speaker. Duplicate table portraits and dialogue boxes are removed. Desktop and phone previews were inspected; all eight counteroffer speakers and agreement dialogue passed browser checks at both widths.
+
+## Two-page introduction
+
+The mission and five concise play rules are separate pages using a consistent cream and green palette. Scoring details remain optional. Navigation, Back, refresh on the rules page, unchanged starting resources, keyboard playthrough and narrow-screen layout are covered by browser checks.
+
+## Local soundtrack
+
+The full Dark Times track loops locally at 20% initial volume. Browser checks cover interaction-triggered playback, uninterrupted navigation, saved volume and mute preferences, home-page stop/rewind and missing-file fallback. A separate check confirmed playback from file:// and usable phone controls. All 37 checks pass.

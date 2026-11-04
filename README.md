@@ -1,6 +1,6 @@
 # Yalta 1945 · At the table
 
-A single-file, offline discussion game for 4–5 students sharing one Roosevelt. This is the **party-style gameplay redesign**, developed on `redesign/party-style`.
+An offline discussion game for 4–5 students sharing one Roosevelt. This is the **party-style gameplay redesign**, developed on `redesign/party-style`.
 
 ## Preserved version
 
@@ -10,7 +10,7 @@ The version before the approved hand-swipe integration is preserved at `pre-inte
 
 ## Play
 
-Open `index.html` in a browser. Everything is inline: historical text, simulation content, character SVG illustrations, CSS and vanilla JavaScript. No build, accounts, external fonts or requests.
+Open `index.html` in a browser. Keep `assets/audio/` alongside it for the soundtrack. Historical text, simulation content, character SVG illustrations, CSS and vanilla JavaScript remain inline. No build, accounts, external fonts or network requests are needed.
 
 For a browser that blocks local files:
 
@@ -87,3 +87,11 @@ The supplied [case study](CASE_STUDY.md) is preserved with formatting changes on
 The full game includes the approved swipe animation. Choosing either middle issue plants hands on its neighbouring cards and pushes the other cards outward. Choosing an end issue uses one broad forearm sweep to clear the other three cards. The selected card stays put until the sweep finishes, then moves to the centre before the decision opens.
 
 This cosmetic transition costs no game time and does not reveal scoring. Escape or U cancels the transition before opening the issue. Reduced-motion preferences skip it; locked UN entry and exhaustion are handled immediately. Saves use the existing redesign key, and the standalone draft’s reset/replay controls are not part of the game.
+
+## Visible dice roll
+
+The on-screen die enters from below/right, turns twice and slows to rest in the middle of the table using the existing cream/gold and dark green palette. It settles on the actual sampled value, displays the number and target, and waits for Continue before applying the agreement or opening the counteroffer. The settled die stays in view and is saved, so refresh cannot change its value. Reduced-motion settings skip the drop and show the result immediately. Physical-die entry still resolves directly.
+
+## Background music
+
+The full “Dark Times” track by Kevin MacLeod loops at 20% volume after Take your seat. Music and Volume controls stay in the header. Preferences are saved separately from game progress; page navigation and Undo do not restart playback. After refresh, playback resumes on the next game action because browsers require an interaction. Back to home stops and rewinds the track. A missing audio file does not block play. Credits and CC BY 4.0 links are in the footer and `assets/audio/CREDITS.txt`.

@@ -72,7 +72,7 @@
     "status": "PASS"
   },
   {
-    "name": "Animated die resolves, and Undo cancels its pending callback",
+    "name": "Animated die settles visibly, and Undo cancels its pending callback",
     "status": "PASS"
   },
   {
@@ -104,7 +104,7 @@
     "status": "PASS"
   },
   {
-    "name": "Briefing numbers five rules, highlights their key points and keeps rubric optional",
+    "name": "Briefing splits mission and rules, keeps scoring optional and supports back and refresh",
     "status": "PASS"
   },
   {
@@ -121,6 +121,26 @@
   },
   {
     "name": "Live swipes finish on phone and tablet without leaving controls locked",
+    "status": "PASS"
+  },
+  {
+    "name": "All six digital faces match their saved result and apply the correct outcome",
+    "status": "PASS"
+  },
+  {
+    "name": "Settled digital result survives refresh and Undo without a reroll",
+    "status": "PASS"
+  },
+  {
+    "name": "Digital dice fallback and phone layout remain usable",
+    "status": "PASS"
+  },
+  {
+    "name": "Counteroffers and agreement dialogue come from seated leaders without duplicate portraits",
+    "status": "PASS"
+  },
+  {
+    "name": "Background music starts on interaction, persists across screens and saves independent preferences",
     "status": "PASS"
   },
   {

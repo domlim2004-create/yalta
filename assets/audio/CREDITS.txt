@@ -1,0 +1,5 @@
+"Dark Times" — Kevin MacLeod (incompetech.com)
+Source: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100747
+Original download: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Dark%20Times.mp3
+Licensed under Creative Commons Attribution 4.0: https://creativecommons.org/licenses/by/4.0/
+Changes: re-encoded to 128 kbps MP3, metadata removed. Full composition retained. Playback loops in the game.

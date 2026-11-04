@@ -18,7 +18,7 @@ Complete decision 1 then decision 2 before returning to the table, or deliberate
 
 Each decision shows three shuffled proposals. Their order remains fixed within a game.
 
-The page separates **01 Read the situation**, **02 Choose a proposal**, and **03 Talk it through before you send**. Selecting an option opens a full-width panel below the cards with two numbered thinking questions, a short guide and a reference to the relevant case-study sections. The other proposals remain available; switching cards changes the questions. Discuss aloud, then use **Send proposal**. No written answer is required and no score is shown.
+The page shows the situation followed by three proposal cards. Selecting a card opens its discussion panel. Selecting an option opens a full-width panel below the cards with two numbered thinking questions, a short guide and a reference to the relevant case-study sections. The other proposals remain available; switching cards changes the questions. Discuss aloud, then use **Send proposal**. No written answer is required and no score is shown.
 
 Send opens a separate **Read the room** page with two restrained speech bubbles from Stalin, Churchill or a fictional adviser. All are labelled as dramatised. These first impressions are not an acceptance or final refusal, and show no score or numerical relationship effect. Interpret them as a group rather than trying to identify an obvious approval signal.
 
@@ -44,11 +44,11 @@ Historical agreement proposals J2a, U1a and U2a require a roll after the base da
 | 4 | 3+ |
 | 5 | 2+ |
 
-Use the on-screen die or enable Physical die and enter the actual result. Success records the historical agreement. Failure creates a simulated complication without automatically charging another day. No score is assigned merely for the roll.
+Use the on-screen die or enable Physical die and enter the actual result. The on-screen die comes in from below/right, turns twice, then stops on its result; read the number and press **Continue**. Reduced-motion preferences show the settled result immediately. A settled digital result survives refresh. Physical-die entry resolves directly. Success records the historical agreement. Failure creates a simulated complication without automatically charging another day. No score is assigned merely for the roll.
 
 ## 6. Choose a response to the counteroffer
 
-Every counteroffer shows its speaker, proposed terms and three responses:
+Every counteroffer shows its proposed terms in a speech bubble beside the seated speaker, with three responses on the table. Agreement reactions use the same seated speech bubbles:
 
 - **Accept:** no additional day. After a failed roll, this accepts conditional support with details left open. Otherwise it accepts the stated compromise.
 - **Negotiate the named improvement:** costs one extra day, or zero when the responding leader is at least 4. The button describes the outcome and relationship changes. It is disabled if unaffordable. This is a specified limited improvement, not a guarantee that the original demand succeeds.
@@ -87,7 +87,7 @@ The theoretical total ranges from −8 to +16, but there is no pass mark and no 
 
 Reveal Japan, Poland, the UN and Germany one row at a time. The historical text is unchanged from the supplied prompt. Your simulated outcome is reported separately, with the number of agreements on each issue. Alternative agreements are not presented as things that actually occurred.
 
-After the closing paragraph, continue to the debrief. The original ten questions remain, with an invitation to challenge scores using the group's reasoning. Print group summary includes scores, explanations, final state and the action log.
+After the closing paragraph, continue to the debrief. The original ten questions remain, with an invitation to challenge scores using the group's reasoning. Back to home returns to the title page with a fresh conference. Undo can restore the completed conference.
 
 ## 11. Example routes (facilitator spoilers)
 
@@ -102,3 +102,5 @@ After the closing paragraph, continue to the debrief. The original ten questions
 1–3 selects proposals. Tab moves focus; Enter/Space activates buttons. Enter/Space on a Continue screen advances. Sending and standing by a proposal each require explicit button actions. Escape on the reaction page reconsiders and returns focus to the option. F toggles facilitator notes; U reverses the last game action. Undo restores hidden scores, relationships, days, orders and logs together and cancels pending roll animation. Restart is confirmed and reversible.
 
 The redesigned save key is separate from the original. Browser storage failure does not prevent play, but progress may be lost on refresh. The original eight-day version and its documentation remain recoverable through the backup tag.
+
+The introduction is split into two pages: mission and constraints first, then five short play rules. Scoring details are optional on the rules page. Back returns to the mission; neither page spends days.
