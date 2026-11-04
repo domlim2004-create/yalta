@@ -108,6 +108,22 @@
     "status": "PASS"
   },
   {
+    "name": "Issue sweep starts on neighbouring cards, uses one arm at ends and commits once",
+    "status": "PASS"
+  },
+  {
+    "name": "Cancelling or refreshing during a swipe cannot open an issue later",
+    "status": "PASS"
+  },
+  {
+    "name": "Sweep bypasses reduced motion, locked UN, no time and unsupported animation",
+    "status": "PASS"
+  },
+  {
+    "name": "Live swipes finish on phone and tablet without leaving controls locked",
+    "status": "PASS"
+  },
+  {
     "name": "Facilitator hidden by default; no runtime errors or external requests",
     "status": "PASS"
   }

@@ -10,7 +10,7 @@ Start with eight days, Stalin 3 and Churchill 3. There is no real-time timer. Ta
 
 ## 2. Pick an issue at the table
 
-The illustrated room shows the three leaders and four coloured dossiers. Open Japan, Poland, the UN or Germany. Opening costs nothing. If either leader is at 1, opening the UN is blocked without a cost. Return and repair relations or choose another issue.
+Churchill and Stalin face your Roosevelt seat across the table, with four coloured dossiers. Open Japan, Poland, the UN or Germany. Opening costs nothing. A short hand-swipe clears the other cards: two hands for a middle card, one forearm for an end card. Escape or U cancels the sweep; reduced-motion settings skip it. If either leader is at 1, opening the UN is blocked without a cost. Return and repair relations or choose another issue.
 
 Complete decision 1 then decision 2 before returning to the table, or deliberately leave the issue unresolved. You cannot reopen a closed issue.
 

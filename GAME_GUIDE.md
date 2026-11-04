@@ -11,7 +11,7 @@ Each settled decision has a hidden score from −1 to +2. Explain the scoring ru
 ## Facilitation
 
 1. Read the opening briefing and short rules. Explain what the scores assess.
-2. Ask the group to justify the issue it opens.
+2. Ask the group to justify the issue it opens. The hand-swipe transition is cosmetic and costs no time; Escape or U cancels it.
 3. Let the group select a proposal. A panel below the choices shows two numbered thinking questions, a short guide and the relevant case-study sections. Discuss aloud, then send the tentative proposal. A separate page shows two restrained reactions from the leaders or a fictional adviser. Ask the group to interpret them.
 4. Choose **Stand by this proposal** to commit time, or **Reconsider** to return without cost. The initial reactions do not establish acceptance or refusal.
 5. Read the agreement or simulated response. For a counteroffer, discuss the cost of improving terms, accepting a concession or walking away.

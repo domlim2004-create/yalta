@@ -6,6 +6,8 @@ A single-file, offline discussion game for 4–5 students sharing one Roosevelt.
 
 The original game is preserved on `main` and the annotated tag `pre-party-redesign`, at commit `450f623838b5ddecec7c2e1d5d985914d9924afc`. The preceding party-style card-table design is also preserved at tag `pre-theatrical-table`, commit `172e38eb4ef24bf8ae208d55d3055f18b77966d8`. This branch does not change the main website or its publishing settings. Switching branches in GitHub shows the alternative files; it does not automatically create a second live website.
 
+The version before the approved hand-swipe integration is preserved at `pre-integrated-swipe` (`80d88cd`).
+
 ## Play
 
 Open `index.html` in a browser. Everything is inline: historical text, simulation content, character SVG illustrations, CSS and vanilla JavaScript. No build, accounts, external fonts or requests.
@@ -79,3 +81,9 @@ Before sending, the selected proposal opens a full-width discussion panel: two n
 The briefing separates the mission, five numbered rules, highlighted key mechanics and an optional scoring rubric. The decision page labels the situation, selection and discussion steps separately.
 
 The supplied [case study](CASE_STUDY.md) is preserved with formatting changes only. [Decision coverage and optional supplementary context](CASE_STUDY_ALIGNMENT.md) map all eight decisions to it and identify specific proposal details not explicit in the original text.
+
+## Issue-opening hand sweep
+
+The full game includes the approved swipe animation. Choosing either middle issue plants hands on its neighbouring cards and pushes the other cards outward. Choosing an end issue uses one broad forearm sweep to clear the other three cards. The selected card stays put until the sweep finishes, then moves to the centre before the decision opens.
+
+This cosmetic transition costs no game time and does not reveal scoring. Escape or U cancels the transition before opening the issue. Reduced-motion preferences skip it; locked UN entry and exhaustion are handled immediately. Saves use the existing redesign key, and the standalone draft’s reset/replay controls are not part of the game.

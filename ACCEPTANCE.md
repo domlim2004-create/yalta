@@ -1,6 +1,6 @@
 # Redesign acceptance report
 
-Validated on 4 November 2026 in headless Chromium. **28 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
+Validated on 4 November 2026 in headless Chromium. **32 checks passed.** See `acceptance-results.json` and `tests/acceptance.cjs` for the recorded results and repeatable suite. Safari and Edge have not been directly tested.
 
 This report covers the approved redesign. It supersedes the original forced-dead-end, automatic extra-day and historical-main-line scoring assumptions. The original game and its earlier reports remain at `pre-party-redesign`.
 
@@ -59,3 +59,9 @@ Two additional checks verify room continuity, speaker-attached reaction bubbles,
 The latest flow adds a discussion panel before Send: two proposal-specific questions, decision-level guidance, and a named section reference to the supplied case study. All 24 proposals were checked for their matching questions and guide, absence of score/effect spoilers, and unchanged resources before commitment. Two added tests cover switching, Undo, collapse, keyboard selection and refresh, plus numbered briefing rules and an optional scoring rubric. **All 28 checks pass in Chromium**, including the existing full playthroughs and responsive checks. Desktop proposal/briefing and mobile discussion screenshots were visually reviewed.
 
 The previous presentation is preserved at `pre-discussion-guides` (`ea079ee`). Existing GAME_DATA fields are unchanged; only discussionGuides was added. The case study’s wording is preserved apart from Markdown formatting. CASE_STUDY_ALIGNMENT.md maps all eight decisions and separates additional option context from the supplied narrative. This checks coverage, not the accuracy of its unsupplied bibliography.
+
+## Integrated hand swipe
+
+The approved animation is now part of the full game, preserving the existing save key and all GAME_DATA fields. Middle selections place two hands on adjacent cards; end selections use one forearm. The chosen card stays in place until the other cards clear. Issue opening is recorded exactly once after the transition and costs no game time. Escape or U cancels before opening, and reloads cannot resume a stale transition. Reduced motion, blocked UN, exhaustion and missing animation support take the immediate path.
+
+Four additional acceptance checks cover neighbouring-card contact, single-arm versus two-hand motion, repeated selection, cancellation, refresh, fallback and live phone/tablet completion. **All 32 checks pass in Chromium.** The full suite was followed by a focused rerun of the four animation checks and runtime check after correcting the cancellation test to press Escape during, rather than after awaiting, the asynchronous animation. No game code changed between these runs. The preceding full game is preserved as `pre-integrated-swipe` (`80d88cd`).

@@ -38,6 +38,14 @@ body{background:#0d1c28;background-image:radial-gradient(ellipse at 52% 0,#244b5
 @media(max-width:600px){.conference-stage .situation-panel{padding:17px 15px}.conference-stage .situation-panel p{font-size:18px}.conference-stage .proposal-send.discussion-panel{padding:18px 14px}.reading-step h3{font-size:21px}.reading-step>span{flex-basis:32px;height:32px;font-size:14px}.thinking-questions li{font-size:18px}.conference-stage .thinking-guide p{font-size:17px}.conference-stage .thinking-guide .case-reference{font-size:14px}.thinking-guide{padding:16px}.conference-stage .send-footer button{width:100%}.send-footer .actions{display:block;width:100%}.briefing-mission{padding:20px 17px}.briefing-mission p{font-size:19px}.briefing-rules li{padding:18px 14px;gap:12px}.briefing-rules h4{font-size:21px}.briefing-rules p{font-size:18px}.scoring-explainer{padding:18px}.briefing-facts{gap:8px}.briefing-facts>span{font-size:15px;padding:6px 10px}}
 @media(prefers-reduced-motion:reduce){.discussion-panel{animation:none}}
 
+
+/* Approved issue-card sweep. */
+.sweep-hand{position:absolute;top:0;left:0;z-index:8;pointer-events:none;filter:drop-shadow(5px 12px 6px #071c3280);transform-origin:50% 85%;will-change:transform}.sweep-hand svg{width:100%;height:auto;display:block}.sweep-left svg{transform:scaleX(-1)}.sweeping-table .dossier{will-change:transform;pointer-events:none}.sweeping-table .dossier:hover{filter:none}.sweeping-table .table-after,.sweeping-table .table-caption{opacity:.3}.sweeping-table .desk-content{position:relative}.sweeping-table .dossiers{isolation:isolate}.sweeping-table .table-heading{opacity:.55}
+
+.sweeping-table .dossier.sweep-selected{background:#ffe5a1;outline:3px solid #f3c45d;outline-offset:2px}
+
+.sweeping-table .sweep-selected{position:relative}.sweep-forearm{filter:drop-shadow(7px 15px 7px #071c3280)}
+
 </style></head><body><div class="app"><header class="mast"><div class="brand">YALTA<span> / 1945</span></div><span class="edition"><span class="live-dot" aria-hidden="true"></span> AT THE TABLE · REDESIGN</span></header><div id="hud"></div><div class="layout" id="layout"><main id="screen" tabindex="-1"></main><aside id="notes" class="notes" hidden></aside></div><details class="log" id="log"><summary>Conference log · <span id="log-count">0</span> entries</summary><ol id="log-list"></ol></details><footer class="footer"><span>UTC2107 · NUS TEMBUSU COLLEGE · 4–5 PLAYERS</span><span>1–3 CHOOSE · ENTER CONTINUE · F NOTES · U UNDO</span></footer></div><script>
 const GAME_DATA = {
   "discussionGuides": {
@@ -1084,6 +1092,79 @@ function closeIssue(){if(state.issue&&!state.closed.includes(state.issue))state.
 function finish(data){if(state.results[state.decision])return;const c=GAME_DATA.cards[state.card];const r={decision:state.decision,proposal:c?.option||'Leave this issue unresolved',card:state.card,...data};state.results[state.decision]=r;tracks(r.changes||{});if(r.status==='walkaway')closeIssue();log(state.decision+': '+r.title+'. '+effectsText(r.changes||{})+'. '+state.days+' days left.');state.screen='result';}
 function historical(){const c=GAME_DATA.cards[state.card];finish({status:'agreement',title:'Agreement secured',text:c.text,score:c.score,why:c.why,changes:c.changes,historical:true});}
 function bargainCost(){const b=GAME_DATA.branches[state.decision];return state[b.who]>=4?0:1;}
+// Cosmetic issue-opening motion. The game state changes only after completion.
+let issueSweep=null;
+const SWEEP_HAND=`<svg viewBox="0 0 160 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="#172e37" stroke-width="5" stroke-linejoin="round"><path d="M44 149 L37 78 Q35 65 45 62 Q56 59 60 73 L57 42 Q56 29 67 28 Q78 28 80 40 L84 65 L84 26 Q84 13 96 14 Q106 15 107 28 L111 70 L116 45 Q119 33 130 37 Q141 41 137 54 L133 105 Q150 79 158 90 Q166 99 151 119 L134 157 L119 179 L65 180Z" fill="#e9b98a"/><path d="M60 90 L65 120 M86 82 L90 115 M112 86 L113 117" fill="none" stroke="#bd885e" stroke-width="3" stroke-linecap="round"/><path d="M57 162 L129 160 L134 185 L51 189Z" fill="#fff1d4"/><path d="M49 178 L135 176 L151 230 L32 230Z" fill="#426b7b"/><path d="M60 187 L62 226" fill="none" stroke="#6792a0"/><circle cx="125" cy="195" r="4" fill="#d9b363"/></g></svg>`;
+function cancelIssueSweep(){
+  const run=issueSweep;if(!run)return;
+  issueSweep=null;
+  run.animations.forEach(a=>a.cancel());run.layers.forEach(e=>e.remove());
+  run.app.inert=false;run.app.removeAttribute('aria-busy');
+  run.stage.classList.remove('sweeping-table');
+  run.stage.querySelectorAll('.dossier').forEach(c=>{c.style.removeProperty('z-index');c.classList.remove('sweep-selected');delete c.dataset.sweepDirection;});
+  const seat=run.stage.querySelector('.your-seat');if(seat)seat.style.removeProperty('opacity');
+}
+async function openIssue(issue){
+  if(issueSweep||state.screen!=='select'||!GAME_DATA.issues[issue]||state.closed.includes(issue))return;
+  const stage=document.querySelector('.conference-stage'),selected=document.querySelector(`.dossier[data-value="${issue}"]`);
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!Element.prototype.animate||!state.days||(issue==='UN'&&(state.Stalin===1||state.Churchill===1))||!stage||!selected){chooseIssue(issue);return;}
+  const app=document.querySelector('.app'),duration=1500;
+  const run={issue,stage,app,animations:[],layers:[]};issueSweep=run;
+  app.inert=true;app.setAttribute('aria-busy','true');stage.classList.add('sweeping-table');
+  try{
+    const sr=stage.getBoundingClientRect();
+    const cards=[...stage.querySelectorAll('.dossier')], selectedIndex=cards.indexOf(selected), small=sr.width<600;
+    const rects=cards.map(c=>c.getBoundingClientRect());
+    const groups=[];
+    if(selectedIndex>0)groups.push({dir:-1,indices:Array.from({length:selectedIndex},(_,i)=>i),neighbor:selectedIndex-1});
+    if(selectedIndex<cards.length-1)groups.push({dir:1,indices:Array.from({length:cards.length-selectedIndex-1},(_,i)=>selectedIndex+1+i),neighbor:selectedIndex+1});
+    const edge=groups.length===1, handWidth=small?(edge?96:85):(edge?155:135);
+    const animations=run.animations,layers=run.layers;
+    const animate=(el,frames)=>{const a=el.animate(frames,{duration,easing:'linear',fill:'forwards'});animations.push(a);return a;};
+    const offsets=[0,.16,.24,.38,.64,.78,1],progress=[0,0,0,.08,.9,1,1];
+    const cr=rects[selectedIndex],centerX=sr.left+sr.width/2,dx=centerX-(cr.left+cr.width/2);
+    selected.style.zIndex=10;selected.classList.add('sweep-selected');
+    animate(selected,[{transform:getComputedStyle(selected).transform,opacity:1,offset:0},{transform:'translateY(-14px) rotate(0deg) scale(1.04)',opacity:1,offset:.16},{transform:'translateY(-14px) rotate(0deg) scale(1.04)',opacity:1,offset:.78},{transform:`translate(${dx}px,-14px) rotate(0deg) scale(1.07)`,opacity:1,offset:.94},{transform:`translate(${dx}px,-14px) rotate(0deg) scale(1.07)`,opacity:1,offset:.98},{transform:`translate(${dx}px,-22px) scale(1.09)`,opacity:0,offset:1}]);
+    groups.forEach(group=>{
+      const {dir,indices,neighbor}=group,r=rects[neighbor];
+      const distance=dir*(sr.width+Math.max(...indices.map(i=>rects[i].width)));
+      indices.forEach((index,j)=>{
+        const card=cards[index],base=getComputedStyle(card).transform;
+        card.dataset.sweepDirection=dir;
+        animate(card,offsets.map((offset,k)=>{const t=progress[k];return {offset,opacity:1,transform:`translate(${distance*t}px,${(edge?24:10)*t}px) ${base==='none'?'':base} rotate(${dir*(edge?12+j*5:7+j*3)*t}deg)`};}));
+      });
+      const el=document.createElement('div');el.className='sweep-hand '+(dir<0?'sweep-left':'sweep-right')+(edge?' sweep-forearm':'');el.style.width=handWidth+'px';el.dataset.neighbor=cards[neighbor].dataset.value;
+      const longHand=SWEEP_HAND.replace('0 0 160 230','0 0 160 420').replace('L151 230 L32 230','L170 420 L12 420').replace('L62 226','L53 412');
+      el.innerHTML=longHand;stage.appendChild(el);layers.push(el);
+      // Plant the palm on the adjacent card, on its edge facing the chosen card.
+      // The hands and cards then share one displacement curve: no remote flying cards.
+      const palmX=(dir<0?r.right-r.width*.2:r.left+r.width*.2)-sr.left;
+      const palmY=r.top-sr.top+r.height*.45;
+      const scale=handWidth/160, x=palmX-handWidth*.55,y=palmY-105*scale;
+      el.style.transformOrigin='55% '+(105*scale)+'px';
+      el.dataset.contactX=palmX;el.dataset.contactY=palmY;
+      const angle=edge?dir*23:dir*5;
+      const pose=(px,py,a)=>`translate(${px}px,${py}px) rotate(${a}deg)`;
+      animate(el,[
+        {offset:0,transform:pose(x,sr.height+80,angle-dir*12),opacity:0},
+        {offset:.16,transform:pose(x,y,angle),opacity:1},
+        {offset:.24,transform:pose(x,y,angle),opacity:1},
+        {offset:.38,transform:pose(x+distance*.08,y+(edge?24:10)*.08,angle+dir*(edge?12:2)),opacity:1},
+        {offset:.64,transform:pose(x+distance*.9,y+(edge?24:10)*.9,angle+dir*(edge?39:10)),opacity:1},
+        {offset:.78,transform:pose(x+distance,y+(edge?24:10),angle+dir*(edge?45:12)),opacity:1},
+        {offset:1,transform:pose(x+distance,sr.height+80,angle+dir*45),opacity:0}
+      ]);
+    });
+    stage.querySelector('.your-seat').style.opacity=0;
+
+    await Promise.all(run.animations.map(a=>a.finished));
+    if(issueSweep!==run)return;
+    cancelIssueSweep();chooseIssue(issue);
+  }catch{
+    // Unsupported/cancelled animation must never strand the conference.
+    if(issueSweep===run){cancelIssueSweep();chooseIssue(issue);}
+  }finally{if(issueSweep===run)cancelIssueSweep();}
+}
 function chooseIssue(issue){if(state.screen!=='select'||!GAME_DATA.issues[issue]||state.closed.includes(issue))return;change(()=>{if(issue==='UN'&&(state.Stalin===1||state.Churchill===1)){state.screen='locked';log('UN entry blocked. No days spent.');return;}if(!state.days){exhausted();return;}state.issue=issue;state.decision=GAME_DATA.issues[issue][0];state.card=null;state.roll=null;state.reason=null;if(!state.opened.includes(issue))state.opened.push(issue);state.screen='decision';log('Opened '+issue+'.');});}
 function focusOption(cid){const el=document.querySelector('[data-action="choose"][data-value="'+cid+'"]');if(el)el.focus({preventScroll:true});}
 function choose(cid){if(!['decision','reflect'].includes(state.screen)||!state.orders[state.decision].includes(cid))return;const closing=state.screen==='reflect'&&state.card===cid;change(()=>{state.card=closing?null:cid;state.screen=closing?'decision':'reflect';});focusOption(cid);}
@@ -1098,7 +1179,7 @@ function leave(){if(!['select','decision'].includes(state.screen))return;change(
 function confirmLeave(){if(state.screen!=='leave')return;change(()=>{if(state.returnTo==='select'){state.screen='ending';log('The group closes its conference early.');return;}state.card=null;finish({status:'walkaway',title:'Issue deliberately left unresolved',text:'You preserve time for other priorities. Remaining decisions on this issue stay unattempted.',score:0,why:'You conserve resources without securing an agreement. This is a deliberate deferral, not a completed settlement.',changes:{},historical:false});});}
 function toast(who){if(state.screen!=='toast'||state.days<1||!['Stalin','Churchill'].includes(who)||state[who]===5)return;change(()=>{state.days--;state[who]++;log('Toast to '+who+': −1 day, relationship +1.');state.screen=state.returnTo;if(!state.days)exhausted();});}
 function next(){switch(state.screen){case'title':change(()=>state.screen='briefing');break;case'briefing':change(()=>state.screen='select');break;case'result':onward();break;case'locked':change(()=>state.screen='select');break;case'exhausted':change(()=>state.screen='ending');break;case'ending':change(()=>{state.rows=0;state.screen='history';});break;case'history':change(()=>{if(state.rows<4)state.rows++;else state.screen='debrief';});break;}}
-function act(a,v){if(a==='undo'){undo();return;}if(a==='notes'){facilitator=!facilitator;cancelRoll();render();return;}if(a==='next')next();else if(a==='issue')chooseIssue(v);else if(a==='choose')choose(v);else if(a==='send')send();else if(a==='commit')commitProposal();else if(a==='reconsider')reconsider();else if(a==='roll')roll();else if(a==='physical')resolveRoll(Number(v));else if(a==='counter')resolveCounter(v);else if(a==='leave')leave();else if(a==='confirm-leave')confirmLeave();else if(a==='cancel'&&['leave','toast','restart'].includes(state.screen))change(()=>state.screen=state.returnTo);else if(a==='toast'&&['select','decision'].includes(state.screen)&&state.days>0)change(()=>{state.returnTo=state.screen;state.screen='toast';});else if(a==='toast-person')toast(v);else if(a==='restart'&&state.screen!=='restart')change(()=>{state.returnTo=state.screen;state.screen='restart';});else if(a==='confirm-restart'&&state.screen==='restart')change(()=>state=fresh(state.orders));else if(a==='print')window.print();}
+function act(a,v){if(a==='undo'){undo();return;}if(a==='notes'){facilitator=!facilitator;cancelRoll();render();return;}if(a==='next')next();else if(a==='issue')openIssue(v);else if(a==='choose')choose(v);else if(a==='send')send();else if(a==='commit')commitProposal();else if(a==='reconsider')reconsider();else if(a==='roll')roll();else if(a==='physical')resolveRoll(Number(v));else if(a==='counter')resolveCounter(v);else if(a==='leave')leave();else if(a==='confirm-leave')confirmLeave();else if(a==='cancel'&&['leave','toast','restart'].includes(state.screen))change(()=>state.screen=state.returnTo);else if(a==='toast'&&['select','decision'].includes(state.screen)&&state.days>0)change(()=>{state.returnTo=state.screen;state.screen='toast';});else if(a==='toast-person')toast(v);else if(a==='restart'&&state.screen!=='restart')change(()=>{state.returnTo=state.screen;state.screen='restart';});else if(a==='confirm-restart'&&state.screen==='restart')change(()=>state=fresh(state.orders));else if(a==='print')window.print();}
 const button=(text,action,value='',cls='')=>`<button class="${cls}" data-action="${action}" data-value="${esc(value)}">${text}</button>`;
 const nextButton=(text='Continue →')=>button(text,'next','','primary');
 function paper(label,title,body){const seal=state.screen==='result'?`<span class="outcome-seal">${state.results[state.decision]?.status==='agreement'?'AGREED':'LEFT OPEN'}</span>`:'';return `<section class="paper">${seal}<div class="eyebrow">${label}</div><h2>${esc(title)}</h2>${body}</section>`;}
@@ -1148,7 +1229,8 @@ case'ending':return paper('The full picture','What did your choices cost?',`${sc
 case'history':return paper('Historical record · not the simulated branches','What happened after Yalta?',`<p>${esc(GAME_DATA.historyIntro)}</p><p class="tiny">${state.rows} of 4 issues revealed</p>${GAME_DATA.history.slice(0,state.rows).map(r=>`<article class="history-row"><h3>${r.issue}</h3><div class="history-columns"><div><small>WHAT ROOSEVELT GOT</small><p>${esc(r.deal)}</p></div><div><small>WHAT HAPPENED NEXT</small><p>${esc(r.after)}</p></div></div><p class="notice">Your group: ${GAME_DATA.issues[r.issue].filter(id=>state.results[id]?.status==='agreement').length}/2 agreements · ${state.opened.includes(r.issue)?'issue opened':'never opened'}. Simulated agreements may differ from the historical settlement.</p></article>`).join('')}${state.rows===4?'<p style="margin-top:24px">'+esc(GAME_DATA.historyClosing)+'</p>':''}<div class="actions">${nextButton(state.rows<4?'Reveal '+GAME_DATA.history[state.rows].issue+' →':'Discuss your conference →')}</div>`);
 case'debrief':return paper('Back to your group','Defend your decisions.',`<p>Which score would you challenge? Use your goals and the situation to explain why. The rubric starts a discussion; it does not settle it.</p>${Object.entries(GAME_DATA.debrief).map(([h,qs])=>'<h3>'+esc(h)+'</h3><ul>'+qs.map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul>').join('')}<div class="actions">${button('Print group summary','print','','primary')}${button('Play again','restart','','quiet')}</div><section class="print-only"><h2>Your conference record</h2>${scoreSummary()}${outcomes()}<h3>Choice and roll log</h3><ol>${state.log.map(t=>'<li>'+esc(t)+'</li>').join('')}</ol></section>`);
 }}
-function render(){document.body.dataset.screen=state.screen;document.querySelector('.app').classList.toggle('has-hud',!['title','briefing'].includes(state.screen));hud();const content=screen();const atTable=['select','decision','reflect','reaction','roll','counter','result','locked','toast','leave','exhausted'].includes(state.screen);document.getElementById('screen').innerHTML=atTable?conferenceStage(content):content;const notes=document.getElementById('notes');notes.hidden=!facilitator;document.getElementById('layout').classList.toggle('notes-on',facilitator);if(facilitator){const key=state.decision||'Issue select';notes.innerHTML='<h3>Facilitator notes</h3><p class="tiny">Visible to everyone looking at this screen. F hides notes.</p><p>'+esc(GAME_DATA.facilitator[key]||'Discuss your priorities and compare the group’s reasoning with its outcomes.')+'</p><p>Do not reveal point values during play. Invite a reason for each proposal and discuss who bears its costs.</p>'+(state.screen==='reaction'?'<p><b>Optional discussion prompts</b></p>'+GAME_DATA.cards[state.card].questions.map(q=>'<p>'+esc(q)+'</p>').join(''):'')+(state.days<=2?'<p>What are you leaving unresolved, and who will pay for it later?</p>':'');}else notes.innerHTML='';document.getElementById('log').hidden=!state.log.length;document.getElementById('log-count').textContent=state.log.length;document.getElementById('log-list').innerHTML=state.log.map(t=>'<li>'+esc(t)+'</li>').join('');document.getElementById('screen').focus({preventScroll:true});if(state.screen==='reflect'){const selected=document.querySelector('.discussion-panel');selected.scrollIntoView({block:'nearest',behavior:'instant'});}else if(state.screen!=='decision'){window.scrollTo(0,0);}}
+function render(){cancelIssueSweep();document.body.dataset.screen=state.screen;document.querySelector('.app').classList.toggle('has-hud',!['title','briefing'].includes(state.screen));hud();const content=screen();const atTable=['select','decision','reflect','reaction','roll','counter','result','locked','toast','leave','exhausted'].includes(state.screen);document.getElementById('screen').innerHTML=atTable?conferenceStage(content):content;const notes=document.getElementById('notes');notes.hidden=!facilitator;document.getElementById('layout').classList.toggle('notes-on',facilitator);if(facilitator){const key=state.decision||'Issue select';notes.innerHTML='<h3>Facilitator notes</h3><p class="tiny">Visible to everyone looking at this screen. F hides notes.</p><p>'+esc(GAME_DATA.facilitator[key]||'Discuss your priorities and compare the group’s reasoning with its outcomes.')+'</p><p>Do not reveal point values during play. Invite a reason for each proposal and discuss who bears its costs.</p>'+(state.screen==='reaction'?'<p><b>Optional discussion prompts</b></p>'+GAME_DATA.cards[state.card].questions.map(q=>'<p>'+esc(q)+'</p>').join(''):'')+(state.days<=2?'<p>What are you leaving unresolved, and who will pay for it later?</p>':'');}else notes.innerHTML='';document.getElementById('log').hidden=!state.log.length;document.getElementById('log-count').textContent=state.log.length;document.getElementById('log-list').innerHTML=state.log.map(t=>'<li>'+esc(t)+'</li>').join('');document.getElementById('screen').focus({preventScroll:true});if(state.screen==='reflect'){const selected=document.querySelector('.discussion-panel');selected.scrollIntoView({block:'nearest',behavior:'instant'});}else if(state.screen!=='decision'){window.scrollTo(0,0);}}
+document.addEventListener('keydown',e=>{if(!issueSweep||e.ctrlKey||e.metaKey||e.altKey)return;const issue=issueSweep.issue;e.preventDefault();e.stopImmediatePropagation();if(e.key.toLowerCase()==='u'||e.key==='Escape'){cancelIssueSweep();render();document.querySelector(`.dossier[data-value="${issue}"]`)?.focus({preventScroll:true});}},true);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(b&&!b.disabled)act(b.dataset.action,b.dataset.value);});
 document.addEventListener('change',e=>{if(e.target.id==='physical-toggle'){cancelRoll();physical=e.target.checked;save();render();}});
 document.addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;const k=e.key.toLowerCase();if(k==='escape'&&state.screen==='reaction'){e.preventDefault();reconsider();}else if(k==='u'){e.preventDefault();undo();}else if(k==='f'){e.preventDefault();act('notes');}else if(['1','2','3'].includes(k)&&['decision','reflect'].includes(state.screen)){e.preventDefault();choose(state.orders[state.decision][Number(k)-1]);}else if((k==='enter'||k===' ')&&!['BUTTON','SUMMARY'].includes(e.target.tagName)){e.preventDefault();next();}});
