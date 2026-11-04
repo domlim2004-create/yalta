@@ -1211,10 +1211,14 @@ function send(){if(state.screen!=='reflect')return;change(()=>{state.screen='rea
 function commitProposal(){if(state.screen!=='reaction')return;change(()=>{const c=GAME_DATA.cards[state.card];log('Proposal sent: '+c.option);if(!pay(c.cost))return;if(c.main){if(c.roll){state.roll={target:7-state.Stalin,value:null,success:null};state.screen='roll';}else historical();}else{tracks(c.changes);log('Response to proposal: '+effectsText(c.changes));state.reason='proposal';state.screen='counter';}});}
 function resolveRoll(value){if(state.screen!=='roll'||state.roll?.value!==null||!Number.isInteger(value)||value<1||value>6)return;change(()=>{recordRoll(value);applyRollOutcome();});}
 const DIE_ROTATIONS={1:[0,0],2:[-90,0],3:[0,-90],4:[0,90],5:[90,0],6:[0,180]};
-function dieTransform(value){const [x,y]=DIE_ROTATIONS[value];return `rotateX(-18deg) rotateY(22deg) rotateX(${x}deg) rotateY(${y}deg)`;}
+function dieTransform(value){
+ const [x,y]=DIE_ROTATIONS[value];
+ // Put the selected face upwards, then view the die from above the table.
+ return `rotateX(-55deg) rotateY(25deg) rotateX(90deg) rotateX(${x}deg) rotateY(${y}deg)`;
+}
 function diceMarkup(value=null){
  const pips={1:[5],2:[1,9],3:[1,5,9],4:[1,3,7,9],5:[1,3,5,7,9],6:[1,3,4,6,7,9]};
- return `<div class="dice-tray" aria-label="Die on the negotiation table"><div class="die-shadow"></div><div class="die-position"><div id="die" class="die die-cube" role="img" aria-label="${value===null?'Die ready to roll':'Die showing '+value}" data-value="${value===null?'':value}" style="transform:${dieTransform(value===null?1:value)}">${[1,2,3,4,5,6].map(n=>`<div class="die-face" data-face="${n}" aria-hidden="true">${pips[n].map(cell=>`<span class="die-pip" style="--pip-row:${Math.ceil(cell/3)};--pip-col:${(cell-1)%3+1}"></span>`).join('')}</div>`).join('')}</div></div></div>`;
+ return `<div class="dice-tray" aria-label="Die on the negotiation table"><div class="die-shadow"></div><div class="die-position"><div id="die" class="die die-cube" role="img" aria-label="${value===null?'Die ready to roll':'Die showing '+value+' on top'}" data-value="${value===null?'':value}" style="transform:${dieTransform(value===null?1:value)}">${[1,2,3,4,5,6].map(n=>`<div class="die-face" data-face="${n}" aria-hidden="true">${pips[n].map(cell=>`<span class="die-pip" style="--pip-row:${Math.ceil(cell/3)};--pip-col:${(cell-1)%3+1}"></span>`).join('')}</div>`).join('')}</div></div></div>`;
 }
 function recordRoll(value){state.roll.value=value;state.roll.success=value>=state.roll.target;log('Roll '+value+' against '+state.roll.target+'+: '+(state.roll.success?'success':'complication')+'.');}
 function applyRollOutcome(){if(state.roll.success)historical();else{state.reason='roll';state.screen='counter';}}

@@ -81,3 +81,7 @@ The mission and five concise play rules are separate pages using a consistent cr
 ## Local soundtrack
 
 The full Dark Times track loops locally at 20% initial volume. Browser checks cover interaction-triggered playback, uninterrupted navigation, saved volume and mute preferences, home-page stop/rewind and missing-file fallback. A separate check confirmed playback from file:// and usable phone controls. All 37 checks pass.
+
+## Dice top-face result
+
+The die is viewed from above, with the sampled result on the upward-facing face. The six-result check verifies both the physical upward orientation and clear visibility of that face. A settled-result preview was visually inspected.

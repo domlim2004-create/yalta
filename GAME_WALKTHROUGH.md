@@ -44,7 +44,7 @@ Historical agreement proposals J2a, U1a and U2a require a roll after the base da
 | 4 | 3+ |
 | 5 | 2+ |
 
-Use the on-screen die or enable Physical die and enter the actual result. The on-screen die comes in from below/right, turns twice, then stops on its result; read the number and press **Continue**. Reduced-motion preferences show the settled result immediately. A settled digital result survives refresh. Physical-die entry resolves directly. Success records the historical agreement. Failure creates a simulated complication without automatically charging another day. No score is assigned merely for the roll.
+Use the on-screen die or enable Physical die and enter the actual result. The on-screen die comes in from below/right, turns twice, then stops on its result; read the number on the top face and press **Continue**. Reduced-motion preferences show the settled result immediately. A settled digital result survives refresh. Physical-die entry resolves directly. Success records the historical agreement. Failure creates a simulated complication without automatically charging another day. No score is assigned merely for the roll.
 
 ## 6. Choose a response to the counteroffer
 
